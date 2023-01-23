@@ -1,0 +1,8 @@
+.vs/
+*.zip
+ForesterAPI/bin/
+ForesterAPI/obj/
+Forester/bin/
+Forester/obj/
+Updater/bin/
+Updater/obj/

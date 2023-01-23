@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendario", "Calendario\Calendario.csproj", "{3129208B-E333-4C3D-9883-AFE73095D6F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calendario", "Calendario\Calendario.csproj", "{3129208B-E333-4C3D-9883-AFE73095D6F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarioApp.Android", "CalendarioApp\CalendarioApp.Android\CalendarioApp.Android.csproj", "{14957900-6622-4563-8EB4-6D5D0CF79AC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarioApp", "CalendarioApp\CalendarioApp\CalendarioApp.csproj", "{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,16 @@ Global
 		{3129208B-E333-4C3D-9883-AFE73095D6F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3129208B-E333-4C3D-9883-AFE73095D6F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3129208B-E333-4C3D-9883-AFE73095D6F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14957900-6622-4563-8EB4-6D5D0CF79AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14957900-6622-4563-8EB4-6D5D0CF79AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14957900-6622-4563-8EB4-6D5D0CF79AC3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{14957900-6622-4563-8EB4-6D5D0CF79AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14957900-6622-4563-8EB4-6D5D0CF79AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14957900-6622-4563-8EB4-6D5D0CF79AC3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
