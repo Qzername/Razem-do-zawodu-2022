@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calendario", "Calendario\Calendario.csproj", "{3129208B-E333-4C3D-9883-AFE73095D6F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarioServer", "CalendarioServer\CalendarioServer.csproj", "{3129208B-E333-4C3D-9883-AFE73095D6F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarioApp.Android", "CalendarioApp\CalendarioApp.Android\CalendarioApp.Android.csproj", "{14957900-6622-4563-8EB4-6D5D0CF79AC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarioApp", "CalendarioApp\CalendarioApp\CalendarioApp.csproj", "{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile App", "Mobile App", "{302B472A-B1E1-4BE4-BA29-676E2098A87D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14957900-6622-4563-8EB4-6D5D0CF79AC3} = {302B472A-B1E1-4BE4-BA29-676E2098A87D}
+		{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B} = {302B472A-B1E1-4BE4-BA29-676E2098A87D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58380C26-45BE-47B8-BDDA-33EFDB331C52}
