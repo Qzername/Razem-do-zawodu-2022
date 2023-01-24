@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "RvC0vxogNNrCEFG06E7VUnHoPoqShxOmETn2fSW2ylN5ZEIjDRIvf6ixVnYsTSKM7LX9f82460ViijpFPeRttw==",
+  "dgSpecHash": "7Si5jXZoRTBNsMTVFYYF97rniVeIk5FahaaXgSIyqo0CweemAP9ghjMC0T3Huj5ZYYaCAvpchpuDqlZ4jEqXMw==",
   "success": true,
-  "projectFilePath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj",
+  "projectFilePath": "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Hubert\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\Hubert\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
-    "C:\\Users\\Hubert\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Users\\Hubert\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
-    "C:\\Users\\Hubert\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+    "C:\\Users\\szymik\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\szymik\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\szymik\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\szymik\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "C:\\Users\\szymik\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
   ],
   "logs": []
 }

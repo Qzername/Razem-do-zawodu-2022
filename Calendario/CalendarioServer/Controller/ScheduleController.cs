@@ -47,7 +47,7 @@ namespace CalendarioAPI.Controller
             if (tasks.Length == 0)
                 return StatusCode(404);
 
-            if (string.IsNullOrEmpty(schedule.DateBegin))
+            if (schedule.DateBegin < DateTime.Today.Ticks)
                 return StatusCode(400);
 
             SQLDatabase.NoReturnQuery($"INSERT INTO Schedules(TaskID, DateBegin, DateEnd) VALUES({loginToken.ID}, {schedule.DateBegin}, {schedule.DateEnd})");
@@ -77,11 +77,11 @@ namespace CalendarioAPI.Controller
 
             string query = "UPDATE Accounts SET ";
 
-            if (!string.IsNullOrEmpty(schedule.DateBegin))
-                query += $"DateBegin=\"{schedule.DateBegin}\",";
+            if (schedule.DateBegin < DateTime.Today.Ticks)
+                query += $"DateBegin={schedule.DateBegin},";
 
-            if (!string.IsNullOrEmpty(schedule.DateEnd))
-                query += $"DateEnd=\"{schedule.DateEnd}\",";
+            if (schedule.DateEnd < DateTime.Today.Ticks)
+                query += $"DateEnd={schedule.DateEnd},";
 
             if (query[^1] != ',')
                 return StatusCode(406);

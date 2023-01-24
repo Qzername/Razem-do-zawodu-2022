@@ -4,7 +4,7 @@
     {
         public int ID { get; set; }
         public int TaskID { get; set; }
-        public string DateBegin { get; set; }
-        public string DateEnd { get; set; }
+        public long DateBegin { get; set; }
+        public long DateEnd { get; set; }
     }
 }

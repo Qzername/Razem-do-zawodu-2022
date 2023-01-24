@@ -3408,24 +3408,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Hubert\\.nuget\\packages\\": {},
+    "C:\\Users\\szymik\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
+      "projectUniqueName": "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
       "projectName": "CalendarioApp.Android",
-      "projectPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
-      "packagesPath": "C:\\Users\\Hubert\\.nuget\\packages\\",
-      "outputPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\obj\\",
+      "projectPath": "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
+      "packagesPath": "C:\\Users\\szymik\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Hubert\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\szymik\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3439,8 +3439,8 @@
       "frameworks": {
         "monoandroid12.0": {
           "projectReferences": {
-            "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj": {
-              "projectPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj"
+            "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj": {
+              "projectPath": "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj"
             }
           }
         }
