@@ -1,8 +1,8 @@
 .vs/
 *.zip
-ForesterAPI/bin/
-ForesterAPI/obj/
-Forester/bin/
-Forester/obj/
-Updater/bin/
-Updater/obj/
+Calendario/CalendarioApp/CalendarioApp/bin/
+Calendario/CalendarioApp/CalendarioApp/obj/
+Calendario/CalendarioApp/CalendarioApp.Android/bin/
+Calendario/CalendarioApp/CalendarioApp.Android/obj/
+Calendario/CalendarioServer/bin/
+Calendario/CalendarioServer/obj/

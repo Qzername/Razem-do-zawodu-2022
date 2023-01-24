@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj": {}
+    "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj": {
+    "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj",
+        "projectUniqueName": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj",
         "projectName": "CalendarioServer",
-        "projectPath": "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj",
-        "packagesPath": "C:\\Users\\szymik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\szymik\\Desktop\\Projekty\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\obj\\",
+        "projectPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj",
+        "packagesPath": "C:\\Users\\heapy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\szymik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\heapy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -81,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

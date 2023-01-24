@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XCalendar.Core.Models;
 
 namespace CalendarioApp
 {
@@ -13,6 +14,7 @@ namespace CalendarioApp
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MainPageViewModel();
         }
     }
 }
