@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OdugjEnOuLH9k4QrYKMAZKTZWqIErKwE9/FkIS+GTk2rxGuRzMkoSS6DUlZBDc4kLi2f4O2Mtv3IUmct+QpBTg==",
+  "dgSpecHash": "YwPUgxeOAYRHmCDJtawhKDCq71qTYTS5CPgnBQ/s06H9eiG5DUwPsCL7+OXMiiqW8GbFWabo4t3iXDlxEHavUA==",
   "success": true,
   "projectFilePath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\heapy\\.nuget\\packages\\rg.plugins.popup\\2.1.0\\rg.plugins.popup.2.1.0.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.androidx.activity\\1.2.4.1\\xamarin.androidx.activity.1.2.4.1.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.androidx.annotation\\1.2.0.1\\xamarin.androidx.annotation.1.2.0.1.nupkg.sha512",
@@ -58,13 +59,11 @@
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.androidx.versionedparcelable\\1.1.1.8\\xamarin.androidx.versionedparcelable.1.1.1.8.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.androidx.viewpager\\1.0.0.8\\xamarin.androidx.viewpager.1.0.0.8.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.androidx.viewpager2\\1.0.0.10\\xamarin.androidx.viewpager2.1.0.0.10.nupkg.sha512",
-    "C:\\Users\\heapy\\.nuget\\packages\\xamarin.communitytoolkit\\1.3.0\\xamarin.communitytoolkit.1.3.0.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.essentials\\1.7.4\\xamarin.essentials.1.7.4.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.forms\\5.0.0.2545\\xamarin.forms.5.0.0.2545.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.google.android.material\\1.4.0.2\\xamarin.google.android.material.1.4.0.2.nupkg.sha512",
     "C:\\Users\\heapy\\.nuget\\packages\\xamarin.google.guava.listenablefuture\\1.0.0.2\\xamarin.google.guava.listenablefuture.1.0.0.2.nupkg.sha512",
-    "C:\\Users\\heapy\\.nuget\\packages\\xcalendar.core\\4.3.1\\xcalendar.core.4.3.1.nupkg.sha512",
-    "C:\\Users\\heapy\\.nuget\\packages\\xcalendar.forms\\4.3.1\\xcalendar.forms.4.3.1.nupkg.sha512"
+    "C:\\Users\\heapy\\.nuget\\packages\\xamarin.plugin.calendar\\2.0.9699\\xamarin.plugin.calendar.2.0.9699.nupkg.sha512"
   ],
   "logs": []
 }

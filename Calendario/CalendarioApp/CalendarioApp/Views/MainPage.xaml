@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CalendarioApp.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CalendarioApp.Controls"
+    xmlns:local="clr-namespace:CalendarioApp.ViewModels"
+    xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar">
+
+    <ContentPage.BindingContext>
+        <local:AdvancedPageViewModel />
+    </ContentPage.BindingContext>
+
+    <Frame
+        Margin="15"
+        Padding="15"
+        BackgroundColor="#3b3b3b"
+        CornerRadius="15"
+        HorizontalOptions="CenterAndExpand">
+        <plugin:Calendar
+            x:Name="Calendar"
+            Padding="10,0"
+            AnimateCalendar="True"
+            CalendarLayout="{Binding CalendarLayout}"
+            Culture="{Binding Culture}"
+            DayTappedCommand="{Binding DayTappedCommand}"
+            DayViewCornerRadius="3"
+            DayViewSize="40"
+            DaysLabelStyle="{StaticResource daysLabelStyle}"
+            DaysTitleColor="Orange"
+            DaysTitleHeight="40"
+            DaysTitleLabelStyle="{StaticResource daysTitleLabelStyle}"
+            DaysTitleMaximumLength="ThreeChars"
+            DeselectedDayTextColor="Blue"
+            DisableSwipeDetection="False"
+            EventIndicatorColor="Red"
+            EventIndicatorSelectedColor="IndianRed"
+            EventIndicatorSelectedTextColor="AliceBlue"
+            EventIndicatorTextColor="WhiteSmoke"
+            EventIndicatorType="Background"
+            Events="{Binding Events}"
+            HeaderSectionVisible="True"
+            HorizontalOptions="FillAndExpand"
+            MonthLabelColor="Red"
+            OtherMonthDayColor="Gray"
+            OtherMonthDayIsVisible="False"
+            SelectedDate="{Binding SelectedDate}"
+            SelectedDateColor="Red"
+            SelectedDateTextFormat="ddd, dd MMM yyyy"
+            SelectedDayBackgroundColor="DarkCyan"
+            SelectedDayTextColor="Cyan"
+            SelectedTodayTextColor="Green"
+            ShownDate="{Binding ShownDate}"
+            SwipeLeftCommand="{Binding SwipeLeftCommand}"
+            SwipeRightCommand="{Binding SwipeRightCommand}"
+            SwipeToChangeMonthEnabled="False"
+            SwipeUpCommand="{Binding SwipeUpCommand}"
+            SwipeUpToHideEnabled="False"
+            TodayFillColor="Silver"
+            TodayOutlineColor="Blue"
+            TodayTextColor="Yellow"
+            VerticalOptions="FillAndExpand"
+            YearLabelColor="Blue">
+
+            <plugin:Calendar.HeaderSectionTemplate>
+                <controls:CalendarHeader />
+            </plugin:Calendar.HeaderSectionTemplate>
+
+            <plugin:Calendar.FooterSectionTemplate>
+                <DataTemplate>
+                    <controls:CalendarFooter />
+                </DataTemplate>
+            </plugin:Calendar.FooterSectionTemplate>
+
+            <plugin:Calendar.EventTemplate>
+                <DataTemplate>
+                    <controls:CalenderEvent CalenderEventCommand="{Binding BindingContext.EventSelectedCommand, Source={x:Reference advancedCalendarPage}}" />
+                </DataTemplate>
+            </plugin:Calendar.EventTemplate>
+            <plugin:Calendar.EmptyTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label
+                            Margin="0,5,0,5"
+                            HorizontalTextAlignment="Center"
+                            Text="NO EVENTS FOR THE SELECTED DATE" />
+                    </StackLayout>
+                </DataTemplate>
+            </plugin:Calendar.EmptyTemplate>
+        </plugin:Calendar>
+    </Frame>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="daysTitleLabelStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+</ContentPage>
