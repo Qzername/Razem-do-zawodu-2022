@@ -3,21 +3,26 @@
     x:Class="CalendarioApp.Controls.CalenderEvent"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"> 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <StackLayout
         Padding="15,0,0,0"
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
-        <Label FontAttributes="Bold" FontSize="Medium">
+        <Label
+            x:Name="EventTitle"
+            FontAttributes="Bold"
+            FontSize="Medium"
+            TextColor="White">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="{Binding Starting, StringFormat='{0:MM/dd HH\\:mm}'}" TextColor="Black" />
-                    <Span Text=" - " />
+                    <Span Text="{Binding Starting, StringFormat='{0:HH\\:mm}'}" />
+                    <Span Text=", " />
                     <Span Text="{Binding Name}" />
                 </FormattedString>
             </Label.FormattedText>
         </Label>
         <Label
+            Padding="0,0,0,10"
             FontSize="Small"
             LineBreakMode="WordWrap"
             Text="{Binding Description}" />

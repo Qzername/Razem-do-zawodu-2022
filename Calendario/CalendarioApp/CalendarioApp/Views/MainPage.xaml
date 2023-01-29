@@ -5,17 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CalendarioApp.Controls"
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
-    xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar">
+    xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+    x:Name="CalendarioContentPage">
 
     <ContentPage.BindingContext>
         <local:AdvancedPageViewModel />
     </ContentPage.BindingContext>
 
     <Frame
-        Margin="15"
+        x:Name="CalendarFrame"
+        Margin="15,30,15,30"
         Padding="15"
-        BackgroundColor="#3b3b3b"
-        CornerRadius="15"
+        CornerRadius="30"
         HorizontalOptions="CenterAndExpand">
         <plugin:Calendar
             x:Name="Calendar"
@@ -27,40 +28,28 @@
             DayViewCornerRadius="3"
             DayViewSize="40"
             DaysLabelStyle="{StaticResource daysLabelStyle}"
-            DaysTitleColor="Orange"
             DaysTitleHeight="40"
             DaysTitleLabelStyle="{StaticResource daysTitleLabelStyle}"
             DaysTitleMaximumLength="ThreeChars"
-            DeselectedDayTextColor="Blue"
             DisableSwipeDetection="False"
-            EventIndicatorColor="Red"
-            EventIndicatorSelectedColor="IndianRed"
-            EventIndicatorSelectedTextColor="AliceBlue"
-            EventIndicatorTextColor="WhiteSmoke"
+            EventIndicatorColor="#0080ff"
+            EventIndicatorSelectedColor="#0080ff"
             EventIndicatorType="Background"
             Events="{Binding Events}"
             HeaderSectionVisible="True"
             HorizontalOptions="FillAndExpand"
-            MonthLabelColor="Red"
-            OtherMonthDayColor="Gray"
             OtherMonthDayIsVisible="False"
             SelectedDate="{Binding SelectedDate}"
-            SelectedDateColor="Red"
             SelectedDateTextFormat="ddd, dd MMM yyyy"
-            SelectedDayBackgroundColor="DarkCyan"
-            SelectedDayTextColor="Cyan"
-            SelectedTodayTextColor="Green"
             ShownDate="{Binding ShownDate}"
             SwipeLeftCommand="{Binding SwipeLeftCommand}"
             SwipeRightCommand="{Binding SwipeRightCommand}"
-            SwipeToChangeMonthEnabled="False"
+            SwipeToChangeMonthEnabled="True"
             SwipeUpCommand="{Binding SwipeUpCommand}"
             SwipeUpToHideEnabled="False"
-            TodayFillColor="Silver"
-            TodayOutlineColor="Blue"
-            TodayTextColor="Yellow"
-            VerticalOptions="FillAndExpand"
-            YearLabelColor="Blue">
+            TodayOutlineColor="#0080ff"
+            TodayTextColor="#0080ff"
+            VerticalOptions="FillAndExpand">
 
             <plugin:Calendar.HeaderSectionTemplate>
                 <controls:CalendarHeader />
@@ -74,7 +63,7 @@
 
             <plugin:Calendar.EventTemplate>
                 <DataTemplate>
-                    <controls:CalenderEvent CalenderEventCommand="{Binding BindingContext.EventSelectedCommand, Source={x:Reference advancedCalendarPage}}" />
+                    <controls:CalenderEvent CalenderEventCommand="{Binding EventSelectedCommand}" />
                 </DataTemplate>
             </plugin:Calendar.EventTemplate>
             <plugin:Calendar.EmptyTemplate>
@@ -83,7 +72,7 @@
                         <Label
                             Margin="0,5,0,5"
                             HorizontalTextAlignment="Center"
-                            Text="NO EVENTS FOR THE SELECTED DATE" />
+                            Text="Brak wydarzeń..." />
                     </StackLayout>
                 </DataTemplate>
             </plugin:Calendar.EmptyTemplate>
@@ -94,7 +83,17 @@
         <ResourceDictionary>
             <Style x:Key="daysTitleLabelStyle" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Padding" Value="0, 10, 0, 0" />
+            </Style>
+
+            <Style x:Key="daysLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize" Value="20" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5,2" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>

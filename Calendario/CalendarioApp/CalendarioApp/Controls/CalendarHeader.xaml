@@ -22,8 +22,7 @@
         <Frame
             Grid.Column="0"
             Padding="0"
-            BackgroundColor="White"
-            BorderColor="Orange"
+            BackgroundColor="Transparent"
             CornerRadius="18"
             HasShadow="False"
             HeightRequest="36"
@@ -66,8 +65,7 @@
         <Frame
             Grid.Column="2"
             Padding="0"
-            BackgroundColor="White"
-            BorderColor="Orange"
+            BackgroundColor="Transparent"
             CornerRadius="18"
             HasShadow="False"
             HeightRequest="36"
