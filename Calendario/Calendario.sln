@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarioServer", "Calenda
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarioApp.Android", "CalendarioApp\CalendarioApp.Android\CalendarioApp.Android.csproj", "{14957900-6622-4563-8EB4-6D5D0CF79AC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarioApp", "CalendarioApp\CalendarioApp\CalendarioApp.csproj", "{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarioApp", "CalendarioApp\CalendarioApp\CalendarioApp.csproj", "{7BD4EFF8-5F3A-4053-BF39-DA77CF844E8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile App", "Mobile App", "{302B472A-B1E1-4BE4-BA29-676E2098A87D}"
 EndProject
