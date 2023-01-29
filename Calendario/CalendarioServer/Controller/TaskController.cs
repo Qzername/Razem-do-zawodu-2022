@@ -22,7 +22,7 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID=\"{loginToken.ID}\"");
+            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID}");
 
             return Ok(JSONManager.Serialize(tasks));
         }
@@ -37,7 +37,7 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID=\"{loginToken.ID}\" AND ID={id}");
+            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={id}");
 
             if (tasks.Length == 0)
                 return StatusCode(404);
@@ -46,7 +46,7 @@ namespace CalendarioAPI.Controller
         }
 
         [HttpPost]
-        public IActionResult Post([FromHeader] string token, [FromBody] Task task)
+        public IActionResult Post([FromHeader] string token, TaskCreation task)
         {
             string decoded = JWTManager.Decode(token);
 
@@ -58,13 +58,13 @@ namespace CalendarioAPI.Controller
             if (string.IsNullOrEmpty(task.Name))
                 return StatusCode(400);
 
-            SQLDatabase.NoReturnQuery($"INSERT INTO Tasks(AccountID, Name, Description, IsCompleted) VALUES({loginToken.ID}, {task.Name}, {task.Description}, 0)");
+            SQLDatabase.NoReturnQuery($"INSERT INTO Tasks(AccountID, Name, Description, IsCompleted) VALUES({loginToken.ID}, \"{task.Name}\", \"{task.Description}\", 0)");
 
             return Ok();
         }
 
         [HttpPatch]
-        public IActionResult Patch([FromHeader] string token, [FromBody] Task task)
+        public IActionResult Patch([FromHeader] string token, Task task)
         {
             string decoded = JWTManager.Decode(token);
 
@@ -73,7 +73,7 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID=\"{loginToken.ID}\" AND ID={task.ID}");
+            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={task.ID}");
 
             if (tasks.Length == 0)
                 return StatusCode(404);

@@ -13,7 +13,7 @@ namespace CalendarioAPI.Controller
     {
 
         [HttpGet]
-        public IActionResult Get([FromHeader] string token, [FromBody] Task task)
+        public IActionResult Get([FromHeader] string token, [FromBody] int id)
         {
             string decoded = JWTManager.Decode(token);
 
@@ -22,18 +22,18 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID=\"{loginToken.ID}\" AND ID={task.ID}");
+            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={id}");
 
             if (tasks.Length == 0)
                 return StatusCode(404);
 
-            var schedules = SQLDatabase.Select<Schedule>($"SELECT * FROM Schedules WHERE TaskID={task.ID}");
+            var schedules = SQLDatabase.Select<Schedule>($"SELECT * FROM Schedules WHERE TaskID={id}");
 
             return Ok(JSONManager.Serialize(schedules));
         }
 
         [HttpPost]
-        public IActionResult Post([FromHeader] string token, [FromBody] Schedule schedule)
+        public IActionResult Post([FromHeader] string token, [FromBody] ScheduleCreation schedule)
         {
             string decoded = JWTManager.Decode(token);
 
@@ -42,7 +42,7 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID=\"{loginToken.ID}\" AND ID={schedule.TaskID}");
+            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={schedule.TaskID}");
 
             if (tasks.Length == 0)
                 return StatusCode(404);
@@ -50,7 +50,10 @@ namespace CalendarioAPI.Controller
             if (schedule.DateBegin < DateTime.Today.Ticks)
                 return StatusCode(400);
 
-            SQLDatabase.NoReturnQuery($"INSERT INTO Schedules(TaskID, DateBegin, DateEnd) VALUES({loginToken.ID}, {schedule.DateBegin}, {schedule.DateEnd})");
+            if (schedule.DateEnd == null)
+                schedule.DateEnd = 0;
+
+            SQLDatabase.NoReturnQuery($"INSERT INTO Schedules(TaskID, DateBegin, DateEnd) VALUES({schedule.TaskID}, {schedule.DateBegin}, {schedule.DateEnd})");
 
             return Ok();
         }
@@ -65,7 +68,7 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID=\"{loginToken.ID}\" AND ID={schedule.TaskID}");
+            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={schedule.TaskID}");
 
             if (tasks.Length == 0)
                 return StatusCode(404);
@@ -104,7 +107,7 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID=\"{loginToken.ID}\" AND ID={id}");
+            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={id}");
 
             if (tasks.Length == 0)
                 return StatusCode(404);

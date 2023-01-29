@@ -41,10 +41,10 @@ namespace CalendarioAPI.Controller
         public Day GetDay(long day, int AccountID)
         {
             DateTime date = new DateTime(day);
-            var dateStart = date.Date;
-            var dateEnd = date.Date.AddHours(24);
+            var dateStart = date.Date.Ticks;
+            var dateEnd = date.Date.AddHours(24).Ticks;
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT Tasks.* FROM Tasks, Schedules WHERE Schedules.DateBegin>{dateStart} AND Schedules.DateBegin<{dateEnd} AND Tasks.AccountID=Schedules.AccountID ");
+            var tasks = SQLDatabase.Select<Task>($"SELECT Tasks.* FROM Tasks, Schedules WHERE Schedules.DateBegin>{dateStart} AND Schedules.DateBegin<{dateEnd} AND Tasks.ID=Schedules.TaskID");
 
             return new Day(tasks);
         }
