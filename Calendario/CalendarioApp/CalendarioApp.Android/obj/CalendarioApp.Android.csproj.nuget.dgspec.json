@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj": {}
+    "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj": {}
   },
   "projects": {
-    "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj": {
+    "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
+        "projectUniqueName": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
         "projectName": "CalendarioApp.Android",
-        "projectPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
-        "packagesPath": "C:\\Users\\Hubert\\.nuget\\packages\\",
-        "outputPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\obj\\",
+        "projectPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\CalendarioApp.Android.csproj",
+        "packagesPath": "C:\\Users\\heapy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Hubert\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\heapy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
         "frameworks": {
           "monoandroid12.0": {
             "projectReferences": {
-              "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj": {
-                "projectPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj"
+              "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj": {
+                "projectPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj"
               }
             }
           }
@@ -42,6 +42,10 @@
       "frameworks": {
         "monoandroid12.0": {
           "dependencies": {
+            "Rg.Plugins.Popup": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Xamarin.Essentials": {
               "target": "Package",
               "version": "[1.7.4, )"
@@ -49,25 +53,29 @@
             "Xamarin.Forms": {
               "target": "Package",
               "version": "[5.0.0.2545, )"
+            },
+            "Xamarin.Plugin.Calendar": {
+              "target": "Package",
+              "version": "[2.0.9699, )"
             }
           }
         }
       }
     },
-    "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj": {
+    "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj",
+        "projectUniqueName": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj",
         "projectName": "CalendarioApp",
-        "projectPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj",
-        "packagesPath": "C:\\Users\\Hubert\\.nuget\\packages\\",
-        "outputPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\obj\\",
+        "projectPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\CalendarioApp.csproj",
+        "packagesPath": "C:\\Users\\heapy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioApp\\CalendarioApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Hubert\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\heapy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -101,9 +109,9 @@
               "version": "[2.0.3, )",
               "autoReferenced": true
             },
-            "XCalendar.Forms": {
+            "Rg.Plugins.Popup": {
               "target": "Package",
-              "version": "[4.3.1, )"
+              "version": "[2.1.0, )"
             },
             "Xamarin.Essentials": {
               "target": "Package",
@@ -112,6 +120,10 @@
             "Xamarin.Forms": {
               "target": "Package",
               "version": "[5.0.0.2545, )"
+            },
+            "Xamarin.Plugin.Calendar": {
+              "target": "Package",
+              "version": "[2.0.9699, )"
             }
           },
           "imports": [
@@ -125,7 +137,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

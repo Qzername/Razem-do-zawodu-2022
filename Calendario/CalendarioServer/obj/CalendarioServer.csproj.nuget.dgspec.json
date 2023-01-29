@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj": {}
+    "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj": {}
   },
   "projects": {
-    "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj": {
+    "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj",
+        "projectUniqueName": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj",
         "projectName": "CalendarioServer",
-        "projectPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj",
-        "packagesPath": "C:\\Users\\Hubert\\.nuget\\packages\\",
-        "outputPath": "D:\\Projekty\\aktywne teraz\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\obj\\",
+        "projectPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\CalendarioServer.csproj",
+        "packagesPath": "C:\\Users\\heapy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\heapy\\Desktop\\heapy\\Programming\\C#\\Razem-do-zawodu-2022\\Calendario\\CalendarioServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Hubert\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\heapy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -73,20 +73,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-              "version": "[6.0.8, 6.0.8]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[6.0.8, 6.0.8]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-              "version": "[6.0.8, 6.0.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -95,12 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "ubuntu.20.04-x64": {
-          "#import": []
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
