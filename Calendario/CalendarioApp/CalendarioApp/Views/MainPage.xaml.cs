@@ -38,11 +38,11 @@ namespace CalendarioApp
                 Calendar.EventIndicatorTextColor = Color.White;
             }
 
-            else if (theme == OSAppTheme.Light)
+            else
             {
                 CalendarioContentPage.BackgroundColor = Color.White;
 
-                CalendarFrame.BackgroundColor = Color.FromRgb(245, 245, 245);
+                CalendarFrame.BackgroundColor = Color.FromRgb(240, 240, 240);
 
                 Calendar.ArrowsColor = Color.Black;
                 Calendar.YearLabelColor = Color.Black;

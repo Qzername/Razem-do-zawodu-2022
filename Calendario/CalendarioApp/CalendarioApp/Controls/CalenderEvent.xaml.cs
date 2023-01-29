@@ -20,7 +20,7 @@ namespace CalendarioApp.Controls
         private void Setup(OSAppTheme theme)
         {
             if (theme == OSAppTheme.Dark) EventTitle.TextColor = Color.White;
-            else if (theme == OSAppTheme.Light) EventTitle.TextColor = Color.Black;
+            else EventTitle.TextColor = Color.Black;
         }
 
         public ICommand CalenderEventCommand
