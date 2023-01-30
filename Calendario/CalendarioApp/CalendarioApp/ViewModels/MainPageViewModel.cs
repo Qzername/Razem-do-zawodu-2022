@@ -1,4 +1,5 @@
 ﻿using CalendarioApp.Model;
+using CalendarioApp.Model.App;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -49,10 +50,10 @@ namespace CalendarioApp.ViewModels
             Events = new EventCollection
             {
                 // [DateTime.Now.AddDays(-3)] = new List<AdvancedEventModel>(GenerateEvents(10, "Cool")),
-                [DateTime.Now.AddDays(-6)] = new DayEventCollection<AdvancedEventModel>(Color.Purple, IndicatorSelectedColor)
+                [DateTime.Now.AddDays(-6)] = new DayEventCollection<MainPageEventModel>(Color.Purple, IndicatorSelectedColor)
                 {
-                    new AdvancedEventModel { Name = "Pobudka...", Description = "Nowy dzień, nowy ja :)", Starting= new DateTime().AddHours(06).AddMinutes(30) },
-                    new AdvancedEventModel { Name = "Koniec szkoły :D", Description = "Wkońcu!!!", Starting= new DateTime().AddHours(14).AddMinutes(45) }
+                    new MainPageEventModel { Name = "Pobudka...", Description = "Nowy dzień, nowy ja :)", Starting= new DateTime().AddHours(06).AddMinutes(30) },
+                    new MainPageEventModel { Name = "Koniec szkoły :D", Description = "Wkońcu!!!", Starting= new DateTime().AddHours(14).AddMinutes(45) }
                 }
             };
 
@@ -144,7 +145,7 @@ namespace CalendarioApp.ViewModels
 
         private async Task ExecuteEventSelectedCommand(object item)
         {
-            if (item is AdvancedEventModel eventModel)
+            if (item is MainPageEventModel eventModel)
             {
                 var title = $"Selected: {eventModel.Name}";
                 var message = $"Starts: {eventModel.Starting:HH:mm}{Environment.NewLine}Details: {eventModel.Description}";

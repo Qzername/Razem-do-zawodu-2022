@@ -1,4 +1,4 @@
-﻿using CalendarioApp.Model;
+﻿using CalendarioApp.Model.App;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

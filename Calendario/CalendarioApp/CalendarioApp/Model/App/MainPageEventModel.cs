@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CalendarioApp.Model
+namespace CalendarioApp.Model.App
 {
-    public class AdvancedEventModel
+    public class MainPageEventModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

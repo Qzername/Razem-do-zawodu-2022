@@ -1,4 +1,4 @@
-﻿using CalendarioApp.Model;
+﻿using CalendarioApp.Model.App;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -31,7 +31,7 @@ namespace CalendarioApp.Controls
 
         private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
-            if (BindingContext is AdvancedEventModel eventModel)
+            if (BindingContext is MainPageEventModel eventModel)
                 CalenderEventCommand?.Execute(eventModel);
         }
     }

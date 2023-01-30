@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Plugin.Calendar.Interfaces;
 
-namespace CalendarioApp.Model
+namespace CalendarioApp.Model.App
 {
     /// <summary>
     /// Wrapper to allow change the dot color

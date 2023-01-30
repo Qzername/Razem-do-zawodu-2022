@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CalendarioApp.Model
+namespace CalendarioApp.Model.App
 {
     public class CalendarRangePickerResult
     {

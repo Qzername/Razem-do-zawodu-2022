@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CalendarioApp.Model
+namespace CalendarioApp.Model.App
 {
     public class CalendarPickerResult
     {

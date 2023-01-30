@@ -1,9 +1,9 @@
 ﻿using Rg.Plugins.Popup.Services;
-using CalendarioApp.Model;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Plugin.Calendar.Enums;
+using CalendarioApp.Model.App;
 
 namespace CalendarioApp.ViewModels
 {
