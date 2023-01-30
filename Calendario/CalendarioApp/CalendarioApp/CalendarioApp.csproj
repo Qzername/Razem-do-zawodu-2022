@@ -22,10 +22,22 @@
     <Compile Update="SelectionPage.xaml.cs">
       <DependentUpon>SelectionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\EventCreationPage.xaml.cs">
+      <DependentUpon>EventCreationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SyncPage.xaml.cs">
+      <DependentUpon>SyncPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="SelectionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EventCreationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SyncPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -33,6 +45,5 @@
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Model\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

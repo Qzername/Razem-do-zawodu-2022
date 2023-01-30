@@ -1,46 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="CalendarioApp.MainPage"
+    x:Class="CalendarioApp.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CalendarioApp.Controls"
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
     xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
-    x:Name="CalendarioContentPage">
-
+    Title="Calendario @ 2023"
+    BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
-        <local:AdvancedPageViewModel />
+        <local:MainPageViewModel />
     </ContentPage.BindingContext>
 
     <Frame
-        x:Name="CalendarFrame"
-        Margin="15,30,15,30"
-        Padding="15"
+        Margin="20"
+        Padding="20"
+        BackgroundColor="{Binding FrameBackground}"
         CornerRadius="30"
-        HorizontalOptions="CenterAndExpand">
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
         <plugin:Calendar
             x:Name="Calendar"
-            Padding="10,0"
             AnimateCalendar="True"
+            ArrowsColor="{Binding PrimaryColor}"
             CalendarLayout="{Binding CalendarLayout}"
             Culture="{Binding Culture}"
             DayTappedCommand="{Binding DayTappedCommand}"
             DayViewCornerRadius="3"
             DayViewSize="40"
             DaysLabelStyle="{StaticResource daysLabelStyle}"
+            DaysTitleColor="{Binding PrimaryColor}"
             DaysTitleHeight="40"
             DaysTitleLabelStyle="{StaticResource daysTitleLabelStyle}"
             DaysTitleMaximumLength="ThreeChars"
+            DeselectedDayTextColor="{Binding PrimaryColor}"
             DisableSwipeDetection="False"
             EventIndicatorColor="#0080ff"
             EventIndicatorSelectedColor="#0080ff"
+            EventIndicatorSelectedTextColor="{Binding SecondaryColor}"
+            EventIndicatorTextColor="{Binding PrimaryColor}"
             EventIndicatorType="Background"
             Events="{Binding Events}"
             HeaderSectionVisible="True"
             HorizontalOptions="FillAndExpand"
+            MonthLabelColor="{Binding PrimaryColor}"
+            OtherMonthDayColor="{Binding DisabledColor}"
             OtherMonthDayIsVisible="False"
             SelectedDate="{Binding SelectedDate}"
+            SelectedDateColor="{Binding PrimaryColor}"
             SelectedDateTextFormat="ddd, dd MMM yyyy"
+            SelectedDayBackgroundColor="{Binding PrimaryColor}"
+            SelectedDayTextColor="{Binding SecondaryColor}"
+            SelectedTodayTextColor="{Binding SecondaryColor}"
             ShownDate="{Binding ShownDate}"
             SwipeLeftCommand="{Binding SwipeLeftCommand}"
             SwipeRightCommand="{Binding SwipeRightCommand}"
@@ -49,7 +60,8 @@
             SwipeUpToHideEnabled="False"
             TodayOutlineColor="#0080ff"
             TodayTextColor="#0080ff"
-            VerticalOptions="FillAndExpand">
+            VerticalOptions="FillAndExpand"
+            YearLabelColor="{Binding PrimaryColor}">
 
             <plugin:Calendar.HeaderSectionTemplate>
                 <controls:CalendarHeader />
@@ -68,11 +80,21 @@
             </plugin:Calendar.EventTemplate>
             <plugin:Calendar.EmptyTemplate>
                 <DataTemplate>
-                    <StackLayout>
+                    <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
                         <Label
                             Margin="0,5,0,5"
                             HorizontalTextAlignment="Center"
                             Text="Brak wydarzeń..." />
+                        <Button
+                            x:Name="CreateEventButton"
+                            BackgroundColor="{Binding PrimaryColor}"
+                            Clicked="CreateEventButtonClicked"
+                            CornerRadius="30"
+                            HorizontalOptions="Center"
+                            Text="Nowe wydarzenie"
+                            TextColor="{Binding SecondaryColor}"
+                            TextTransform="None"
+                            VerticalOptions="EndAndExpand" />
                     </StackLayout>
                 </DataTemplate>
             </plugin:Calendar.EmptyTemplate>
