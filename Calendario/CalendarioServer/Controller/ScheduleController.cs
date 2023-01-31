@@ -12,8 +12,8 @@ namespace CalendarioAPI.Controller
     public class ScheduleController : ControllerBase
     {
 
-        [HttpGet]
-        public IActionResult Get([FromHeader] string token, [FromBody] int id)
+        [HttpGet("{id}")]
+        public IActionResult Get([FromHeader] string token, int id)
         {
             string decoded = JWTManager.Decode(token);
 

@@ -4,9 +4,9 @@ using System.Net.Http;
 using CalendarioApp.Model.Server;
 using System.Text.Json;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using Task = System.Threading.Tasks.Task;
+using System.Net.Mime;
+using System.Text;
 
 namespace CalendarioApp.ServerManager
 {
@@ -16,7 +16,7 @@ namespace CalendarioApp.ServerManager
         public static HttpClient Client = new HttpClient();
         public static Token Token;
 
-        public static async Task<Token> Login(AccountCredentials accountCredentials)
+        public static async System.Threading.Tasks.Task<Token> Login(AccountCredentials accountCredentials)
         {
             string accountCredentialsDict = JsonSerializer.Serialize(accountCredentials);
 
@@ -29,7 +29,7 @@ namespace CalendarioApp.ServerManager
             {
                 throw new Exception("Failed");
             }
-            var responseString = await response.Content.ReadAsStringAsync();
+            string responseString = await response.Content.ReadAsStringAsync();
 
             JObject json = JObject.Parse(responseString);
             long expiration = json["expiration"].ToObject<long>();
@@ -40,19 +40,23 @@ namespace CalendarioApp.ServerManager
             return Token;
         }
 
-        public static async Task<string> GetTasks()
+        public static async System.Threading.Tasks.Task GetTasks()
         {
-            var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Task/Get");
+            var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Task");
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 throw new Exception("Failed");
             }
-            var responseString = await response.Content.ReadAsStringAsync();
+            string responseString = await response.Content.ReadAsStringAsync();
 
-            return responseString;
+            Task[] tasks = JSONManager.Deserialize<Task[]>(responseString);
+            foreach (Task task in tasks)
+            {
+                var scheduleResponse = await Client.GetAsync($"http://{ServerIP}:6969/api/Task");
+            }
         }
 
-        public static async Task AddTask(TaskCreation task)
+        public static async System.Threading.Tasks.Task AddTask(TaskCreation task)
         {
 
         }
