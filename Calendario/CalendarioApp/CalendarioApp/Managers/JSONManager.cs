@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CalendarioApp.ServerManager
+namespace CalendarioApp.Managers
 {
     public static class JSONManager
     {

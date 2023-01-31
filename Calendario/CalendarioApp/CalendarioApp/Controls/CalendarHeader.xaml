@@ -46,21 +46,23 @@
             </Frame.GestureRecognizers>
         </Frame>
 
-        <Label
+        <StackLayout
             Grid.Column="1"
-            FontAttributes="Bold"
-            FontSize="Medium"
-            HorizontalOptions="Center"
-            TextColor="{Binding MonthLabelColor}"
-            VerticalOptions="Center">
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span Text="{Binding LayoutUnitText, Mode=TwoWay}" />
-                    <Span Text=", " />
-                    <Span Text="{Binding Year, Mode=TwoWay}" />
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+            HorizontalOptions="Fill"
+            Orientation="Vertical">
+            <Label
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="{Binding LayoutUnitText, Mode=TwoWay}"
+                TextColor="{Binding MonthLabelColor}" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="{Binding Year, Mode=TwoWay}"
+                TextColor="{Binding MonthLabelColor}" />
+        </StackLayout>
 
         <Frame
             Grid.Column="2"

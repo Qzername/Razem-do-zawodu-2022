@@ -21,6 +21,7 @@
         <StackLayout>
             <Label
                 FontSize="24"
+                HorizontalOptions="Center"
                 Text="Nowe wydarzenie"
                 TextColor="{Binding PrimaryColor}" />
             <StackLayout Margin="0,10">

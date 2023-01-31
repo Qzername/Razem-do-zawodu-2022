@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CalendarioApp.Managers;
+using CalendarioApp.Model.Server;
 
 namespace CalendarioApp.Views
 {
@@ -9,18 +11,27 @@ namespace CalendarioApp.Views
     {
         public DateTime Date;
 
-        public EventCreationPage(DateTime date)
+        public EventCreationPage(DateTime? date)
         {
-            Date = date;
+            Date = date ?? DateTime.Now;
             InitializeComponent();
         }
 
         async void CreateEventButtonClicked(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new SyncPage(), false);
+            if (EventTitle == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Błąd!", "Tytuł nie może być pusty.", "Ok");
+                return;
+            }
+
+            await Navigation.PushAsync(new SyncPage());
             Date = Date + EventTimePicker.Time;
-            await App.Current.MainPage.DisplayAlert($"Created an event: {EventTitle.Text}", $"Ticks: {Date.Ticks.ToString()}", "Ok");
-            await Navigation.PopToRootAsync(false);
+            TaskCreation task = new TaskCreation() { Name = EventTitle.Text, Description = EventDescription.Text };
+            ScheduleCreation schedule = new ScheduleCreation() { DateBegin = Date.Ticks, TaskID = 1};
+            await ServerManager.AddTaskAndSchedule(task, schedule);
+            await ServerManager.GetTasks();
+            await Navigation.PopToRootAsync();
         }
     }
 }

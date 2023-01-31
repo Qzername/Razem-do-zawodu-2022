@@ -1,5 +1,6 @@
 ﻿using System;
 using CalendarioApp.Model.Server;
+using CalendarioApp.Managers;
 using Xamarin.Forms;
 
 namespace CalendarioApp.Views
@@ -14,33 +15,35 @@ namespace CalendarioApp.Views
 
                 try
                 {
-                    await ServerManager.ServerManager.Login(new AccountCredentials
+                    await ServerManager.Login(new AccountCredentials
                     {
                         Login = "testlogin",
                         Password = "SeX123@a"
                     });
                 }
 
-                catch { await App.Current.MainPage.DisplayAlert("Błąd!", "Logowanie nie powiodło się...", "Ok"); }
+                catch { await App.Current.MainPage.DisplayAlert("Błąd!", "Logowanie nie powiodło się.", "Ok"); }
 
                 try
                 {
-                    string test = await ServerManager.ServerManager.GetTasks();
-                    await App.Current.MainPage.DisplayAlert("Debug", test, "Ok");
+                    await ServerManager.GetTasks();
                 }
 
-                catch (Exception e) { await App.Current.MainPage.DisplayAlert("Błąd!", $"Pobranie listy wydarzeń nie powiodło się...\n{e.Message}", "Ok"); }
+                catch (Exception e) { await App.Current.MainPage.DisplayAlert("Błąd!", "Pobranie listy wydarzeń nie powiodło się.", "Ok"); }
 
-                await Navigation.PopToRootAsync(false);
+                await Navigation.PopToRootAsync();
             });
 
             InitializeComponent();
         }
 
-        async void CreateEventButtonClicked(object sender, EventArgs args)
+        private async void CreateEventButtonClicked(object sender, EventArgs args)
         {
-            DateTime selectedDate = Calendar.SelectedDate ?? DateTime.Now;
-            await Navigation.PushAsync(new EventCreationPage(selectedDate), false);
+            DateTime? selectedDate = Calendar.SelectedDate;
+            if (selectedDate != null)
+            {
+                await Navigation.PushAsync(new EventCreationPage(selectedDate));
+            }
         }
     }
 }

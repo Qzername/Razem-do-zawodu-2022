@@ -1,9 +1,7 @@
-﻿using CalendarioApp.Model;
+﻿using CalendarioApp.Managers;
 using CalendarioApp.Model.App;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -27,7 +25,6 @@ namespace CalendarioApp.ViewModels
 
             if (theme == OSAppTheme.Dark)
             {
-                IndicatorSelectedColor = Color.White;
                 PageBackground = Color.Black;
                 FrameBackground = Color.FromRgb(15, 15, 15);
                 PrimaryColor = Color.White;
@@ -37,7 +34,6 @@ namespace CalendarioApp.ViewModels
 
             else
             {
-                IndicatorSelectedColor = Color.Black;
                 PageBackground = Color.White;
                 FrameBackground = Color.FromRgb(240, 240, 240);
                 PrimaryColor = Color.Black;
@@ -46,24 +42,14 @@ namespace CalendarioApp.ViewModels
             }
 
             Culture = CultureInfo.CreateSpecificCulture("pl-PL");
-
-            Events = new EventCollection
-            {
-                // [DateTime.Now.AddDays(-3)] = new List<AdvancedEventModel>(GenerateEvents(10, "Cool")),
-                [DateTime.Now.AddDays(-6)] = new DayEventCollection<MainPageEventModel>(Color.Purple, IndicatorSelectedColor)
-                {
-                    new MainPageEventModel { Name = "Pobudka...", Description = "Nowy dzień, nowy ja :)", Starting= new DateTime().AddHours(06).AddMinutes(30) },
-                    new MainPageEventModel { Name = "Koniec szkoły :D", Description = "Wkońcu!!!", Starting= new DateTime().AddHours(14).AddMinutes(45) }
-                }
-            };
-
+            SelectedDate = null;
             ShownDate = DateTime.Today;
-            SelectedDate = DateTime.Today;
         }
 
-        public EventCollection Events { get; }
-
-        private Color IndicatorSelectedColor;
+        public EventCollection Events
+        {
+            get => ServerManager.Events;
+        }
 
         private Color _pageBackground;
 
@@ -145,7 +131,7 @@ namespace CalendarioApp.ViewModels
 
         private async Task ExecuteEventSelectedCommand(object item)
         {
-            if (item is MainPageEventModel eventModel)
+            if (item is AdvancedEventModel eventModel)
             {
                 var title = $"Selected: {eventModel.Name}";
                 var message = $"Starts: {eventModel.Starting:HH:mm}{Environment.NewLine}Details: {eventModel.Description}";

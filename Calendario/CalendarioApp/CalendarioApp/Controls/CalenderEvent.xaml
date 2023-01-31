@@ -15,6 +15,7 @@
             TextColor="White">
             <Label.FormattedText>
                 <FormattedString>
+                    <Span Text="• " />
                     <Span Text="{Binding Starting, StringFormat='{0:HH\\:mm}'}" />
                     <Span Text=", " />
                     <Span Text="{Binding Name}" />
@@ -27,7 +28,7 @@
             LineBreakMode="WordWrap"
             Text="{Binding Description}" />
         <StackLayout.GestureRecognizers>
-            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            <TapGestureRecognizer Tapped="EventClicked" />
         </StackLayout.GestureRecognizers>
     </StackLayout>
 </ContentView>

@@ -1,4 +1,6 @@
 ﻿using CalendarioApp.Model.App;
+using CalendarioApp.Views;
+using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,8 +10,7 @@ namespace CalendarioApp.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalenderEvent : ContentView
     {
-        public static BindableProperty CalenderEventCommandProperty =
-            BindableProperty.Create(nameof(CalenderEventCommand), typeof(ICommand), typeof(CalenderEvent), null);
+        public static BindableProperty CalenderEventCommandProperty = BindableProperty.Create(nameof(CalenderEventCommand), typeof(ICommand), typeof(CalenderEvent), null);
 
         public CalenderEvent()
         {
@@ -29,10 +30,12 @@ namespace CalendarioApp.Controls
             set => SetValue(CalenderEventCommandProperty, value);
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        private async void EventClicked(object sender, EventArgs e)
         {
-            if (BindingContext is MainPageEventModel eventModel)
-                CalenderEventCommand?.Execute(eventModel);
+            if (BindingContext is AdvancedEventModel eventModel)
+            {
+                await App.Current.MainPage.DisplayAlert("Event has been clicked!", $"{eventModel.Name}, {eventModel.Description}, {eventModel.Starting}, {eventModel.ScheduleID}, {eventModel.TaskID}", "Ok");
+            }
         }
     }
 }
