@@ -17,10 +17,10 @@
         CornerRadius="30"
         HorizontalOptions="Fill"
         VerticalOptions="Fill">
-        <StackLayout VerticalOptions="Center">
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Label
                 FontSize="16"
-                Text="Synchronizacja..."
+                Text="WIP"
                 TextColor="{Binding PrimaryColor}" />
         </StackLayout>
     </Frame>

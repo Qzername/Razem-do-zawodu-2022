@@ -1,7 +1,6 @@
 ﻿using System;
 using CalendarioApp.Model.Server;
 using CalendarioApp.Managers;
-using CalendarioApp.Model.App;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,33 +11,8 @@ namespace CalendarioApp.Views
     {
         public MainPage()
         {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await Navigation.PushAsync(new SyncPage(), false);
-
-                try
-                {
-                    await ServerManager.Login(new AccountCredentials
-                    {
-                        Login = "testlogin",
-                        Password = "SeX123@a"
-                    });
-                }
-
-                catch { await App.Current.MainPage.DisplayAlert("Błąd!", "Logowanie nie powiodło się.", "Ok"); }
-
-                try
-                {
-                    ServerManager.ClearEvents();
-                    await ServerManager.Setup();
-                }
-
-                catch { await App.Current.MainPage.DisplayAlert("Błąd!", "Pobranie listy wydarzeń nie powiodło się.", "Ok"); }
-
-                await Navigation.PopToRootAsync();
-            }); 
-
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private async void NavigateCalendarClicked(object sender, EventArgs args)

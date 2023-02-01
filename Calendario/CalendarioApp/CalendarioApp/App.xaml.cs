@@ -9,7 +9,7 @@ namespace CalendarioApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new TabPage());
 
             if (Application.Current.RequestedTheme == OSAppTheme.Dark) MainPage.BackgroundColor = Color.Black;
             else MainPage.BackgroundColor = Color.White;

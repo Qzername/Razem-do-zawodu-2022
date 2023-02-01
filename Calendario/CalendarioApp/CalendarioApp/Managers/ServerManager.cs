@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -9,18 +8,14 @@ using System.Net.Http.Headers;
 using Xamarin.Plugin.Calendar.Models;
 using CalendarioApp.Model.App;
 using Xamarin.Forms;
-using System.Collections.ObjectModel;
-using CalendarioApp.Model.Server.Calendar;
 using Newtonsoft.Json.Linq;
-using System.Text;
 
 namespace CalendarioApp.Managers
 {
     public class ServerManager
     {
         private static readonly Color EventIndicatorSelectedColor = ColorManager.GetPrimaryColor();
-        // private static readonly string ServerIP = "54.37.204.140";
-        private static readonly string ServerIP = "192.168.0.103";
+        private static readonly string ServerIP = "20.25.191.186"; // "54.37.204.140";
         public static HttpClient Client = new HttpClient();
         public static EventCollection Events = new EventCollection();
         private static Token Token;
@@ -36,7 +31,7 @@ namespace CalendarioApp.Managers
             var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Account/Login", content);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Failed");
+                throw new Exception("Failed login");
             }
             string responseString = await response.Content.ReadAsStringAsync();
 
@@ -52,7 +47,7 @@ namespace CalendarioApp.Managers
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Task");
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Failed");
+                throw new Exception("Failed tasks");
             }
             string responseString = await response.Content.ReadAsStringAsync();
 
@@ -64,7 +59,7 @@ namespace CalendarioApp.Managers
 
                 if (scheduleResponseString == null)
                 {
-                    throw new Exception("Failed");
+                    throw new Exception("Failed schedules");
                 }
 
                 Schedule[] schedules = JSONManager.Deserialize<Schedule[]>(scheduleResponseString);
@@ -92,7 +87,7 @@ namespace CalendarioApp.Managers
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Task");
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Failed");
+                throw new Exception("Failed tasks");
             }
             string responseString = await response.Content.ReadAsStringAsync();
 
@@ -111,7 +106,7 @@ namespace CalendarioApp.Managers
             var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Task", content);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Failed");
+                throw new Exception("Failed add task");
             }
         }
 
@@ -131,7 +126,7 @@ namespace CalendarioApp.Managers
 
                 if (scheduleResponseString == null)
                 {
-                    throw new Exception("Failed");
+                    throw new Exception("Failed schedules");
                 }
 
                 Schedule[] _schedules = JSONManager.Deserialize<Schedule[]>(scheduleResponseString);
@@ -155,7 +150,7 @@ namespace CalendarioApp.Managers
             var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Schedule", content);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Failed");
+                throw new Exception("Failed add schedule");
             }
         }
 
@@ -164,7 +159,7 @@ namespace CalendarioApp.Managers
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Priority");
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Failed");
+                throw new Exception("Failed priorities");
             }
             string responseString = await response.Content.ReadAsStringAsync();
             Priority[] priorities = JSONManager.Deserialize<Priority[]>(responseString);
@@ -183,7 +178,7 @@ namespace CalendarioApp.Managers
             var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Priority", content);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Failed");
+                throw new Exception("Failed add priority");
             }
         }
 
@@ -192,7 +187,7 @@ namespace CalendarioApp.Managers
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Calendar/Day/{date.Day}");
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception(response.StatusCode.ToString());
+                throw new Exception("Failed day");
             }
             string responseString = await response.Content.ReadAsStringAsync();
             var json = JObject.Parse(responseString);

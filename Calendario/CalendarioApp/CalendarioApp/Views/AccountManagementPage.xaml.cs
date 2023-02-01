@@ -9,6 +9,7 @@ namespace CalendarioApp.Views
         public AccountManagementPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

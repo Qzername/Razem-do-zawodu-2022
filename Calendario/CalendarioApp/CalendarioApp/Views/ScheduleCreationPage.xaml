@@ -8,7 +8,7 @@
     Title="Planowanie wydarzenia"
     BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
-        <local:SchedulePageViewModel />
+        <local:ScheduleCreationPageViewModel />
     </ContentPage.BindingContext>
 
     <Frame
@@ -30,7 +30,10 @@
                     FontSize="16"
                     Text="Zadanie"
                     TextColor="{Binding PrimaryColor}" />
-                <Picker x:Name="TaskPicker" Title="Wybierz zadanie" />
+                <Picker
+                    x:Name="TaskPicker"
+                    Title="Wybierz zadanie"
+                    ItemsSource="{Binding Tasks}" />
             </StackLayout>
 
             <StackLayout Margin="0,10">

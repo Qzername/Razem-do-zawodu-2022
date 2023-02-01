@@ -10,6 +10,7 @@ namespace CalendarioApp.Views
         public CalendarManagementPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private void TaskClicked(object sender, EventArgs e)

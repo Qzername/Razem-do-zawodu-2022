@@ -1,17 +1,31 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.Linq;
 using CalendarioApp.Managers;
 using CalendarioApp.Model.Server;
-using CalendarioApp.Views;
 using Xamarin.Forms;
 
 namespace CalendarioApp.ViewModels
 {
-    internal class SchedulePageViewModel : BasePageViewModel
+    internal class ScheduleCreationPageViewModel : BasePageViewModel
     {
-        public SchedulePageViewModel() : base()
+        public ScheduleCreationPageViewModel() : base()
         {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                Task[] tasks = await ServerManager.GetTasks();
+                Tasks = tasks.ToList();
+            });
+
             TimeNow = DateTime.Now;
+        }
+
+        private List<Task> _tasks;
+
+        public List<Task> Tasks
+        {
+            get => _tasks;
+            set => SetProperty(ref _tasks, value);
         }
 
         private DateTime _timeNow;

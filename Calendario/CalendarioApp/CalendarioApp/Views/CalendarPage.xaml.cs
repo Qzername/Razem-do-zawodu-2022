@@ -1,7 +1,4 @@
 ﻿using System;
-using CalendarioApp.Model.Server;
-using CalendarioApp.Managers;
-using CalendarioApp.Model.App;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,6 +10,7 @@ namespace CalendarioApp.Views
         public CalendarPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private async void CreateScheduleClicked(object sender, EventArgs args)

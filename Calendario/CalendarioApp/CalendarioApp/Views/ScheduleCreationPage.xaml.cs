@@ -14,13 +14,8 @@ namespace CalendarioApp.Views
         public ScheduleCreationPage(DateTime? date)
         {
             Date = date ?? DateTime.Now;
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                var Tasks = await ServerManager.GetTasks();
-                TaskPicker.ItemsSource = Tasks;
-                TaskPicker.ItemDisplayBinding = new Binding("Name");
-            });
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         async void CreateScheduleClicked(object sender, EventArgs args)
@@ -38,9 +33,11 @@ namespace CalendarioApp.Views
 
             catch { await App.Current.MainPage.DisplayAlert("Błąd!", "Zaplanowanie wydarzenia nie powiodło się.", "Ok"); }
 
-            await ServerManager.ClearEvents();
+            ServerManager.ClearEvents();
             await ServerManager.Setup();
+
             await Navigation.PopToRootAsync();
+            await Navigation.PushAsync(new CalendarPage());
         }
     }
 }

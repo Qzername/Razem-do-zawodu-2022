@@ -1,6 +1,4 @@
-﻿using CalendarioApp.Managers;
-using CalendarioApp.Model.Server;
-using System;
+﻿using System;
 using CalendarioApp.Model.App;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,6 +11,7 @@ namespace CalendarioApp.Views
         public SchedulePage(AdvancedEventModel schedule)
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             ScheduleTitle.Text = schedule.Name;
             ScheduleDatePicker.Date = schedule.Starting;
             ScheduleTimePicker.Time = schedule.Starting.TimeOfDay;

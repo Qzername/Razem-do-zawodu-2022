@@ -5,21 +5,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CalendarioApp.Controls"
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
-    xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
     Title="Strona główna"
     BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
         <local:BasePageViewModel />
     </ContentPage.BindingContext>
 
-    <Frame
+    <StackLayout
         Margin="20"
-        Padding="20"
-        BackgroundColor="{Binding FrameBackground}"
-        CornerRadius="30"
         HorizontalOptions="Fill"
         VerticalOptions="Fill">
-        <StackLayout VerticalOptions="Center">
+        <StackLayout>
+            <Image Margin="0,32,0,0" Source="white.png" />
+
+            <Label
+                FontSize="32"
+                HorizontalOptions="Center"
+                Text="Calendario"
+                TextColor="{Binding PrimaryColor}" />
+        </StackLayout>
+
+
+        <StackLayout Padding="0,32" VerticalOptions="EndAndExpand">
             <Button
                 x:Name="NavigateCalendar"
                 BackgroundColor="{Binding PrimaryColor}"
@@ -48,5 +55,5 @@
                 TextColor="{Binding SecondaryColor}"
                 TextTransform="None" />
         </StackLayout>
-    </Frame>
+    </StackLayout>
 </ContentPage>

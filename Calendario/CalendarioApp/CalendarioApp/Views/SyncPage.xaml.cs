@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +15,7 @@ namespace CalendarioApp.Views
 
         protected override bool OnBackButtonPressed()
         {
-           return false;
+            return true;
         }
     }
 }
