@@ -3,16 +3,17 @@
     x:Class="CalendarioApp.Controls.CalenderEvent"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CalendarioApp.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <StackLayout
         Padding="15,0,0,0"
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
         <Label
-            x:Name="EventTitle"
+            x:Name="TaskTitle"
             FontAttributes="Bold"
             FontSize="Medium"
-            TextColor="White">
+            TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="• " />
@@ -28,7 +29,7 @@
             LineBreakMode="WordWrap"
             Text="{Binding Description}" />
         <StackLayout.GestureRecognizers>
-            <TapGestureRecognizer Tapped="EventClicked" />
+            <TapGestureRecognizer Tapped="TaskClicked" />
         </StackLayout.GestureRecognizers>
     </StackLayout>
 </ContentView>

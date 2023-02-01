@@ -4,13 +4,14 @@ using System;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CalendarioApp.Views;
 using Xamarin.Forms;
 using Xamarin.Plugin.Calendar.Enums;
 using Xamarin.Plugin.Calendar.Models;
 
 namespace CalendarioApp.ViewModels
 {
-    public class MainPageViewModel : BasePageViewModel
+    public class CalendarPageViewModel : BasePageViewModel
     {
         public ICommand DayTappedCommand => new Command<DateTime>(async (date) => await DayTapped(date));
         public ICommand SwipeLeftCommand => new Command(() => ChangeShownUnit(1));
@@ -19,28 +20,8 @@ namespace CalendarioApp.ViewModels
 
         public ICommand EventSelectedCommand => new Command(async (item) => await ExecuteEventSelectedCommand(item));
 
-        public MainPageViewModel() : base()
+        public CalendarPageViewModel() : base()
         {
-            OSAppTheme theme = Application.Current.RequestedTheme;
-
-            if (theme == OSAppTheme.Dark)
-            {
-                PageBackground = Color.Black;
-                FrameBackground = Color.FromRgb(15, 15, 15);
-                PrimaryColor = Color.White;
-                SecondaryColor = Color.Black;
-                DisabledColor = Color.DimGray;
-            }
-
-            else
-            {
-                PageBackground = Color.White;
-                FrameBackground = Color.FromRgb(240, 240, 240);
-                PrimaryColor = Color.Black;
-                SecondaryColor = Color.White;
-                DisabledColor = Color.Gray;
-            }
-
             Culture = CultureInfo.CreateSpecificCulture("pl-PL");
             SelectedDate = null;
             ShownDate = DateTime.Today;
@@ -49,46 +30,6 @@ namespace CalendarioApp.ViewModels
         public EventCollection Events
         {
             get => ServerManager.Events;
-        }
-
-        private Color _pageBackground;
-
-        public Color PageBackground
-        {
-            get => _pageBackground;
-            set => SetProperty(ref _pageBackground, value);
-        }
-
-        private Color _frameBackground;
-
-        public Color FrameBackground
-        {
-            get => _frameBackground;
-            set => SetProperty(ref _frameBackground, value);
-        }
-
-        private Color _primaryColor;
-
-        public Color PrimaryColor
-        {
-            get => _primaryColor;
-            set => SetProperty(ref _primaryColor, value);
-        }
-
-        private Color _secondaryColor;
-
-        public Color SecondaryColor
-        {
-            get => _secondaryColor;
-            set => SetProperty(ref _secondaryColor, value);
-        }
-
-        private Color _disabledColor;
-
-        public Color DisabledColor
-        {
-            get => _disabledColor;
-            set => SetProperty(ref _disabledColor, value);
         }
 
         private DateTime _shownDate = DateTime.Today;
@@ -133,9 +74,7 @@ namespace CalendarioApp.ViewModels
         {
             if (item is AdvancedEventModel eventModel)
             {
-                var title = $"Selected: {eventModel.Name}";
-                var message = $"Starts: {eventModel.Starting:HH:mm}{Environment.NewLine}Details: {eventModel.Description}";
-                await App.Current.MainPage.DisplayAlert(title, message, "Ok");
+                await App.Current.MainPage.Navigation.PushAsync(new SchedulePage(eventModel));
             }
         }
 

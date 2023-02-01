@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="CalendarioApp.Views.EventCreationPage"
+    x:Class="CalendarioApp.Views.ScheduleCreationPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CalendarioApp.Controls"
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
-    Title="Calendario @ 2023"
+    Title="Planowanie wydarzenia"
     BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
-        <local:EventCreationViewModel />
+        <local:SchedulePageViewModel />
     </ContentPage.BindingContext>
 
     <Frame
@@ -17,50 +17,37 @@
         BackgroundColor="{Binding FrameBackground}"
         CornerRadius="30"
         HorizontalOptions="Fill"
-        VerticalOptions="Fill">
+        VerticalOptions="Center">
         <StackLayout>
             <Label
                 FontSize="24"
                 HorizontalOptions="Center"
-                Text="Nowe wydarzenie"
+                Text="Zaplanuj wydarzenie"
                 TextColor="{Binding PrimaryColor}" />
+
             <StackLayout Margin="0,10">
                 <Label
                     FontSize="16"
-                    Text="Nazwa"
+                    Text="Zadanie"
                     TextColor="{Binding PrimaryColor}" />
-                <Entry
-                    x:Name="EventTitle"
-                    MaxLength="50"
-                    Placeholder="(Maks. 50 symboli)" />
+                <Picker x:Name="TaskPicker" Title="Wybierz zadanie" />
             </StackLayout>
 
             <StackLayout Margin="0,10">
                 <Label
                     FontSize="16"
-                    Text="Opis"
+                    Text="Rozpoczęcie wydarzenia"
                     TextColor="{Binding PrimaryColor}" />
-                <Entry
-                    x:Name="EventDescription"
-                    MaxLength="150"
-                    Placeholder="(Maks. 150 symboli)" />
-            </StackLayout>
-
-            <StackLayout Margin="0,10">
-                <Label
-                    FontSize="16"
-                    Text="Czas"
-                    TextColor="{Binding PrimaryColor}" />
-                <TimePicker x:Name="EventTimePicker" Time="{Binding TimeNow}" />
+                <TimePicker x:Name="ScheduleTimePicker" Time="{Binding TimeNow}" />
             </StackLayout>
 
             <Button
-                x:Name="CreateEventButton"
+                x:Name="CreateSchedule"
                 BackgroundColor="{Binding PrimaryColor}"
-                Clicked="CreateEventButtonClicked"
+                Clicked="CreateScheduleClicked"
                 CornerRadius="30"
                 HorizontalOptions="Center"
-                Text="Stwórz wydarzenie"
+                Text="Zaplanuj wydarzenie"
                 TextColor="{Binding SecondaryColor}"
                 TextTransform="None"
                 VerticalOptions="EndAndExpand" />

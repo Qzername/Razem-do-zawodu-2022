@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CalendarioApp.Views.CalendarManagementPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CalendarioApp.Controls"
+    xmlns:local="clr-namespace:CalendarioApp.ViewModels"
+    x:Name="CalendarioManagementPage"
+    BackgroundColor="{Binding PageBackground}">
+    <ContentPage.BindingContext>
+        <local:CalendarManagementPageViewModel />
+    </ContentPage.BindingContext>
+
+    <Frame
+        x:Name="Frame"
+        Margin="20"
+        Padding="20"
+        BackgroundColor="{Binding FrameBackground}"
+        CornerRadius="30"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
+        <StackLayout VerticalOptions="Center">
+            <Label
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="Zadania"
+                TextColor="{Binding PrimaryColor}" />
+
+            <ListView
+                x:Name="Tasks"
+                BackgroundColor="Transparent"
+                HasUnevenRows="True"
+                ItemsSource="{Binding Tasks}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout
+                                Padding="15,0,0,0"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="• " />
+                                            <Span Text="{Binding Name}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Padding="0,0,0,10"
+                                    FontSize="Small"
+                                    LineBreakMode="WordWrap"
+                                    Text="{Binding Description}" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TaskClicked" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="Wydarzenia"
+                TextColor="{Binding PrimaryColor}" />
+
+            <ListView
+                x:Name="Schedules"
+                BackgroundColor="Transparent"
+                HasUnevenRows="True"
+                ItemsSource="{Binding Schedules}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout
+                                Padding="15,0,0,0"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="• " />
+                                            <Span Text="{Binding ID}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Padding="0,0,0,10"
+                                    FontSize="Small"
+                                    LineBreakMode="WordWrap"
+                                    Text="{Binding TaskID}" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ScheduleClicked" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="Priorytety"
+                TextColor="{Binding PrimaryColor}" />
+
+            <ListView
+                x:Name="Priorities"
+                BackgroundColor="Transparent"
+                HasUnevenRows="True"
+                ItemsSource="{Binding Priorities}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout
+                                Padding="15,0,0,0"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="• " TextColor="{Binding ColorHex}" />
+                                            <Span Text="{Binding Name}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Padding="0,0,0,10"
+                                    FontSize="Small"
+                                    LineBreakMode="WordWrap"
+                                    Text="{Binding ColorHex}" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="PriorityClicked" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </Frame>
+</ContentPage>

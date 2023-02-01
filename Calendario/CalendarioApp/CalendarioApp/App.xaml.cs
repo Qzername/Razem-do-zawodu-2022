@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalendarioApp.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace CalendarioApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Views.MainPage());
+            MainPage = new NavigationPage(new MainPage());
             if (Application.Current.RequestedTheme == OSAppTheme.Dark) MainPage.BackgroundColor = Color.Black;
             else MainPage.BackgroundColor = Color.White;
         }

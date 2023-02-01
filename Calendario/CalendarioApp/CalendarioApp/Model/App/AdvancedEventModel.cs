@@ -9,5 +9,6 @@ namespace CalendarioApp.Model.App
         public DateTime Starting { get; set; }
         public int ScheduleID { get; set; }
         public int TaskID { get; set; }
+        public int PriorityID { get; set; }
     }
 }

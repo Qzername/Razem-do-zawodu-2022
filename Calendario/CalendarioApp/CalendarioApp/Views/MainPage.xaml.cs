@@ -1,10 +1,13 @@
 ﻿using System;
 using CalendarioApp.Model.Server;
 using CalendarioApp.Managers;
+using CalendarioApp.Model.App;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace CalendarioApp.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
         public MainPage()
@@ -26,10 +29,11 @@ namespace CalendarioApp.Views
 
                 try
                 {
-                    await ServerManager.GetTasks();
+                    await ServerManager.ClearEvents();
+                    await ServerManager.Setup();
                 }
 
-                catch (Exception e) { await App.Current.MainPage.DisplayAlert("Błąd!", "Pobranie listy wydarzeń nie powiodło się.", "Ok"); }
+                catch { await App.Current.MainPage.DisplayAlert("Błąd!", "Pobranie listy wydarzeń nie powiodło się.", "Ok"); }
 
                 await Navigation.PopToRootAsync();
             });
@@ -37,13 +41,19 @@ namespace CalendarioApp.Views
             InitializeComponent();
         }
 
-        private async void CreateEventButtonClicked(object sender, EventArgs args)
+        private async void NavigateCalendarClicked(object sender, EventArgs args)
         {
-            DateTime? selectedDate = Calendar.SelectedDate;
-            if (selectedDate != null)
-            {
-                await Navigation.PushAsync(new EventCreationPage(selectedDate));
-            }
+            await Navigation.PushAsync(new CalendarPage());
+        }
+
+        private async void NavigateAccountManagementClicked(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new AccountManagementPage());
+        }
+
+        private async void NavigateCalendarManagementClicked(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new CalendarManagementPage());
         }
     }
 }

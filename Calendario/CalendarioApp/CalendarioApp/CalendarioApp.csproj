@@ -24,8 +24,23 @@
     <Compile Update="SelectionPage.xaml.cs">
       <DependentUpon>SelectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\EventCreationPage.xaml.cs">
-      <DependentUpon>EventCreationPage.xaml</DependentUpon>
+    <Compile Update="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CalendarPage.xaml.cs">
+      <DependentUpon>CalendarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CalendarManagementPage.xaml.cs">
+      <DependentUpon>CalendarManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AccountManagementPage.xaml.cs">
+      <DependentUpon>AccountManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SchedulePage.xaml.cs">
+      <DependentUpon>SchedulePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ScheduleCreationPage.xaml.cs">
+      <DependentUpon>ScheduleCreationPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SyncPage.xaml.cs">
       <DependentUpon>SyncPage.xaml</DependentUpon>
@@ -36,7 +51,16 @@
     <EmbeddedResource Update="SelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EventCreationPage.xaml">
+    <EmbeddedResource Update="Views\CalendarManagementPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AccountManagementPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SchedulePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ScheduleCreationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SyncPage.xaml">

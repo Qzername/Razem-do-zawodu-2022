@@ -12,8 +12,8 @@ namespace CalendarioAPI.Controller
     [ApiController]
     public class CalendarController : ControllerBase
     {
-        [HttpGet("[action]")]
-        public IActionResult Day([FromHeader] string token, [FromBody]long day)
+        [HttpGet("[action]/{day}")]
+        public IActionResult Day([FromHeader] string token, long day)
         {
             string decoded = JWTManager.Decode(token);
 
@@ -25,8 +25,8 @@ namespace CalendarioAPI.Controller
             return Ok(JSONManager.Serialize(GetDay(day, loginToken.ID)));
         }
 
-        [HttpGet("[action]")]
-        public IActionResult Week([FromHeader] string token, [FromBody]long week)
+        [HttpGet("[action]/{week}")]
+        public IActionResult Week([FromHeader] string token, long week)
         {
             string decoded = JWTManager.Decode(token);
 

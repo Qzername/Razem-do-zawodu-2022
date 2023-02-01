@@ -20,8 +20,8 @@ namespace CalendarioApp.Controls
 
         private void Setup(OSAppTheme theme)
         {
-            if (theme == OSAppTheme.Dark) EventTitle.TextColor = Color.White;
-            else EventTitle.TextColor = Color.Black;
+            if (theme == OSAppTheme.Dark) TaskTitle.TextColor = Color.White;
+            else TaskTitle.TextColor = Color.Black;
         }
 
         public ICommand CalenderEventCommand
@@ -30,11 +30,11 @@ namespace CalendarioApp.Controls
             set => SetValue(CalenderEventCommandProperty, value);
         }
 
-        private async void EventClicked(object sender, EventArgs e)
+        private async void TaskClicked(object sender, EventArgs e)
         {
             if (BindingContext is AdvancedEventModel eventModel)
             {
-                await App.Current.MainPage.DisplayAlert("Event has been clicked!", $"{eventModel.Name}, {eventModel.Description}, {eventModel.Starting}, {eventModel.ScheduleID}, {eventModel.TaskID}", "Ok");
+                CalenderEventCommand?.Execute(eventModel);
             }
         }
     }
