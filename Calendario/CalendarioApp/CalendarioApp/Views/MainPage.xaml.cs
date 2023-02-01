@@ -29,14 +29,14 @@ namespace CalendarioApp.Views
 
                 try
                 {
-                    await ServerManager.ClearEvents();
+                    ServerManager.ClearEvents();
                     await ServerManager.Setup();
                 }
 
                 catch { await App.Current.MainPage.DisplayAlert("Błąd!", "Pobranie listy wydarzeń nie powiodło się.", "Ok"); }
 
                 await Navigation.PopToRootAsync();
-            });
+            }); 
 
             InitializeComponent();
         }

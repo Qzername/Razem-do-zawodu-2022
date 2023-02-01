@@ -45,7 +45,7 @@ namespace CalendarioApp.Managers
             return Token;
         }
 
-        public static async System.Threading.Tasks.Task ClearEvents() { Events.Clear();}
+        public static void ClearEvents() { Events.Clear();}
 
         public static async System.Threading.Tasks.Task Setup()
         {

@@ -18,7 +18,7 @@ namespace CalendarioApp.Views
             ScheduleTimePicker.Time = schedule.Starting.TimeOfDay;
         }
 
-        async void DeleteScheduleClicked(object sender, EventArgs args)
+        private void DeleteScheduleClicked(object sender, EventArgs args)
         {
         }
     }

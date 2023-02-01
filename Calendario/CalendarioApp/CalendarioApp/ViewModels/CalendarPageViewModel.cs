@@ -13,7 +13,7 @@ namespace CalendarioApp.ViewModels
 {
     public class CalendarPageViewModel : BasePageViewModel
     {
-        public ICommand DayTappedCommand => new Command<DateTime>(async (date) => await DayTapped(date));
+        public ICommand DayTappedCommand => new Command<DateTime>((date) => DayTapped(date));
         public ICommand SwipeLeftCommand => new Command(() => ChangeShownUnit(1));
         public ICommand SwipeRightCommand => new Command(() => ChangeShownUnit(-1));
         public ICommand SwipeUpCommand => new Command(() => { ShownDate = DateTime.Today; });
@@ -64,7 +64,7 @@ namespace CalendarioApp.ViewModels
             set => SetProperty(ref _culture, value);
         }
 
-        private static async Task DayTapped(DateTime date)
+        private static void DayTapped(DateTime date)
         {
             // var message = $"Received tap event from date: {date}";
             // await App.Current.MainPage.DisplayAlert("DayTapped", message, "Ok");

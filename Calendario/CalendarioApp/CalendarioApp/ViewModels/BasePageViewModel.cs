@@ -22,7 +22,7 @@ namespace CalendarioApp.ViewModels
             else
             {
                 PageBackground = Color.White;
-                FrameBackground = Color.FromRgb(240, 240, 240);
+                FrameBackground = Color.FromRgb(255, 255, 255);
                 PrimaryColor = Color.Black;
                 SecondaryColor = Color.White;
                 DisabledColor = Color.Gray;

@@ -30,7 +30,7 @@ namespace CalendarioApp.Controls
             set => SetValue(CalenderEventCommandProperty, value);
         }
 
-        private async void TaskClicked(object sender, EventArgs e)
+        private void TaskClicked(object sender, EventArgs e)
         {
             if (BindingContext is AdvancedEventModel eventModel)
             {
