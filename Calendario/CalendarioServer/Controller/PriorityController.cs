@@ -2,15 +2,12 @@
 using ForesterAPI;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using static System.Data.Entity.Infrastructure.Design.Executor;
-using Task = CalendarioAPI.Model.Task;
 
 namespace CalendarioAPI.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class PriorityController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get([FromHeader] string token)
@@ -22,13 +19,13 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID}");
+            var priority = SQLDatabase.Select<Priority>($"SELECT * FROM Priorities WHERE AccountID={loginToken.ID}");
 
-            return Ok(JSONManager.Serialize(tasks));
+            return Ok(JSONManager.Serialize(priority));
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get([FromHeader]string token, int id)
+        public IActionResult Get([FromHeader] string token, int id)
         {
             string decoded = JWTManager.Decode(token);
 
@@ -37,16 +34,16 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={id}");
+            var priority = SQLDatabase.Select<Priority>($"SELECT * FROM Priorities WHERE AccountID={loginToken.ID} AND ID={id}");
 
-            if (tasks.Length == 0)
+            if (priority.Length == 0)
                 return StatusCode(404);
 
-            return Ok(JSONManager.Serialize(tasks[0]));
+            return Ok(JSONManager.Serialize(priority[0]));
         }
 
         [HttpPost]
-        public IActionResult Post([FromHeader] string token, TaskCreation task)
+        public IActionResult Post([FromHeader] string token, PriorityCreation priority)
         {
             string decoded = JWTManager.Decode(token);
 
@@ -55,16 +52,16 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            if (string.IsNullOrEmpty(task.Name))
+            if (string.IsNullOrEmpty(priority.Name))
                 return StatusCode(400);
 
-            SQLDatabase.NoReturnQuery($"INSERT INTO Tasks(AccountID, ProrityID, Name, Description, IsCompleted) VALUES({loginToken.ID}, {-1}, \"{task.Name}\", \"{task.Description}\", 0)");
+            SQLDatabase.NoReturnQuery($"INSERT INTO Priorities(AccountID, Name, ColorHex) VALUES({loginToken.ID}, \"{priority.Name}\", \"{priority.ColorHex}\")");
 
             return Ok();
         }
 
         [HttpPatch]
-        public IActionResult Patch([FromHeader] string token, Task task)
+        public IActionResult Patch([FromHeader] string token, Priority priority)
         {
             string decoded = JWTManager.Decode(token);
 
@@ -73,30 +70,24 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={task.ID}");
+            var tasks = SQLDatabase.Select<Priority>($"SELECT * FROM Priorities WHERE AccountID={loginToken.ID} AND ID={priority.ID}");
 
             if (tasks.Length == 0)
                 return StatusCode(404);
 
-            string query = "UPDATE Accounts SET ";
+            string query = "UPDATE Priorities SET ";
+            
+            if (!string.IsNullOrEmpty(priority.Name))
+                query += $"Name=\"{priority.Name}\",";
 
-            if (tasks[0].PriorityID != task.PriorityID)
-                query += $"PriorityID={task.PriorityID},";
-
-            if (!string.IsNullOrEmpty(task.Name))
-                query += $"Name=\"{task.Name}\",";
-
-            if (!string.IsNullOrEmpty(task.Description))
-                query += $"Description=\"{task.Description}\",";
-
-            if (tasks[0].IsCompleted != task.IsCompleted)
-                query += $"IsCompleted={int.Parse(task.IsCompleted.ToString())},";
+            if (!string.IsNullOrEmpty(priority.ColorHex))
+                query += $"ColorHex=\"{priority.ColorHex}\",";
 
             if (query[^1] != ',')
                 return StatusCode(406);
 
             query = query.Remove(query.Length - 1);
-            query += $" WHERE ID={task.ID}";
+            query += $" WHERE ID={priority.ID}";
 
             SQLDatabase.NoReturnQuery(query);
 
@@ -113,14 +104,14 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID=\"{loginToken.ID}\" AND ID={id}");
+            var priorities = SQLDatabase.Select<Priority>($"SELECT * FROM Priorities WHERE AccountID=\"{loginToken.ID}\" AND ID={id}");
 
-            if (tasks.Length == 0)
+            if (priorities.Length == 0)
                 return StatusCode(404);
 
-            SQLDatabase.NoReturnQuery($"DELETE FROM Tasks WHERE ID={id}");
+            SQLDatabase.NoReturnQuery($"DELETE FROM Priorities WHERE ID={id}");
 
             return Ok();
-        }
+        }   
     }
 }

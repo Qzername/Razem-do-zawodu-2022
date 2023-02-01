@@ -80,6 +80,9 @@ namespace CalendarioAPI.Controller
 
             string query = "UPDATE Accounts SET ";
 
+            if (schedules[0].PriorityID != schedule.PriorityID)
+                query += $"ProrityID={schedule.PriorityID},";
+
             if (schedule.DateBegin < DateTime.Today.Ticks)
                 query += $"DateBegin={schedule.DateBegin},";
 
