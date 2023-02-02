@@ -1,4 +1,6 @@
-﻿using CalendarioApp.Views;
+﻿using CalendarioApp.Managers;
+using CalendarioApp.Model.Server;
+using CalendarioApp.Views;
 using Xamarin.Forms;
 
 namespace CalendarioApp

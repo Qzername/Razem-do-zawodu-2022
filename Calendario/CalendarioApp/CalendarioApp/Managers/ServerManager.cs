@@ -65,18 +65,20 @@ namespace CalendarioApp.Managers
                 Schedule[] schedules = JSONManager.Deserialize<Schedule[]>(scheduleResponseString);
                 foreach (Schedule schedule in schedules)
                 {
-                    DateTime scheduleDate = new DateTime(schedule.DateBegin);
+                    DateTime scheduleBegin = new DateTime(schedule.DateBegin);
+                    DateTime scheduleEnd = new DateTime(schedule.DateEnd);
+
                     try
                     {
-                        var dayEvent = Events[scheduleDate] as DayEventCollection<AdvancedEventModel>;
-                        dayEvent.Add(new AdvancedEventModel { Name = task.Name, Description = task.Description, Starting = scheduleDate, ScheduleID = schedule.ID, TaskID = schedule.TaskID, PriorityID = schedule.PriorityID });
+                        var dayEvent = Events[scheduleBegin] as DayEventCollection<AdvancedEventModel>;
+                        dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, schedule.TaskID, schedule.PriorityID));
                     }
 
                     catch
                     {
-                        Events[scheduleDate] = new DayEventCollection<AdvancedEventModel>(Color.FromHex("#0080ff"), EventIndicatorSelectedColor);
-                        var dayEvent = Events[scheduleDate] as DayEventCollection<AdvancedEventModel>;
-                        dayEvent.Add(new AdvancedEventModel { Name = task.Name, Description = task.Description, Starting = scheduleDate, ScheduleID = schedule.ID, TaskID = schedule.TaskID, PriorityID = schedule.PriorityID });
+                        Events[scheduleBegin] = new DayEventCollection<AdvancedEventModel>(Color.FromHex("#0080ff"), EventIndicatorSelectedColor);
+                        var dayEvent = Events[scheduleBegin] as DayEventCollection<AdvancedEventModel>;
+                        dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, schedule.TaskID, schedule.PriorityID));
                     }
                 }
             }
@@ -110,10 +112,10 @@ namespace CalendarioApp.Managers
             }
         }
 
-        /* public static async System.Threading.Tasks.Task RemoveTask(Task task)
+        public static async System.Threading.Tasks.Task RemoveTask(Task task)
         {
-
-        } */
+            await Client.DeleteAsync($"http://{ServerIP}:6969/api/Task/{task.ID}");
+        }
 
         public static async System.Threading.Tasks.Task<Schedule[]> GetSchedulesUsingTasks(Task[] tasks)
         {
@@ -152,6 +154,11 @@ namespace CalendarioApp.Managers
             {
                 throw new Exception("Failed add schedule");
             }
+        }
+
+        public static async System.Threading.Tasks.Task RemoveSchedule(AdvancedEventModel schedule)
+        {
+            await Client.DeleteAsync($"http://{ServerIP}:6969/api/Schedule/{schedule.ScheduleID}");
         }
 
         public static async System.Threading.Tasks.Task<Priority[]> GetPriorities()

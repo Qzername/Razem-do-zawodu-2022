@@ -110,12 +110,7 @@ namespace CalendarioAPI.Controller
 
             var loginToken = JSONManager.Deserialize<TokenData>(decoded);
 
-            var tasks = SQLDatabase.Select<Task>($"SELECT * FROM Tasks WHERE AccountID={loginToken.ID} AND ID={id}");
-
-            if (tasks.Length == 0)
-                return StatusCode(404);
-
-            var schedules = SQLDatabase.Select<Schedule>($"SELECT * FROM Schedules WHERE TaskID={id}");
+            var schedules = SQLDatabase.Select<Schedule>($"SELECT * FROM Schedules WHERE ID={id}");
 
             if (schedules.Length == 0)
                 return StatusCode(404);

@@ -18,6 +18,8 @@
                 <FormattedString>
                     <Span Text="• " />
                     <Span Text="{Binding Starting, StringFormat='{0:HH\\:mm}'}" />
+                    <Span Text=" - " />
+                    <Span Text="{Binding Ending, StringFormat='{0:HH\\:mm}'}" />
                     <Span Text=", " />
                     <Span Text="{Binding Name}" />
                 </FormattedString>

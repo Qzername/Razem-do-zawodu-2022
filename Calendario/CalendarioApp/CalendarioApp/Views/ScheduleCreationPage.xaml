@@ -33,15 +33,36 @@
                 <Picker
                     x:Name="TaskPicker"
                     Title="Wybierz zadanie"
-                    ItemsSource="{Binding Tasks}" />
+                    ItemsSource="{Binding Tasks}"
+                    ItemDisplayBinding="{Binding Name}"/>
             </StackLayout>
 
-            <StackLayout Margin="0,10">
+            <StackLayout Margin="0,10" Orientation="Horizontal">
+                <CheckBox x:Name="IsScheduleAllDay"/>
+                <Label
+                    Margin="0, 5, 0, 0"
+                    FontSize="16"
+                    Text="Wydarzenie trwa cały dzień?"
+                    TextColor="{Binding PrimaryColor}" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="IsScheduleAllDayTapped" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+            <StackLayout Margin="0,10" x:Name="ScheduleStart">
                 <Label
                     FontSize="16"
                     Text="Rozpoczęcie wydarzenia"
                     TextColor="{Binding PrimaryColor}" />
-                <TimePicker x:Name="ScheduleTimePicker" Time="{Binding TimeNow}" />
+                <TimePicker x:Name="ScheduleStartTimePicker" Time="{Binding TimeNow}" />
+            </StackLayout>
+
+            <StackLayout Margin="0,10" x:Name="ScheduleEnd">
+                <Label
+                    FontSize="16"
+                    Text="Zakończenie wydarzenia"
+                    TextColor="{Binding PrimaryColor}" />
+                <TimePicker x:Name="ScheduleEndTimePicker" Time="{Binding TimeNow}" />
             </StackLayout>
 
             <Button

@@ -22,9 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="SelectionPage.xaml.cs">
-      <DependentUpon>SelectionPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

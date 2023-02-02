@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Content.Res;
 using CalendarioApp.Managers;
 using CalendarioApp.Model.Server;
+using CalendarioApp.Views;
 using Xamarin.Forms;
 
 namespace CalendarioApp.ViewModels
@@ -13,6 +15,17 @@ namespace CalendarioApp.ViewModels
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
+                await App.Current.MainPage.Navigation.PushAsync(new SyncPage());
+
+                await ServerManager.Login(new AccountCredentials
+                {
+                    Login = "testlogin",
+                    Password = "SeX123@a"
+                });
+
+                ServerManager.ClearEvents();
+                await ServerManager.Setup();
+
                 Task[] tasks = await ServerManager.GetTasks();
                 Tasks = tasks.ToList();
 
@@ -21,6 +34,8 @@ namespace CalendarioApp.ViewModels
 
                 Priority[] priorities = await ServerManager.GetPriorities();
                 Priorities = priorities.ToList();
+
+                await App.Current.MainPage.Navigation.PopToRootAsync();
             });
         }
 
