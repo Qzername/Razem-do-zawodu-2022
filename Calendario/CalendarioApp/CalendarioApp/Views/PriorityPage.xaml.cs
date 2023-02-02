@@ -22,9 +22,8 @@ namespace CalendarioApp.Views
         private async void DeletePriorityClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new SyncPage());
-            // await ServerManager.RemovePriority(Priority);
-            ServerManager.ClearEvents();
-            await ServerManager.Setup();
+            await ServerManager.RemovePriority(Priority);
+            await ServerManager.Sync();
             await Navigation.PopToRootAsync();
         }
     }

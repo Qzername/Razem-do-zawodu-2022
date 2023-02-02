@@ -23,8 +23,7 @@ namespace CalendarioApp.Views
         {
             await Navigation.PushAsync(new SyncPage());
             await ServerManager.RemoveTask(Task);
-            ServerManager.ClearEvents();
-            await ServerManager.Setup();
+            await ServerManager.Sync();
             await Navigation.PopToRootAsync();
         }
     }

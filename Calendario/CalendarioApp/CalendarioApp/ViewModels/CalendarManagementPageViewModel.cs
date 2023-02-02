@@ -23,11 +23,10 @@ namespace CalendarioApp.ViewModels
                     Password = "SeX123@a"
                 });
 
-                ServerManager.ClearEvents();
-                await ServerManager.Setup();
+                await ServerManager.Sync();
 
-                Tasks = await ServerManager.GetTasks();
-                Priorities = await ServerManager.GetPriorities();
+                Tasks = ServerManager.Tasks;
+                Priorities = ServerManager.Priorities;
 
                 await App.Current.MainPage.Navigation.PopToRootAsync();
             });

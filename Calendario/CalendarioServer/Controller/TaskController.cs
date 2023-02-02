@@ -58,7 +58,7 @@ namespace CalendarioAPI.Controller
             if (string.IsNullOrEmpty(task.Name))
                 return StatusCode(400);
 
-            SQLDatabase.NoReturnQuery($"INSERT INTO Tasks(AccountID, ProrityID, Name, Description, IsCompleted) VALUES({loginToken.ID}, {-1}, \"{task.Name}\", \"{task.Description}\", 0)");
+            SQLDatabase.NoReturnQuery($"INSERT INTO Tasks(AccountID, PriorityID, Name, Description, IconID, IsCompleted) VALUES({loginToken.ID}, -1, \"{task.Name}\", \"{task.Description}\", \"Calendar\", 0)");
 
             return Ok();
         }

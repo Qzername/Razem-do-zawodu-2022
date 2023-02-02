@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
     BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
-        <local:ScheduleCreationPageViewModel />
+        <local:BasePageViewModel />
     </ContentPage.BindingContext>
 
     <Frame
@@ -32,7 +32,7 @@
                 <Entry
                     x:Name="PriorityName"
                     MaxLength="50"
-                    Placeholder="(Maks. 50 symboli)"/>
+                    Placeholder="(Maks. 50 symboli)" />
             </StackLayout>
 
             <Button

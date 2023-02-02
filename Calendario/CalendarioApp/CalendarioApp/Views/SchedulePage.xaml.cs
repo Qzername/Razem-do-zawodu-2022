@@ -24,8 +24,7 @@ namespace CalendarioApp.Views
         {
             await Navigation.PushAsync(new SyncPage());
             await ServerManager.RemoveSchedule(Schedule);
-            ServerManager.ClearEvents();
-            await ServerManager.Setup();
+            await ServerManager.Sync();
             await Navigation.PopToRootAsync();
         }
     }

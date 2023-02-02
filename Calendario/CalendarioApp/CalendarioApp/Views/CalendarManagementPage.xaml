@@ -26,6 +26,7 @@
                 TextColor="{Binding PrimaryColor}" />
 
             <ListView
+                x:Name="Tasks"
                 BackgroundColor="Transparent"
                 CachingStrategy="RecycleElement"
                 HasUnevenRows="True"
@@ -81,6 +82,7 @@
                 TextColor="{Binding PrimaryColor}" />
 
             <ListView
+                x:Name="Priorities"
                 BackgroundColor="Transparent"
                 CachingStrategy="RecycleElement"
                 HasUnevenRows="True"

@@ -22,6 +22,12 @@ namespace CalendarioApp.Views
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(TaskDescription.Text))
+            {
+                await App.Current.MainPage.DisplayAlert("Błąd!", "Opis zadania nie może być pusty.", "Ok");
+                return;
+            }
+
             await Navigation.PushAsync(new SyncPage());
 
             TaskCreation task = new TaskCreation() { Name = TaskName.Text, Description = TaskDescription.Text};
@@ -31,16 +37,14 @@ namespace CalendarioApp.Views
                 await ServerManager.AddTask(task);
             }
 
-            catch
+            catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Błąd!", "Stworzenie zadania nie powiodło się.", "Ok");
+                await App.Current.MainPage.DisplayAlert("Błąd!", $"Stworzenie zadania nie powiodło się.{ex.Message}", "Ok");
             }
 
-            ServerManager.ClearEvents();
-            await ServerManager.Setup();
+            await ServerManager.Sync();
 
             await Navigation.PopToRootAsync();
-            await Navigation.PushAsync(new CalendarPage());
         }
     }
 }

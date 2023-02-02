@@ -18,7 +18,9 @@ namespace CalendarioApp.Managers
         private static readonly Color EventIndicatorSelectedColor = ColorManager.GetPrimaryColor();
         private static readonly string ServerIP = "20.25.191.186"; // "54.37.204.140";
         public static HttpClient Client = new HttpClient();
+        public static List<Task> Tasks = new List<Task>();
         public static EventCollection Events = new EventCollection();
+        public static List<Priority> Priorities = new List<Priority>();
         private static Token Token;
 
         public static async System.Threading.Tasks.Task<Token> Login(AccountCredentials accountCredentials)
@@ -41,9 +43,20 @@ namespace CalendarioApp.Managers
             return Token;
         }
 
-        public static void ClearEvents() { Events.Clear();}
+        public static async System.Threading.Tasks.Task Sync()
+        {
+            Tasks.Clear();
+            Events.Clear();
+            Priorities.Clear();
 
-        public static async System.Threading.Tasks.Task Setup()
+            await GetTasks();
+            await GetSchedules(Tasks);
+            await GetPriorities();
+        }
+
+
+
+        public static async System.Threading.Tasks.Task GetTasks()
         {
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Task");
             if (response.StatusCode != HttpStatusCode.OK)
@@ -52,7 +65,33 @@ namespace CalendarioApp.Managers
             }
             string responseString = await response.Content.ReadAsStringAsync();
 
-            Task[] tasks = JSONManager.Deserialize<Task[]>(responseString);
+            Tasks = JSONManager.Deserialize<Task[]>(responseString).ToList();
+        }
+
+        public static async System.Threading.Tasks.Task AddTask(TaskCreation task)
+        {
+            string taskDict = JsonSerializer.Serialize(task);
+
+            StringContent content = new StringContent(taskDict, System.Text.Encoding.UTF8);
+            MediaTypeHeaderValue headerValue = new MediaTypeHeaderValue("application/json");
+            content.Headers.ContentType = headerValue;
+
+            var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Task", content);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Failed add task");
+            }
+        }
+
+        public static async System.Threading.Tasks.Task RemoveTask(Task task)
+        {
+            await Client.DeleteAsync($"http://{ServerIP}:6969/api/Task/{task.ID}");
+        }
+
+
+
+        public static async System.Threading.Tasks.Task GetSchedules(List<Task> tasks)
+        {
             foreach (Task task in tasks)
             {
                 var scheduleResponse = await Client.GetAsync($"http://{ServerIP}:6969/api/Schedule/{task.ID}");
@@ -85,63 +124,6 @@ namespace CalendarioApp.Managers
             }
         }
 
-        public static async System.Threading.Tasks.Task<List<Task>> GetTasks()
-        {
-            var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Task");
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed tasks");
-            }
-            string responseString = await response.Content.ReadAsStringAsync();
-
-            List<Task> tasks = JSONManager.Deserialize<Task[]>(responseString).ToList();
-            return tasks;
-        }
-
-        public static async System.Threading.Tasks.Task AddTask(TaskCreation task)
-        {
-            string scheduleDict = JsonSerializer.Serialize(task);
-
-            StringContent content = new StringContent(scheduleDict, System.Text.Encoding.UTF8);
-            MediaTypeHeaderValue headerValue = new MediaTypeHeaderValue("application/json");
-            content.Headers.ContentType = headerValue;
-
-            var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Task", content);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed add task");
-            }
-        }
-
-        public static async System.Threading.Tasks.Task RemoveTask(Task task)
-        {
-            await Client.DeleteAsync($"http://{ServerIP}:6969/api/Task/{task.ID}");
-        }
-
-        public static async System.Threading.Tasks.Task<List<Schedule>> GetSchedulesUsingTasks(Task[] tasks)
-        {
-            List<Schedule> schedules = new List<Schedule>();
-
-            foreach (Task task in tasks)
-            {
-                var scheduleResponse = await Client.GetAsync($"http://{ServerIP}:6969/api/Schedule/{task.ID}");
-                string scheduleResponseString = await scheduleResponse.Content.ReadAsStringAsync();
-
-                if (scheduleResponseString == null)
-                {
-                    throw new Exception("Failed schedules");
-                }
-
-                Schedule[] _schedules = JSONManager.Deserialize<Schedule[]>(scheduleResponseString);
-                foreach (Schedule _schedule in _schedules)
-                {
-                    schedules.Add(_schedule);
-                }
-            }
-
-            return schedules;
-        }
-
         public static async System.Threading.Tasks.Task AddSchedule(ScheduleCreation schedule)
         {
             string scheduleDict = JsonSerializer.Serialize(schedule);
@@ -162,7 +144,9 @@ namespace CalendarioApp.Managers
             await Client.DeleteAsync($"http://{ServerIP}:6969/api/Schedule/{schedule.ScheduleID}");
         }
 
-        public static async System.Threading.Tasks.Task<List<Priority>> GetPriorities()
+
+
+        public static async System.Threading.Tasks.Task GetPriorities()
         {
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Priority");
             if (response.StatusCode != HttpStatusCode.OK)
@@ -170,9 +154,8 @@ namespace CalendarioApp.Managers
                 throw new Exception("Failed priorities");
             }
             string responseString = await response.Content.ReadAsStringAsync();
-            List<Priority> priorities = JSONManager.Deserialize<Priority[]>(responseString).ToList();
 
-            return priorities;
+            Priorities = JSONManager.Deserialize<Priority[]>(responseString).ToList();
         }
 
         public static async System.Threading.Tasks.Task AddPriority(PriorityCreation priority)
@@ -189,6 +172,13 @@ namespace CalendarioApp.Managers
                 throw new Exception("Failed add priority");
             }
         }
+
+        public static async System.Threading.Tasks.Task RemovePriority(Priority priority)
+        {
+            await Client.DeleteAsync($"http://{ServerIP}:6969/api/Priority/{priority.ID}");
+        }
+
+
 
         public static async System.Threading.Tasks.Task<Task[]> GetDay(Date date)
         {

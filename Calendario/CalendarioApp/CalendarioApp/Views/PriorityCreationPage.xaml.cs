@@ -1,9 +1,8 @@
 ﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using CalendarioApp.Managers;
 using CalendarioApp.Model.Server;
-using static Android.App.ActivityManager;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace CalendarioApp.Views
 {
@@ -37,11 +36,9 @@ namespace CalendarioApp.Views
                 await App.Current.MainPage.DisplayAlert("Błąd!", "Stworzenie priorytetu nie powiodło się.", "Ok");
             }
 
-            ServerManager.ClearEvents();
-            await ServerManager.Setup();
+            await ServerManager.Sync();
 
             await Navigation.PopToRootAsync();
-            await Navigation.PushAsync(new CalendarPage());
         }
     }
 }

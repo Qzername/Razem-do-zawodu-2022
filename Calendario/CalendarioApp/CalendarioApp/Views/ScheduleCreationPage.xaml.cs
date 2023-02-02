@@ -37,7 +37,8 @@ namespace CalendarioApp.Views
                 await Navigation.PushAsync(new SyncPage());
 
                 var selectedTask = (Task)TaskPicker.SelectedItem;
-                ScheduleCreation schedule = new ScheduleCreation() { DateBegin = StartDate.Ticks, DateEnd = EndDate.Ticks, TaskID = selectedTask.ID };
+                ScheduleCreation schedule = new ScheduleCreation()
+                    { DateBegin = StartDate.Ticks, DateEnd = EndDate.Ticks, TaskID = selectedTask.ID };
 
                 try
                 {
@@ -49,11 +50,9 @@ namespace CalendarioApp.Views
                     await App.Current.MainPage.DisplayAlert("Błąd!", "Zaplanowanie wydarzenia nie powiodło się.", "Ok");
                 }
 
-                ServerManager.ClearEvents();
-                await ServerManager.Setup();
+                await ServerManager.Sync();
 
                 await Navigation.PopToRootAsync();
-                await Navigation.PushAsync(new CalendarPage());
             }
 
             else
@@ -63,9 +62,24 @@ namespace CalendarioApp.Views
             }
         }
 
-        private void IsScheduleAllDayTapped(object sender, EventArgs e)
+        private void IsScheduleAllDayCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (IsScheduleAllDay.IsChecked == true)
+            if (IsScheduleAllDay.IsChecked)
+            {
+                ScheduleStart.IsVisible = false;
+                ScheduleEnd.IsVisible = false;
+            }
+
+            else
+            {
+                ScheduleStart.IsVisible = true;
+                ScheduleEnd.IsVisible = true;
+            }
+        }
+
+        private void IsScheduleAllDayCheckedTapped(object sender, EventArgs e)
+        {
+            if (IsScheduleAllDay.IsChecked)
             {
                 IsScheduleAllDay.IsChecked = false;
                 ScheduleStart.IsVisible = true;

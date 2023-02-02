@@ -32,7 +32,7 @@
                 <Entry
                     x:Name="TaskName"
                     MaxLength="50"
-                    Placeholder="(Maks. 50 symboli)"/>
+                    Placeholder="(Maks. 50 symboli)" />
             </StackLayout>
 
             <StackLayout Margin="0,10">
@@ -43,7 +43,7 @@
                 <Entry
                     x:Name="TaskDescription"
                     MaxLength="150"
-                    Placeholder="(Maks. 150 symboli)"/>
+                    Placeholder="(Maks. 150 symboli)" />
             </StackLayout>
 
             <Button
