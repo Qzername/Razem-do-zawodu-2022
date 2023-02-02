@@ -6,7 +6,7 @@
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:views="clr-namespace:CalendarioApp.Views"
     android:TabbedPage.ToolbarPlacement="Bottom">
-    <views:CalendarPage Title="Kalendarz" />
-    <views:CalendarManagementPage Title="Zarządzanie kalendarzem" />
-    <views:AccountManagementPage Title="Konto" />
+    <views:CalendarPage Title="Kalendarz" IconImageSource="white.png" />
+    <views:CalendarManagementPage Title="Zarządzanie" IconImageSource="white.png" />
+    <views:AccountManagementPage Title="Konto" IconImageSource="white.png" />
 </TabbedPage>

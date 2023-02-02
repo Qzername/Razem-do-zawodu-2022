@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="CalendarioApp.Views.SchedulePage"
+    x:Class="CalendarioApp.Views.PriorityPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CalendarioApp.Controls"
@@ -27,31 +27,15 @@
             <StackLayout Margin="0,10">
                 <Label
                     FontSize="16"
-                    Text="Zadanie"
+                    Text="Nazwa priorytetu"
                     TextColor="{Binding PrimaryColor}" />
-                <Entry x:Name="Task" IsEnabled="False" />
-            </StackLayout>
-
-            <StackLayout Margin="0,10">
-                <Label
-                    FontSize="16"
-                    Text="Data wydarzenia"
-                    TextColor="{Binding PrimaryColor}" />
-                <DatePicker x:Name="ScheduleDatePicker" IsEnabled="False" />
-            </StackLayout>
-
-            <StackLayout Margin="0,10">
-                <Label
-                    FontSize="16"
-                    Text="Rozpoczęcie wydarzenia"
-                    TextColor="{Binding PrimaryColor}" />
-                <TimePicker x:Name="ScheduleTimePicker" IsEnabled="False" />
+                <Entry x:Name="PriorityName" IsEnabled="False" />
             </StackLayout>
 
             <Button
-                x:Name="DeleteSchedule"
+                x:Name="DeletePriority"
                 BackgroundColor="Red"
-                Clicked="DeleteScheduleClicked"
+                Clicked="DeletePriorityClicked"
                 CornerRadius="30"
                 HorizontalOptions="Center"
                 Text="Usuń wydarzenie"

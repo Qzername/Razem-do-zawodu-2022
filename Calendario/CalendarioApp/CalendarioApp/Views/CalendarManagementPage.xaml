@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CalendarioApp.Controls"
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
-    x:Name="CalendarioManagementPage"
     BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
         <local:CalendarManagementPageViewModel />
@@ -27,9 +26,11 @@
                 TextColor="{Binding PrimaryColor}" />
 
             <ListView
-                x:Name="Tasks"
                 BackgroundColor="Transparent"
+                CachingStrategy="RecycleElement"
                 HasUnevenRows="True"
+                ItemSelected="TaskSelected"
+                ItemTapped="TaskTapped"
                 ItemsSource="{Binding Tasks}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -54,57 +55,24 @@
                                     FontSize="Small"
                                     LineBreakMode="WordWrap"
                                     Text="{Binding Description}" />
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="TaskClicked" />
-                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Label
-                FontSize="24"
-                HorizontalOptions="Center"
-                Text="Wydarzenia"
-                TextColor="{Binding PrimaryColor}" />
-
-            <ListView
-                x:Name="Schedules"
-                BackgroundColor="Transparent"
-                HasUnevenRows="True"
-                ItemsSource="{Binding Schedules}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout
-                                Padding="15,0,0,0"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand">
-                                <Label
-                                    FontAttributes="Bold"
-                                    FontSize="Medium"
-                                    TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="• " />
-                                            <Span Text="{Binding ID}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Label
-                                    Padding="0,0,0,10"
-                                    FontSize="Small"
-                                    LineBreakMode="WordWrap"
-                                    Text="{Binding TaskID}" />
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="ScheduleClicked" />
-                                </StackLayout.GestureRecognizers>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Button
+                x:Name="CreateTask"
+                BackgroundColor="{Binding PrimaryColor}"
+                Clicked="CreateTaskClicked"
+                CornerRadius="30"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                Text="+"
+                TextColor="{Binding SecondaryColor}"
+                TextTransform="None"
+                VerticalOptions="End"
+                WidthRequest="50" />
 
             <Label
                 FontSize="24"
@@ -113,9 +81,11 @@
                 TextColor="{Binding PrimaryColor}" />
 
             <ListView
-                x:Name="Priorities"
                 BackgroundColor="Transparent"
+                CachingStrategy="RecycleElement"
                 HasUnevenRows="True"
+                ItemSelected="PrioritySelected"
+                ItemTapped="PriorityTapped"
                 ItemsSource="{Binding Priorities}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -140,14 +110,24 @@
                                     FontSize="Small"
                                     LineBreakMode="WordWrap"
                                     Text="{Binding ColorHex}" />
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="PriorityClicked" />
-                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <Button
+                x:Name="CreatePriority"
+                BackgroundColor="{Binding PrimaryColor}"
+                Clicked="CreatePriorityClicked"
+                CornerRadius="30"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                Text="+"
+                TextColor="{Binding SecondaryColor}"
+                TextTransform="None"
+                VerticalOptions="End"
+                WidthRequest="50" />
         </StackLayout>
     </Frame>
 </ContentPage>

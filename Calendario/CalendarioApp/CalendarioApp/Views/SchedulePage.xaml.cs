@@ -9,13 +9,13 @@ namespace CalendarioApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SchedulePage : ContentPage
     {
-        AdvancedEventModel Schedule;
+        private AdvancedEventModel Schedule;
 
         public SchedulePage(AdvancedEventModel schedule)
         {
             InitializeComponent();
             Schedule = schedule;
-            ScheduleTitle.Text = schedule.Name;
+            Task.Text = schedule.Name;
             ScheduleDatePicker.Date = schedule.Starting;
             ScheduleTimePicker.Time = schedule.Starting.TimeOfDay;
         }

@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
     xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
     x:Name="CalendarioMainPage"
-    Title="Kalendarz"
     BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
         <local:CalendarPageViewModel />
@@ -99,8 +98,10 @@
                 BackgroundColor="{Binding PrimaryColor}"
                 Clicked="CreateScheduleClicked"
                 CornerRadius="30"
-                HorizontalOptions="Center"
-                Text="Zaplanuj wydarzenie"
+                HorizontalOptions="End"
+                WidthRequest="50"
+                HeightRequest="50"
+                Text="+"
                 TextColor="{Binding SecondaryColor}"
                 TextTransform="None"
                 VerticalOptions="End" />

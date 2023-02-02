@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -84,7 +85,7 @@ namespace CalendarioApp.Managers
             }
         }
 
-        public static async System.Threading.Tasks.Task<Task[]> GetTasks()
+        public static async System.Threading.Tasks.Task<List<Task>> GetTasks()
         {
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Task");
             if (response.StatusCode != HttpStatusCode.OK)
@@ -93,7 +94,7 @@ namespace CalendarioApp.Managers
             }
             string responseString = await response.Content.ReadAsStringAsync();
 
-            Task[] tasks = JSONManager.Deserialize<Task[]>(responseString);
+            List<Task> tasks = JSONManager.Deserialize<Task[]>(responseString).ToList();
             return tasks;
         }
 
@@ -117,9 +118,9 @@ namespace CalendarioApp.Managers
             await Client.DeleteAsync($"http://{ServerIP}:6969/api/Task/{task.ID}");
         }
 
-        public static async System.Threading.Tasks.Task<Schedule[]> GetSchedulesUsingTasks(Task[] tasks)
+        public static async System.Threading.Tasks.Task<List<Schedule>> GetSchedulesUsingTasks(Task[] tasks)
         {
-            Schedule[] schedules = { };
+            List<Schedule> schedules = new List<Schedule>();
 
             foreach (Task task in tasks)
             {
@@ -134,7 +135,7 @@ namespace CalendarioApp.Managers
                 Schedule[] _schedules = JSONManager.Deserialize<Schedule[]>(scheduleResponseString);
                 foreach (Schedule _schedule in _schedules)
                 {
-                    schedules.Append(_schedule);
+                    schedules.Add(_schedule);
                 }
             }
 
@@ -161,7 +162,7 @@ namespace CalendarioApp.Managers
             await Client.DeleteAsync($"http://{ServerIP}:6969/api/Schedule/{schedule.ScheduleID}");
         }
 
-        public static async System.Threading.Tasks.Task<Priority[]> GetPriorities()
+        public static async System.Threading.Tasks.Task<List<Priority>> GetPriorities()
         {
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Priority");
             if (response.StatusCode != HttpStatusCode.OK)
@@ -169,7 +170,7 @@ namespace CalendarioApp.Managers
                 throw new Exception("Failed priorities");
             }
             string responseString = await response.Content.ReadAsStringAsync();
-            Priority[] priorities = JSONManager.Deserialize<Priority[]>(responseString);
+            List<Priority> priorities = JSONManager.Deserialize<Priority[]>(responseString).ToList();
 
             return priorities;
         }

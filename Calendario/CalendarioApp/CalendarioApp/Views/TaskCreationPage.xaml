@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="CalendarioApp.Views.SchedulePage"
+    x:Class="CalendarioApp.Views.TaskCreationPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CalendarioApp.Controls"
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
     BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
-        <local:SchedulePageViewModel />
+        <local:BasePageViewModel />
     </ContentPage.BindingContext>
 
     <Frame
@@ -21,40 +21,38 @@
             <Label
                 FontSize="24"
                 HorizontalOptions="Center"
-                Text="Wydarzenie"
+                Text="Stwórz zadanie"
                 TextColor="{Binding PrimaryColor}" />
 
             <StackLayout Margin="0,10">
                 <Label
                     FontSize="16"
-                    Text="Zadanie"
+                    Text="Nazwa zadania"
                     TextColor="{Binding PrimaryColor}" />
-                <Entry x:Name="Task" IsEnabled="False" />
+                <Entry
+                    x:Name="TaskName"
+                    MaxLength="50"
+                    Placeholder="(Maks. 50 symboli)"/>
             </StackLayout>
 
             <StackLayout Margin="0,10">
                 <Label
                     FontSize="16"
-                    Text="Data wydarzenia"
+                    Text="Opis zadania"
                     TextColor="{Binding PrimaryColor}" />
-                <DatePicker x:Name="ScheduleDatePicker" IsEnabled="False" />
-            </StackLayout>
-
-            <StackLayout Margin="0,10">
-                <Label
-                    FontSize="16"
-                    Text="Rozpoczęcie wydarzenia"
-                    TextColor="{Binding PrimaryColor}" />
-                <TimePicker x:Name="ScheduleTimePicker" IsEnabled="False" />
+                <Entry
+                    x:Name="TaskDescription"
+                    MaxLength="150"
+                    Placeholder="(Maks. 150 symboli)"/>
             </StackLayout>
 
             <Button
-                x:Name="DeleteSchedule"
-                BackgroundColor="Red"
-                Clicked="DeleteScheduleClicked"
+                x:Name="CreateTask"
+                BackgroundColor="{Binding PrimaryColor}"
+                Clicked="CreateTaskClicked"
                 CornerRadius="30"
                 HorizontalOptions="Center"
-                Text="Usuń wydarzenie"
+                Text="Stwórz zadanie"
                 TextColor="{Binding SecondaryColor}"
                 TextTransform="None"
                 VerticalOptions="EndAndExpand" />

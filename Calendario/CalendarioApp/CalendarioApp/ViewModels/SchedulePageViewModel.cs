@@ -13,8 +13,7 @@ namespace CalendarioApp.ViewModels
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                Task[] tasks = await ServerManager.GetTasks();
-                Tasks = tasks.ToList();
+                Tasks = await ServerManager.GetTasks();
             });
 
             TimeNow = DateTime.Now;

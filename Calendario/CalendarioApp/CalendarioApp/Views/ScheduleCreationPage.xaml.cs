@@ -20,7 +20,7 @@ namespace CalendarioApp.Views
 
         async void CreateScheduleClicked(object sender, EventArgs args)
         {
-            if (IsScheduleAllDay.IsChecked == true)
+            if (IsScheduleAllDay.IsChecked)
             {
                 StartDate = StartDate.Date;
                 EndDate = EndDate.Date.AddDays(1).AddTicks(-1);
@@ -37,14 +37,17 @@ namespace CalendarioApp.Views
                 await Navigation.PushAsync(new SyncPage());
 
                 var selectedTask = (Task)TaskPicker.SelectedItem;
-                ScheduleCreation schedule = new ScheduleCreation() { DateBegin = StartDate.Ticks, DateEnd = EndDate.Ticks, TaskID = selectedTask.ID};
+                ScheduleCreation schedule = new ScheduleCreation() { DateBegin = StartDate.Ticks, DateEnd = EndDate.Ticks, TaskID = selectedTask.ID };
 
                 try
                 {
                     await ServerManager.AddSchedule(schedule);
                 }
 
-                catch { await App.Current.MainPage.DisplayAlert("Błąd!", "Zaplanowanie wydarzenia nie powiodło się.", "Ok"); }
+                catch
+                {
+                    await App.Current.MainPage.DisplayAlert("Błąd!", "Zaplanowanie wydarzenia nie powiodło się.", "Ok");
+                }
 
                 ServerManager.ClearEvents();
                 await ServerManager.Setup();

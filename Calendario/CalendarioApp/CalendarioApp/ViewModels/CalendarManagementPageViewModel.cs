@@ -26,14 +26,8 @@ namespace CalendarioApp.ViewModels
                 ServerManager.ClearEvents();
                 await ServerManager.Setup();
 
-                Task[] tasks = await ServerManager.GetTasks();
-                Tasks = tasks.ToList();
-
-                Schedule[] schedules = await ServerManager.GetSchedulesUsingTasks(tasks);
-                Schedules = schedules.ToList();
-
-                Priority[] priorities = await ServerManager.GetPriorities();
-                Priorities = priorities.ToList();
+                Tasks = await ServerManager.GetTasks();
+                Priorities = await ServerManager.GetPriorities();
 
                 await App.Current.MainPage.Navigation.PopToRootAsync();
             });
@@ -45,14 +39,6 @@ namespace CalendarioApp.ViewModels
         {
             get => _tasks;
             set => SetProperty(ref _tasks, value);
-        }
-
-        private List<Schedule> _schedules;
-
-        public List<Schedule> Schedules
-        {
-            get => _schedules;
-            set => SetProperty(ref _schedules, value);
         }
 
         private List<Priority> _priorities;
