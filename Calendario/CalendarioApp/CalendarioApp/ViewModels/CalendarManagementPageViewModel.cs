@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Android.Content.Res;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using CalendarioApp.Managers;
 using CalendarioApp.Model.Server;
-using CalendarioApp.Views;
 using Xamarin.Forms;
 
 namespace CalendarioApp.ViewModels
@@ -13,36 +10,21 @@ namespace CalendarioApp.ViewModels
     {
         public CalendarManagementPageViewModel() : base()
         {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await App.Current.MainPage.Navigation.PushAsync(new SyncPage());
-
-                await ServerManager.Login(new AccountCredentials
-                {
-                    Login = "testlogin",
-                    Password = "SeX123@a"
-                });
-
-                await ServerManager.Sync();
-
-                Tasks = ServerManager.Tasks;
-                Priorities = ServerManager.Priorities;
-
-                await App.Current.MainPage.Navigation.PopToRootAsync();
-            });
+            Tasks = ServerManager.Tasks;
+            Priorities = ServerManager.Priorities;
         }
 
-        private List<Task> _tasks;
+        private ObservableCollection<Task> _tasks;
 
-        public List<Task> Tasks
+        public ObservableCollection<Task> Tasks
         {
             get => _tasks;
             set => SetProperty(ref _tasks, value);
         }
 
-        private List<Priority> _priorities;
+        private ObservableCollection<Priority> _priorities;
 
-        public List<Priority> Priorities
+        public ObservableCollection<Priority> Priorities
         {
             get => _priorities;
             set => SetProperty(ref _priorities, value);

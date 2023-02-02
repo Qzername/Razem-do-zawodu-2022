@@ -19,7 +19,7 @@
         VerticalOptions="Fill">
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Label
-                FontSize="16"
+                FontSize="Medium"
                 Text="WIP"
                 TextColor="{Binding PrimaryColor}" />
         </StackLayout>

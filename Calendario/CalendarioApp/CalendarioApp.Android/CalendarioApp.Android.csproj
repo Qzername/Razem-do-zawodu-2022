@@ -63,6 +63,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.2</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.CurrentActivity">
+      <Version>2.1.0.4</Version>
+    </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>7.0.1</Version>
     </PackageReference>
@@ -103,10 +106,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\black.png" />
+    <AndroidResource Include="Resources\drawable\account.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\white.png" />
+    <AndroidResource Include="Resources\drawable\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\manage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

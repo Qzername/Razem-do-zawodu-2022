@@ -19,17 +19,21 @@
         VerticalOptions="Center">
         <StackLayout>
             <Label
-                FontSize="24"
+                FontSize="Medium"
                 HorizontalOptions="Center"
                 Text="Wydarzenie"
                 TextColor="{Binding PrimaryColor}" />
 
             <StackLayout Margin="0,10">
                 <Label
-                    FontSize="16"
+                    FontSize="Small"
                     Text="Nazwa priorytetu"
                     TextColor="{Binding PrimaryColor}" />
-                <Entry x:Name="PriorityName" IsEnabled="False" />
+                <Entry
+                    x:Name="PriorityName"
+                    FontSize="Small"
+                    IsEnabled="False"
+                    TextColor="{Binding PrimaryColor}" />
             </StackLayout>
 
             <Button
@@ -37,8 +41,9 @@
                 BackgroundColor="Red"
                 Clicked="DeletePriorityClicked"
                 CornerRadius="30"
+                FontSize="Small"
                 HorizontalOptions="Center"
-                Text="Usuń wydarzenie"
+                Text="Usuń priorytet"
                 TextColor="{Binding SecondaryColor}"
                 TextTransform="None"
                 VerticalOptions="EndAndExpand" />

@@ -20,7 +20,7 @@
         <StackLayout>
             <ActivityIndicator IsRunning="True" Color="#0080ff" />
             <Label
-                FontSize="16"
+                FontSize="Small"
                 Text="Synchronizacja..."
                 TextColor="{Binding PrimaryColor}" />
         </StackLayout>

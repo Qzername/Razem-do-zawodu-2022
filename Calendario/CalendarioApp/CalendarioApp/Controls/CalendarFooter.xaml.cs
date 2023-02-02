@@ -9,13 +9,6 @@ namespace CalendarioApp.Controls
         public CalendarFooter()
         {
             InitializeComponent();
-            Setup(Application.Current.RequestedTheme);
-        }
-
-        private void Setup(OSAppTheme theme)
-        {
-            if (theme == OSAppTheme.Dark) showHideLabel.TextColor = Color.White;
-            else showHideLabel.TextColor = Color.Black;
         }
     }
 }

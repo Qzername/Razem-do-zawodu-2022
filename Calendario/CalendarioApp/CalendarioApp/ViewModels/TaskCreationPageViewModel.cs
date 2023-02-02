@@ -5,20 +5,20 @@ using CalendarioApp.Model.Server;
 
 namespace CalendarioApp.ViewModels
 {
-    internal class ScheduleCreationPageViewModel : BasePageViewModel
+    internal class TaskCreationPageViewModel : BasePageViewModel
     {
-        public ScheduleCreationPageViewModel() : base()
+        public TaskCreationPageViewModel() : base()
         {
-            Tasks = ServerManager.Tasks;
+            Priorities = ServerManager.Priorities;
             TimeNow = DateTime.Now;
         }
 
-        private ObservableCollection<Task> _tasks;
+        private ObservableCollection<Priority> _priorities;
 
-        public ObservableCollection<Task> Tasks
+        public ObservableCollection<Priority> Priorities
         {
-            get => _tasks;
-            set => SetProperty(ref _tasks, value);
+            get => _priorities;
+            set => SetProperty(ref _priorities, value);
         }
 
         private DateTime _timeNow;

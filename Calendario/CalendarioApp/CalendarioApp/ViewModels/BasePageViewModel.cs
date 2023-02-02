@@ -8,8 +8,16 @@ namespace CalendarioApp.ViewModels
     {
         public BasePageViewModel()
         {
-            OSAppTheme theme = Application.Current.RequestedTheme;
+            SetupTheme(Application.Current.RequestedTheme);
 
+            Application.Current.RequestedThemeChanged += (s, a) =>
+            {
+                SetupTheme(a.RequestedTheme);
+            };
+        }
+
+        private void SetupTheme(OSAppTheme theme)
+        {
             if (theme == OSAppTheme.Dark)
             {
                 PageBackground = Color.Black;
@@ -28,8 +36,6 @@ namespace CalendarioApp.ViewModels
                 DisabledColor = Color.Gray;
             }
         }
-        
-        #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -42,8 +48,6 @@ namespace CalendarioApp.ViewModels
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        #endregion
 
         private Color _pageBackground;
 

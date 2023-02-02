@@ -19,33 +19,58 @@
         VerticalOptions="Center">
         <StackLayout>
             <Label
-                FontSize="24"
+                FontSize="Medium"
                 HorizontalOptions="Center"
                 Text="Wydarzenie"
                 TextColor="{Binding PrimaryColor}" />
 
             <StackLayout Margin="0,10">
                 <Label
-                    FontSize="16"
+                    FontSize="Small"
                     Text="Zadanie"
                     TextColor="{Binding PrimaryColor}" />
-                <Entry x:Name="Task" IsEnabled="False" />
+                <Entry
+                    x:Name="Task"
+                    FontSize="Small"
+                    IsEnabled="False"
+                    PlaceholderColor="{Binding DisabledColor}"
+                    TextColor="{Binding PrimaryColor}" />
             </StackLayout>
 
             <StackLayout Margin="0,10">
                 <Label
-                    FontSize="16"
+                    FontSize="Small"
                     Text="Data wydarzenia"
                     TextColor="{Binding PrimaryColor}" />
-                <DatePicker x:Name="ScheduleDatePicker" IsEnabled="False" />
+                <DatePicker
+                    x:Name="ScheduleDatePicker"
+                    FontSize="Small"
+                    IsEnabled="False"
+                    TextColor="{Binding PrimaryColor}" />
             </StackLayout>
 
             <StackLayout Margin="0,10">
                 <Label
-                    FontSize="16"
+                    FontSize="Small"
                     Text="Rozpoczęcie wydarzenia"
                     TextColor="{Binding PrimaryColor}" />
-                <TimePicker x:Name="ScheduleTimePicker" IsEnabled="False" />
+                <TimePicker
+                    x:Name="ScheduleStartTimePicker"
+                    FontSize="Small"
+                    IsEnabled="False"
+                    TextColor="{Binding PrimaryColor}" />
+            </StackLayout>
+
+            <StackLayout Margin="0,10">
+                <Label
+                    FontSize="Small"
+                    Text="Zakończenie wydarzenia"
+                    TextColor="{Binding PrimaryColor}" />
+                <TimePicker
+                    x:Name="ScheduleEndTimePicker"
+                    FontSize="Small"
+                    IsEnabled="False"
+                    TextColor="{Binding PrimaryColor}" />
             </StackLayout>
 
             <Button
@@ -53,6 +78,7 @@
                 BackgroundColor="Red"
                 Clicked="DeleteScheduleClicked"
                 CornerRadius="30"
+                FontSize="Small"
                 HorizontalOptions="Center"
                 Text="Usuń wydarzenie"
                 TextColor="{Binding SecondaryColor}"

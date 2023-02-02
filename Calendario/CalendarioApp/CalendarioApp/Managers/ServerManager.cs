@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -18,9 +19,9 @@ namespace CalendarioApp.Managers
         private static readonly Color EventIndicatorSelectedColor = ColorManager.GetPrimaryColor();
         private static readonly string ServerIP = "20.25.191.186"; // "54.37.204.140";
         public static HttpClient Client = new HttpClient();
-        public static List<Task> Tasks = new List<Task>();
+        public static ObservableCollection<Task> Tasks = new ObservableCollection<Task>();
         public static EventCollection Events = new EventCollection();
-        public static List<Priority> Priorities = new List<Priority>();
+        public static ObservableCollection<Priority> Priorities = new ObservableCollection<Priority>();
         private static Token Token;
 
         public static async System.Threading.Tasks.Task<Token> Login(AccountCredentials accountCredentials)
@@ -46,12 +47,13 @@ namespace CalendarioApp.Managers
         public static async System.Threading.Tasks.Task Sync()
         {
             Tasks.Clear();
-            Events.Clear();
             Priorities.Clear();
+            Events.Clear();
+
 
             await GetTasks();
-            await GetSchedules(Tasks);
             await GetPriorities();
+            await GetSchedules(Tasks);
         }
 
 
@@ -65,7 +67,10 @@ namespace CalendarioApp.Managers
             }
             string responseString = await response.Content.ReadAsStringAsync();
 
-            Tasks = JSONManager.Deserialize<Task[]>(responseString).ToList();
+            foreach (Task x in JSONManager.Deserialize<Task[]>(responseString))
+            {
+                Tasks.Add(x);
+            };
         }
 
         public static async System.Threading.Tasks.Task AddTask(TaskCreation task)
@@ -90,7 +95,7 @@ namespace CalendarioApp.Managers
 
 
 
-        public static async System.Threading.Tasks.Task GetSchedules(List<Task> tasks)
+        public static async System.Threading.Tasks.Task GetSchedules(ObservableCollection<Task> tasks)
         {
             foreach (Task task in tasks)
             {
@@ -107,18 +112,26 @@ namespace CalendarioApp.Managers
                 {
                     DateTime scheduleBegin = new DateTime(schedule.DateBegin);
                     DateTime scheduleEnd = new DateTime(schedule.DateEnd);
+                    string colorHex = "#ffffff";
+
+                    try
+                    { 
+                        colorHex = Priorities.Single(x => x.ID == schedule.PriorityID).ColorHex;
+                    }
+
+                    catch { }
 
                     try
                     {
                         var dayEvent = Events[scheduleBegin] as DayEventCollection<AdvancedEventModel>;
-                        dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, schedule.TaskID, schedule.PriorityID));
+                        dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, task.ID, schedule.PriorityID, colorHex));
                     }
 
                     catch
                     {
                         Events[scheduleBegin] = new DayEventCollection<AdvancedEventModel>(Color.FromHex("#0080ff"), EventIndicatorSelectedColor);
                         var dayEvent = Events[scheduleBegin] as DayEventCollection<AdvancedEventModel>;
-                        dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, schedule.TaskID, schedule.PriorityID));
+                        dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, task.ID, schedule.PriorityID, colorHex));
                     }
                 }
             }
@@ -155,7 +168,10 @@ namespace CalendarioApp.Managers
             }
             string responseString = await response.Content.ReadAsStringAsync();
 
-            Priorities = JSONManager.Deserialize<Priority[]>(responseString).ToList();
+            foreach (Priority x in JSONManager.Deserialize<Priority[]>(responseString))
+            {
+                Priorities.Add(x);
+            };
         }
 
         public static async System.Threading.Tasks.Task AddPriority(PriorityCreation priority)

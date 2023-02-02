@@ -1,5 +1,6 @@
 ﻿using CalendarioApp.Managers;
 using CalendarioApp.Model.Server;
+using CalendarioApp.ViewModels;
 using CalendarioApp.Views;
 using Xamarin.Forms;
 
@@ -12,9 +13,23 @@ namespace CalendarioApp
             InitializeComponent();
 
             MainPage = new NavigationPage(new TabPage());
+            MainPage.SetBinding(VisualElement.BackgroundColorProperty, "PageBackground");
+            MainPage.BindingContext = new BasePageViewModel();
 
-            if (Application.Current.RequestedTheme == OSAppTheme.Dark) MainPage.BackgroundColor = Color.Black;
-            else MainPage.BackgroundColor = Color.White;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new SyncPage());
+
+                await ServerManager.Login(new AccountCredentials
+                {
+                    Login = "testlogin",
+                    Password = "SeX123@a"
+                });
+
+                await ServerManager.Sync();
+
+                await App.Current.MainPage.Navigation.PopToRootAsync();
+            });
         }
 
         protected override void OnStart()

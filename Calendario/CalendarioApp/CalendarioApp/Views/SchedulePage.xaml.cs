@@ -17,7 +17,9 @@ namespace CalendarioApp.Views
             Schedule = schedule;
             Task.Text = schedule.Name;
             ScheduleDatePicker.Date = schedule.Starting;
-            ScheduleTimePicker.Time = schedule.Starting.TimeOfDay;
+            ScheduleStartTimePicker.Time = schedule.Starting.TimeOfDay;
+            DateTime ending = schedule.Ending ?? schedule.Starting;
+            ScheduleEndTimePicker.Time = ending.TimeOfDay;
         }
 
         private async void DeleteScheduleClicked(object sender, EventArgs args)

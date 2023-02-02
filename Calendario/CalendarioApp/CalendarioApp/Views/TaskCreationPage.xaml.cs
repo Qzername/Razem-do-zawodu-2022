@@ -30,7 +30,8 @@ namespace CalendarioApp.Views
 
             await Navigation.PushAsync(new SyncPage());
 
-            TaskCreation task = new TaskCreation() { Name = TaskName.Text, Description = TaskDescription.Text};
+            var selectedPriority = (Priority)PriorityPicker.SelectedItem;
+            TaskCreation task = new TaskCreation() { Name = TaskName.Text, Description = TaskDescription.Text, PriorityID = selectedPriority.ID };
 
             try
             {

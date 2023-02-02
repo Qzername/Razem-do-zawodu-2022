@@ -15,13 +15,6 @@ namespace CalendarioApp.Controls
         public CalenderEvent()
         {
             InitializeComponent();
-            Setup(Application.Current.RequestedTheme);
-        }
-
-        private void Setup(OSAppTheme theme)
-        {
-            if (theme == OSAppTheme.Dark) TaskTitle.TextColor = Color.White;
-            else TaskTitle.TextColor = Color.Black;
         }
 
         public ICommand CalenderEventCommand

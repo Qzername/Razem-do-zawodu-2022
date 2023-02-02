@@ -10,126 +10,143 @@
         <local:CalendarManagementPageViewModel />
     </ContentPage.BindingContext>
 
-    <Frame
-        x:Name="Frame"
-        Margin="20"
-        Padding="20"
-        BackgroundColor="{Binding FrameBackground}"
-        CornerRadius="30"
-        HorizontalOptions="Fill"
-        VerticalOptions="Fill">
-        <StackLayout VerticalOptions="Center">
-            <Label
-                FontSize="24"
-                HorizontalOptions="Center"
-                Text="Zadania"
-                TextColor="{Binding PrimaryColor}" />
+    <StackLayout>
+        <Frame
+            Margin="20,20,20,10"
+            Padding="20"
+            BackgroundColor="{Binding FrameBackground}"
+            CornerRadius="30"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <StackLayout>
+                <Label
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="Zadania"
+                    TextColor="{Binding PrimaryColor}" />
 
-            <ListView
-                x:Name="Tasks"
-                BackgroundColor="Transparent"
-                CachingStrategy="RecycleElement"
-                HasUnevenRows="True"
-                ItemSelected="TaskSelected"
-                ItemTapped="TaskTapped"
-                ItemsSource="{Binding Tasks}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout
-                                Padding="15,0,0,0"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand">
-                                <Label
-                                    FontAttributes="Bold"
-                                    FontSize="Medium"
-                                    TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="• " />
-                                            <Span Text="{Binding Name}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Label
-                                    Padding="0,0,0,10"
-                                    FontSize="Small"
-                                    LineBreakMode="WordWrap"
-                                    Text="{Binding Description}" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                <Grid>
+                    <ListView
+                        x:Name="Tasks"
+                        BackgroundColor="Transparent"
+                        CachingStrategy="RecycleElement"
+                        HasUnevenRows="True"
+                        ItemSelected="TaskSelected"
+                        ItemTapped="TaskTapped"
+                        ItemsSource="{Binding Tasks}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout
+                                        Padding="15,10,15,10"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand">
+                                        <Label
+                                            FontSize="Small"
+                                            LineBreakMode="CharacterWrap"
+                                            TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <!-- <Span Text="• " /> -->
+                                                    <Span Text="{Binding Name}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label
+                                            FontSize="Micro"
+                                            LineBreakMode="CharacterWrap"
+                                            Text="{Binding Description}"
+                                            TextColor="{Binding DisabledColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-            <Button
-                x:Name="CreateTask"
-                BackgroundColor="{Binding PrimaryColor}"
-                Clicked="CreateTaskClicked"
-                CornerRadius="30"
-                HeightRequest="50"
-                HorizontalOptions="End"
-                Text="+"
-                TextColor="{Binding SecondaryColor}"
-                TextTransform="None"
-                VerticalOptions="End"
-                WidthRequest="50" />
+                    <Button
+                        x:Name="CreateTask"
+                        Margin="10"
+                        BackgroundColor="{Binding PrimaryColor}"
+                        Clicked="CreateTaskClicked"
+                        CornerRadius="30"
+                        HeightRequest="50"
+                        HorizontalOptions="End"
+                        Text="+"
+                        TextColor="{Binding SecondaryColor}"
+                        TextTransform="None"
+                        VerticalOptions="End"
+                        WidthRequest="50" />
+                </Grid>
+            </StackLayout>
+        </Frame>
 
-            <Label
-                FontSize="24"
-                HorizontalOptions="Center"
-                Text="Priorytety"
-                TextColor="{Binding PrimaryColor}" />
+        <Frame
+            Margin="20,10,20,20"
+            Padding="20"
+            BackgroundColor="{Binding FrameBackground}"
+            CornerRadius="30"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <StackLayout>
+                <Label
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="Priorytety"
+                    TextColor="{Binding PrimaryColor}" />
 
-            <ListView
-                x:Name="Priorities"
-                BackgroundColor="Transparent"
-                CachingStrategy="RecycleElement"
-                HasUnevenRows="True"
-                ItemSelected="PrioritySelected"
-                ItemTapped="PriorityTapped"
-                ItemsSource="{Binding Priorities}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout
-                                Padding="15,0,0,0"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand">
-                                <Label
-                                    FontAttributes="Bold"
-                                    FontSize="Medium"
-                                    TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="• " TextColor="{Binding ColorHex}" />
-                                            <Span Text="{Binding Name}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Label
-                                    Padding="0,0,0,10"
-                                    FontSize="Small"
-                                    LineBreakMode="WordWrap"
-                                    Text="{Binding ColorHex}" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                <Grid>
+                    <ListView
+                        x:Name="Priorities"
+                        BackgroundColor="Transparent"
+                        CachingStrategy="RecycleElement"
+                        HasUnevenRows="True"
+                        ItemSelected="PrioritySelected"
+                        ItemTapped="PriorityTapped"
+                        ItemsSource="{Binding Priorities}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout
+                                        Padding="15,10,15,10"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand">
+                                        <Label
+                                            FontSize="Small"
+                                            LineBreakMode="CharacterWrap"
+                                            TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="• " TextColor="{Binding ColorHex}" />
+                                                    <Span Text="{Binding Name}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label
+                                            FontSize="Micro"
+                                            LineBreakMode="CharacterWrap"
+                                            Text="{Binding ColorHex}"
+                                            TextColor="{Binding DisabledColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-            <Button
-                x:Name="CreatePriority"
-                BackgroundColor="{Binding PrimaryColor}"
-                Clicked="CreatePriorityClicked"
-                CornerRadius="30"
-                HeightRequest="50"
-                HorizontalOptions="End"
-                Text="+"
-                TextColor="{Binding SecondaryColor}"
-                TextTransform="None"
-                VerticalOptions="End"
-                WidthRequest="50" />
-        </StackLayout>
-    </Frame>
+                    <Button
+                        x:Name="CreatePriority"
+                        Margin="10"
+                        BackgroundColor="{Binding PrimaryColor}"
+                        Clicked="CreatePriorityClicked"
+                        CornerRadius="30"
+                        HeightRequest="50"
+                        HorizontalOptions="End"
+                        Text="+"
+                        TextColor="{Binding SecondaryColor}"
+                        TextTransform="None"
+                        VerticalOptions="End"
+                        WidthRequest="50" />
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
 </ContentPage>

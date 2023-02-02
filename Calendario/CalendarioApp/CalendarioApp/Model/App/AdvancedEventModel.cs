@@ -11,8 +11,9 @@ namespace CalendarioApp.Model.App
         public int ScheduleID { get; set; }
         public int TaskID { get; set; }
         public int PriorityID { get; set; }
+        public string ColorHex { get; set; }
 
-        public AdvancedEventModel(string Name, string Description, DateTime Starting, DateTime? Ending, int ScheduleID, int TaskID, int PriorityID)
+        public AdvancedEventModel(string Name, string Description, DateTime Starting, DateTime? Ending, int ScheduleID, int TaskID, int PriorityID, string ColorHex)
         {
             this.Name = Name;
             this.Description = Description;
@@ -21,6 +22,7 @@ namespace CalendarioApp.Model.App
             this.ScheduleID = ScheduleID;
             this.TaskID = TaskID;
             this.PriorityID = PriorityID;
+            this.ColorHex = ColorHex;
         }
     }
 }

@@ -4,9 +4,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:CalendarioApp.ViewModels"
     xmlns:views="clr-namespace:CalendarioApp.Views"
-    android:TabbedPage.ToolbarPlacement="Bottom">
-    <views:CalendarPage Title="Kalendarz" IconImageSource="white.png" />
-    <views:CalendarManagementPage Title="Zarządzanie" IconImageSource="white.png" />
-    <views:AccountManagementPage Title="Konto" IconImageSource="white.png" />
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    SelectedTabColor="#0080ff"
+    UnselectedTabColor="{Binding DisabledColor}">
+    <TabbedPage.BindingContext>
+        <local:BasePageViewModel />
+    </TabbedPage.BindingContext>
+
+    <views:CalendarPage Title="Kalendarz" IconImageSource="calendar.png" />
+    <views:CalendarManagementPage Title="Zarządzanie" IconImageSource="manage.png" />
+    <views:AccountManagementPage Title="Konto" IconImageSource="account.png" />
 </TabbedPage>

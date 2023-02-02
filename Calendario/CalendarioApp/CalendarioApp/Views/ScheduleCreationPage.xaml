@@ -19,28 +19,30 @@
         VerticalOptions="Center">
         <StackLayout>
             <Label
-                FontSize="24"
+                FontSize="Medium"
                 HorizontalOptions="Center"
                 Text="Zaplanuj wydarzenie"
                 TextColor="{Binding PrimaryColor}" />
 
             <StackLayout Margin="0,10">
                 <Label
-                    FontSize="16"
+                    FontSize="Small"
                     Text="Zadanie"
                     TextColor="{Binding PrimaryColor}" />
                 <Picker
                     x:Name="TaskPicker"
                     Title="Wybierz zadanie"
+                    FontSize="Small"
                     ItemDisplayBinding="{Binding Name}"
-                    ItemsSource="{Binding Tasks}" />
+                    ItemsSource="{Binding Tasks}"
+                    TextColor="{Binding PrimaryColor}" />
             </StackLayout>
 
             <StackLayout Margin="0,10" Orientation="Horizontal">
                 <CheckBox x:Name="IsScheduleAllDay" CheckedChanged="IsScheduleAllDayCheckedChanged" />
                 <Label
-                    Margin="0,5,0,0"
-                    FontSize="16"
+                    Margin="0,6,0,0"
+                    FontSize="Small"
                     Text="Wydarzenie trwa cały dzień?"
                     TextColor="{Binding PrimaryColor}" />
 
@@ -51,18 +53,26 @@
 
             <StackLayout x:Name="ScheduleStart" Margin="0,10">
                 <Label
-                    FontSize="16"
+                    FontSize="Small"
                     Text="Rozpoczęcie wydarzenia"
                     TextColor="{Binding PrimaryColor}" />
-                <TimePicker x:Name="ScheduleStartTimePicker" Time="{Binding TimeNow}" />
+                <TimePicker
+                    x:Name="ScheduleStartTimePicker"
+                    FontSize="Small"
+                    TextColor="{Binding PrimaryColor}"
+                    Time="{Binding TimeNow}" />
             </StackLayout>
 
             <StackLayout x:Name="ScheduleEnd" Margin="0,10">
                 <Label
-                    FontSize="16"
+                    FontSize="Small"
                     Text="Zakończenie wydarzenia"
                     TextColor="{Binding PrimaryColor}" />
-                <TimePicker x:Name="ScheduleEndTimePicker" Time="{Binding TimeNow}" />
+                <TimePicker
+                    x:Name="ScheduleEndTimePicker"
+                    FontSize="Small"
+                    TextColor="{Binding PrimaryColor}"
+                    Time="{Binding TimeNow}" />
             </StackLayout>
 
             <Button
@@ -70,6 +80,7 @@
                 BackgroundColor="{Binding PrimaryColor}"
                 Clicked="CreateScheduleClicked"
                 CornerRadius="30"
+                FontSize="Small"
                 HorizontalOptions="Center"
                 Text="Zaplanuj wydarzenie"
                 TextColor="{Binding SecondaryColor}"

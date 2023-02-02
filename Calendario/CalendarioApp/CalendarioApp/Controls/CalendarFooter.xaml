@@ -18,32 +18,5 @@
             TextColor="{Binding SelectedDateColor}"
             VerticalOptions="CenterAndExpand"
             VerticalTextAlignment="Center" />
-
-        <Label
-            x:Name="showHideLabel"
-            Grid.Column="1"
-            Margin="0,0,15,0"
-            BackgroundColor="Transparent"
-            FontAttributes="Bold"
-            FontFamily="{StaticResource FontAwesomeSolid}"
-            FontSize="25"
-            HorizontalOptions="End"
-            IsVisible="{Binding FooterArrowVisible}"
-            Text="&#xf062;"
-            TextColor="White"
-            VerticalOptions="CenterAndExpand"
-            VerticalTextAlignment="Center">
-            <Label.Triggers>
-                <DataTrigger
-                    Binding="{Binding CalendarSectionShown}"
-                    TargetType="Label"
-                    Value="False">
-                    <Setter Property="Text" Value="&#xf063;" />
-                </DataTrigger>
-            </Label.Triggers>
-        </Label>
-        <Grid.GestureRecognizers>
-            <TapGestureRecognizer Command="{Binding ShowHideCalendarCommand}" />
-        </Grid.GestureRecognizers>
     </Grid>
 </ContentView>

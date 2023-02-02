@@ -6,30 +6,31 @@
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <StackLayout
-        Padding="15,0,0,0"
+        Padding="15,10,15,10"
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
         <Label
-            x:Name="TaskTitle"
-            FontAttributes="Bold"
-            FontSize="Medium"
+            FontSize="Small"
+            LineBreakMode="CharacterWrap"
             TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="• " />
-                    <Span Text="{Binding Starting, StringFormat='{0:HH\\:mm}'}" />
-                    <Span Text=" - " />
-                    <Span Text="{Binding Ending, StringFormat='{0:HH\\:mm}'}" />
-                    <Span Text=", " />
+                    <Span Text="• " TextColor="{Binding ColorHex}" />
                     <Span Text="{Binding Name}" />
                 </FormattedString>
             </Label.FormattedText>
         </Label>
-        <Label
-            Padding="0,0,0,10"
-            FontSize="Small"
-            LineBreakMode="WordWrap"
-            Text="{Binding Description}" />
+        <Label FontSize="Micro" LineBreakMode="CharacterWrap">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding Starting, StringFormat='{0:HH\\:mm}'}" TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}" />
+                    <Span Text=" - " TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}" />
+                    <Span Text="{Binding Ending, StringFormat='{0:HH\\:mm}'}" TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}" />
+                    <Span Text=" | " />
+                    <Span Text="{Binding Description}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
         <StackLayout.GestureRecognizers>
             <TapGestureRecognizer Tapped="TaskClicked" />
         </StackLayout.GestureRecognizers>

@@ -4,6 +4,9 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Plugin.LocalNotification;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using Android.Views;
 
 namespace CalendarioApp.Droid
 {
@@ -14,11 +17,50 @@ namespace CalendarioApp.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Platform.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
             LocalNotificationCenter.CreateNotificationChannel();
             LoadApplication(new App());
             LocalNotificationCenter.NotifyNotificationTapped(Intent);
+
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            StatusBarVisibility flag = (StatusBarVisibility)SystemUiFlags.LightStatusBar;
+
+            if (Xamarin.Forms.Application.Current.RequestedTheme == OSAppTheme.Dark)
+            {
+                Window.SetStatusBarColor(Android.Graphics.Color.Argb(255, 0, 0, 0));
+                Window.DecorView.SystemUiVisibility = false ? flag : 0;
+            }
+
+            else
+            {
+                Window.SetStatusBarColor(Android.Graphics.Color.Argb(255, 255, 255, 255));
+                Window.DecorView.SystemUiVisibility = true ? flag : 0;
+
+            }
+
+
+            Xamarin.Forms.Application.Current.RequestedThemeChanged += (s, a) =>
+            {
+                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+                Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+                StatusBarVisibility flag = (StatusBarVisibility)SystemUiFlags.LightStatusBar;
+
+                OSAppTheme theme = a.RequestedTheme;
+                
+                if (theme == OSAppTheme.Dark)
+                {
+                    Window.SetStatusBarColor(Android.Graphics.Color.Argb(255, 0, 0, 0));
+                    Window.DecorView.SystemUiVisibility = false ? flag : 0;
+                }
+
+                else
+                {
+                    Window.SetStatusBarColor(Android.Graphics.Color.Argb(255, 255, 255, 255));
+                    Window.DecorView.SystemUiVisibility = true ? flag : 0;
+                }
+            };
         }
 
         protected override void OnNewIntent(Intent intent)

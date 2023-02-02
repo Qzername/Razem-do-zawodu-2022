@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using CalendarioApp.Model.Server;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
