@@ -7,6 +7,7 @@ using Plugin.LocalNotification;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Android.Views;
+using Android;
 
 namespace CalendarioApp.Droid
 {
@@ -61,6 +62,20 @@ namespace CalendarioApp.Droid
                     Window.DecorView.SystemUiVisibility = true ? flag : 0;
                 }
             };
+
+            const int requestLocationId = 0;
+
+            string[] permissions =
+            {
+                Manifest.Permission.PostNotifications
+            };
+
+            if ((int)Build.VERSION.SdkInt < 33) return;
+
+            if (this.CheckSelfPermission(Manifest.Permission.PostNotifications) != Permission.Granted)
+            {
+                this.RequestPermissions(permissions, requestLocationId);
+            }
         }
 
         protected override void OnNewIntent(Intent intent)
@@ -71,7 +86,7 @@ namespace CalendarioApp.Droid
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }

@@ -49,7 +49,7 @@ namespace CalendarioApp.Managers
             Tasks.Clear();
             Priorities.Clear();
             Events.Clear();
-
+            NotificationManager.CancelAll();
 
             await GetTasks();
             await GetPriorities();
@@ -125,6 +125,7 @@ namespace CalendarioApp.Managers
                     {
                         var dayEvent = Events[scheduleBegin] as DayEventCollection<AdvancedEventModel>;
                         dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, task.ID, schedule.PriorityID, colorHex));
+                        await NotificationManager.Schedule(task.Name, task.Description, scheduleBegin, scheduleEnd);
                     }
 
                     catch
@@ -132,6 +133,7 @@ namespace CalendarioApp.Managers
                         Events[scheduleBegin] = new DayEventCollection<AdvancedEventModel>(Color.FromHex("#0080ff"), EventIndicatorSelectedColor);
                         var dayEvent = Events[scheduleBegin] as DayEventCollection<AdvancedEventModel>;
                         dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, task.ID, schedule.PriorityID, colorHex));
+                        await NotificationManager.Schedule(task.Name, task.Description, scheduleBegin, scheduleEnd);
                     }
                 }
             }

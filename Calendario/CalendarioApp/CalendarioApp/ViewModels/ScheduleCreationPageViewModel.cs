@@ -10,6 +10,7 @@ namespace CalendarioApp.ViewModels
         public ScheduleCreationPageViewModel() : base()
         {
             Tasks = ServerManager.Tasks;
+            Priorities = ServerManager.Priorities;
             TimeNow = DateTime.Now;
         }
 
@@ -19,6 +20,14 @@ namespace CalendarioApp.ViewModels
         {
             get => _tasks;
             set => SetProperty(ref _tasks, value);
+        }
+
+        private ObservableCollection<Priority> _priorities;
+
+        public ObservableCollection<Priority> Priorities
+        {
+            get => _priorities;
+            set => SetProperty(ref _priorities, value);
         }
 
         private DateTime _timeNow;

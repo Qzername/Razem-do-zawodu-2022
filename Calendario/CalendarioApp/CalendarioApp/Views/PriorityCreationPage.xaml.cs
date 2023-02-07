@@ -24,7 +24,8 @@ namespace CalendarioApp.Views
 
             await Navigation.PushAsync(new SyncPage());
 
-            PriorityCreation priority = new PriorityCreation() { Name = PriorityName.Text, ColorHex = "#ff0000" };
+            var selectedColor = ColorPicker.SelectedColor;
+            PriorityCreation priority = new PriorityCreation() { Name = PriorityName.Text, ColorHex = selectedColor.ToHex() };
 
             try
             {
