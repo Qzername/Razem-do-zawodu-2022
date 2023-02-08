@@ -59,8 +59,7 @@
                 <TimePicker
                     x:Name="ScheduleStartTimePicker"
                     FontSize="Small"
-                    TextColor="{Binding PrimaryColor}"
-                    Time="{Binding TimeNow}" />
+                    TextColor="{Binding PrimaryColor}" />
             </StackLayout>
 
             <StackLayout x:Name="ScheduleEnd" Margin="0,10">
@@ -71,12 +70,24 @@
                 <TimePicker
                     x:Name="ScheduleEndTimePicker"
                     FontSize="Small"
-                    TextColor="{Binding PrimaryColor}"
-                    Time="{Binding TimeNow}" />
+                    TextColor="{Binding PrimaryColor}" />
+            </StackLayout>
+
+            <StackLayout x:Name="Reminder" Margin="0,10">
+                <Label
+                    FontSize="Small"
+                    Text="Przypomnienie"
+                    TextColor="{Binding PrimaryColor}" />
+                <Picker
+                    x:Name="ReminderPicker"
+                    FontSize="Small"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Reminders}"
+                    SelectedItem="0"
+                    TextColor="{Binding PrimaryColor}" />
             </StackLayout>
 
             <Button
-                x:Name="CreateSchedule"
                 BackgroundColor="{Binding PrimaryColor}"
                 Clicked="CreateScheduleClicked"
                 CornerRadius="30"

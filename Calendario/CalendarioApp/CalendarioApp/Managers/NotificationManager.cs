@@ -6,48 +6,53 @@ namespace CalendarioApp.Managers
 {
     class NotificationManager
     {
-        private static int notificationCount = 0;
+        private static int notificationCount;
 
-        public static async Task Schedule(string title, string description, DateTime scheduleBegin, DateTime scheduleEnd)
+        public static async Task Schedule(string title, string description, DateTime scheduleBegin, DateTime scheduleEnd, DateTime? scheduleRemind)
         {
             await LocalNotificationCenter.Current.RequestNotificationPermission();
 
-            notificationCount++;
+            string notificationDescription;
 
-            var notificationDayBefore = new NotificationRequest
-            {
-                NotificationId = notificationCount,
-                Title = $"Nadchodzące wydarzenie (jutro): {title}",
-                Description = $"{scheduleBegin.Hour}:{scheduleBegin.Minute} - {description}",
-                ReturningData = "Notification tapped.", // Returning data when tapped on notification.
-                Schedule =
-                {
-                    NotifyTime = scheduleBegin.AddDays(-1) // Used for Scheduling local notification, if not specified notification will show immediately.
-                }
-            };
+            if (scheduleBegin.TimeOfDay.ToString() == "00:00:00" && scheduleEnd.TimeOfDay.ToString() == "23:59:59.9999999") { notificationDescription = $"Cały dzień\n{description}"; }
+            else if (scheduleBegin.Ticks == scheduleEnd.Ticks) { notificationDescription = $"{scheduleBegin.TimeOfDay}\n{description}"; }
+            else { notificationDescription = $"{scheduleBegin.TimeOfDay} - {scheduleEnd.TimeOfDay}\n{description}"; }
 
-            await LocalNotificationCenter.Current.Show(notificationDayBefore);
-
-            notificationCount++;
-
-            var notification = new NotificationRequest
-            {
-                NotificationId = notificationCount,
-                Title = title,
-                Description = $"{scheduleBegin.Hour}:{scheduleBegin.Minute} - {description}",
-                ReturningData = "Notification tapped.", // Returning data when tapped on notification.
-                Schedule =
-                {
-                    NotifyTime = scheduleBegin // Used for Scheduling local notification, if not specified notification will show immediately.
-                }
-            };
-
-            await LocalNotificationCenter.Current.Show(notification);
+            if (scheduleRemind != null) { await LocalNotificationCenter.Current.Show(CreateReminder(title, notificationDescription, scheduleBegin, scheduleRemind)); }
+            await LocalNotificationCenter.Current.Show(CreateNotification(title, notificationDescription, scheduleBegin));
         }
 
         public static void CancelAll()
         {
             LocalNotificationCenter.Current.CancelAll();
+        }
+
+        private static NotificationRequest CreateNotification(string title, string description, DateTime time)
+        {
+            notificationCount++;
+
+            return new NotificationRequest
+            {
+                NotificationId = notificationCount,
+                Title = title,
+                Description = description,
+                ReturningData = "Notification tapped.",
+                Schedule = { NotifyTime = time }
+            };
+        }
+
+        private static NotificationRequest CreateReminder(string title, string description, DateTime time, DateTime? timeRemind)
+        {
+            notificationCount++;
+
+            return new NotificationRequest
+            {
+                NotificationId = notificationCount,
+                Title = $"Nadchodzące wydarzenie ({time.Date}): {title}",
+                Description = description,
+                ReturningData = "Notification tapped.",
+                Schedule = { NotifyTime = timeRemind }
+            };
         }
     }
 }

@@ -9,14 +9,11 @@
         Padding="15,10,15,10"
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
-        <Label
-            FontSize="Small"
-            LineBreakMode="CharacterWrap"
-            TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}">
+        <Label FontSize="Small" LineBreakMode="CharacterWrap">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="• " TextColor="{Binding ColorHex}" />
-                    <Span Text="{Binding Name}" />
+                    <Span Text="{Binding Name}" TextColor="{Binding PrimaryColor, Source={RelativeSource AncestorType={x:Type local:BasePageViewModel}}}" />
                 </FormattedString>
             </Label.FormattedText>
         </Label>

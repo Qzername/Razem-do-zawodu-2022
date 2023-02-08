@@ -112,6 +112,7 @@ namespace CalendarioApp.Managers
                 {
                     DateTime scheduleBegin = new DateTime(schedule.DateBegin);
                     DateTime scheduleEnd = new DateTime(schedule.DateEnd);
+                    DateTime? scheduleRemind = new DateTime(schedule.DateRemind);
                     string colorHex = "#ffffff";
 
                     try
@@ -125,7 +126,7 @@ namespace CalendarioApp.Managers
                     {
                         var dayEvent = Events[scheduleBegin] as DayEventCollection<AdvancedEventModel>;
                         dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, task.ID, schedule.PriorityID, colorHex));
-                        await NotificationManager.Schedule(task.Name, task.Description, scheduleBegin, scheduleEnd);
+                        await NotificationManager.Schedule(task.Name, task.Description, scheduleBegin, scheduleEnd, scheduleRemind);
                     }
 
                     catch
@@ -133,7 +134,7 @@ namespace CalendarioApp.Managers
                         Events[scheduleBegin] = new DayEventCollection<AdvancedEventModel>(Color.FromHex("#0080ff"), EventIndicatorSelectedColor);
                         var dayEvent = Events[scheduleBegin] as DayEventCollection<AdvancedEventModel>;
                         dayEvent.Add(new AdvancedEventModel(task.Name, task.Description, scheduleBegin, scheduleEnd, schedule.ID, task.ID, schedule.PriorityID, colorHex));
-                        await NotificationManager.Schedule(task.Name, task.Description, scheduleBegin, scheduleEnd);
+                        await NotificationManager.Schedule(task.Name, task.Description, scheduleBegin, scheduleEnd, scheduleRemind);
                     }
                 }
             }

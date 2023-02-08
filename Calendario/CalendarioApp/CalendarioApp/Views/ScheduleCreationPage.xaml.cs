@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CalendarioApp.Managers;
+using CalendarioApp.Model.App;
 using CalendarioApp.Model.Server;
 
 namespace CalendarioApp.Views
@@ -16,6 +17,7 @@ namespace CalendarioApp.Views
         {
             StartDate = EndDate = date ?? DateTime.Now;
             InitializeComponent();
+            ReminderPicker.SelectedItem = ReminderPicker.ItemsSource[0];
         }
 
         async void CreateScheduleClicked(object sender, EventArgs args)
@@ -37,8 +39,30 @@ namespace CalendarioApp.Views
                 await Navigation.PushAsync(new SyncPage());
 
                 var selectedTask = (Task)TaskPicker.SelectedItem;
+                var selectedReminder = (Reminder)ReminderPicker.SelectedItem;
+                long? reminder;
+
+                switch (selectedReminder.ID)
+                {
+                    case 0: // Never
+                        reminder = null;
+                        break;
+                    case 1: // 1 day before
+                        reminder = StartDate.AddDays(-1).Ticks;
+                        break;
+                    case 2: // 1 hour before
+                        reminder = StartDate.AddHours(-1).Ticks;
+                        break;
+                    case 3: // 10 minutes before
+                        reminder = StartDate.AddMinutes(-10).Ticks;
+                        break;
+                    default: // Never
+                        reminder = null;
+                        break;
+                }
+
                 ScheduleCreation schedule = new ScheduleCreation()
-                    { DateBegin = StartDate.Ticks, DateEnd = EndDate.Ticks, TaskID = selectedTask.ID };
+                    { DateBegin = StartDate.Ticks, DateEnd = EndDate.Ticks, DateRemind = reminder, TaskID = selectedTask.ID };
 
                 try
                 {

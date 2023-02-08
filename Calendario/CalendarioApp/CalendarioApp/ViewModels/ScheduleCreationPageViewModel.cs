@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using CalendarioApp.Managers;
+using CalendarioApp.Model.App;
 using CalendarioApp.Model.Server;
+using Java.Util.Jar;
 
 namespace CalendarioApp.ViewModels
 {
@@ -11,7 +13,11 @@ namespace CalendarioApp.ViewModels
         {
             Tasks = ServerManager.Tasks;
             Priorities = ServerManager.Priorities;
-            TimeNow = DateTime.Now;
+            Reminders = new ObservableCollection<Reminder>();
+            Reminders.Add(new Reminder { Name = "Nigdy", ID = 0 });
+            Reminders.Add(new Reminder { Name = "1 dzień przed", ID = 1});
+            Reminders.Add(new Reminder { Name = "1 godzinę przed", ID = 2 });
+            Reminders.Add(new Reminder { Name = "10 minut przed", ID = 3 });
         }
 
         private ObservableCollection<Task> _tasks;
@@ -30,12 +36,12 @@ namespace CalendarioApp.ViewModels
             set => SetProperty(ref _priorities, value);
         }
 
-        private DateTime _timeNow;
+        private ObservableCollection<Reminder> _reminders;
 
-        public DateTime TimeNow
+        public ObservableCollection<Reminder> Reminders
         {
-            get => _timeNow;
-            set => SetProperty(ref _timeNow, value);
+            get => _reminders;
+            set => SetProperty(ref _reminders, value);
         }
     }
 }

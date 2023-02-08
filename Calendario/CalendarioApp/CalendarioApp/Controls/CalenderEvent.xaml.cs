@@ -1,7 +1,8 @@
 ﻿using CalendarioApp.Model.App;
-using CalendarioApp.Views;
 using System;
+using System.Globalization;
 using System.Windows.Input;
+using CalendarioApp.Model.Server;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
