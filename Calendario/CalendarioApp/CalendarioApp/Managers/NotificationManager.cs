@@ -15,8 +15,8 @@ namespace CalendarioApp.Managers
             string notificationDescription;
 
             if (scheduleBegin.TimeOfDay.ToString() == "00:00:00" && scheduleEnd.TimeOfDay.ToString() == "23:59:59.9999999") { notificationDescription = $"Cały dzień\n{description}"; }
-            else if (scheduleBegin.Ticks == scheduleEnd.Ticks) { notificationDescription = $"{scheduleBegin.TimeOfDay}\n{description}"; }
-            else { notificationDescription = $"{scheduleBegin.TimeOfDay} - {scheduleEnd.TimeOfDay}\n{description}"; }
+            else if (scheduleBegin.Ticks == scheduleEnd.Ticks) { notificationDescription = $"{scheduleBegin.ToShortTimeString()}\n{description}"; }
+            else { notificationDescription = $"{scheduleBegin.ToShortTimeString()} - {scheduleEnd.ToShortTimeString()}\n{description}"; }
 
             if (scheduleRemind != null) { await LocalNotificationCenter.Current.Show(CreateReminder(title, notificationDescription, scheduleBegin, scheduleRemind)); }
             await LocalNotificationCenter.Current.Show(CreateNotification(title, notificationDescription, scheduleBegin));
@@ -48,7 +48,7 @@ namespace CalendarioApp.Managers
             return new NotificationRequest
             {
                 NotificationId = notificationCount,
-                Title = $"Nadchodzące wydarzenie ({time.Date}): {title}",
+                Title = $"Nadchodzące wydarzenie ({time.ToShortDateString()}): {title}",
                 Description = description,
                 ReturningData = "Notification tapped.",
                 Schedule = { NotifyTime = timeRemind }
