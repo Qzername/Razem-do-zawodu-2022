@@ -5,7 +5,7 @@ using CalendarioApp.Model.Server;
 
 namespace CalendarioApp.ViewModels
 {
-    internal class TaskCreationPageViewModel : BasePageViewModel
+    public class TaskCreationPageViewModel : BasePageViewModel
     {
         public TaskCreationPageViewModel() : base()
         {

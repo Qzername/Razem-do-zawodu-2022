@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace CalendarioApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TabPage : TabbedPage
+    public partial class MainPage : TabbedPage
     {
-        public TabPage()
+        public MainPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);

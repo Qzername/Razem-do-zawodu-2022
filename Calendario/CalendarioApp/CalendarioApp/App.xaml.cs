@@ -1,8 +1,10 @@
-﻿using CalendarioApp.Managers;
+﻿using System;
+using CalendarioApp.Managers;
 using CalendarioApp.Model.Server;
 using CalendarioApp.ViewModels;
 using CalendarioApp.Views;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace CalendarioApp
 {
@@ -12,24 +14,28 @@ namespace CalendarioApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new TabPage());
-            MainPage.SetBinding(VisualElement.BackgroundColorProperty, "PageBackground");
-            MainPage.BindingContext = new BasePageViewModel();
-
-            Device.BeginInvokeOnMainThread(async () =>
+            try
             {
-                await App.Current.MainPage.Navigation.PushAsync(new SyncPage());
+                if (!Preferences.ContainsKey("username") || !Preferences.ContainsKey("password")) throw new Exception("Username or password is not cached");
 
-                await ServerManager.Login(new AccountCredentials
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    Login = "testlogin",
-                    Password = "SeX123@a"
+                    await ServerManager.Login(new AccountCredentials { Login = Preferences.Get("username", null), Password = Preferences.Get("password", null) });
+                    await ServerManager.Sync();
                 });
 
-                await ServerManager.Sync();
+                ServerManager.UserName = Preferences.Get("username", null);
 
-                await App.Current.MainPage.Navigation.PopToRootAsync();
-            });
+                MainPage = new NavigationPage(new MainPage());
+            }
+
+            catch
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
+
+            MainPage.SetBinding(VisualElement.BackgroundColorProperty, "PageBackground");
+            MainPage.BindingContext = new BasePageViewModel();
         }
 
         protected override void OnStart()

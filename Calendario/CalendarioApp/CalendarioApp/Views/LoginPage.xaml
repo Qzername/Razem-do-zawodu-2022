@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="CalendarioApp.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:CalendarioApp.ViewModels"
+    xmlns:views="clr-namespace:CalendarioApp.Views"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    SelectedTabColor="#0080ff"
+    UnselectedTabColor="{Binding DisabledColor}">
+    <TabbedPage.BindingContext>
+        <local:BasePageViewModel />
+    </TabbedPage.BindingContext>
+
+    <ContentPage Title="Logowanie">
+        <Frame
+            Margin="20"
+            Padding="20"
+            BackgroundColor="{Binding FrameBackground}"
+            CornerRadius="30"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+            <StackLayout>
+                <Label
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="Logowanie"
+                    TextColor="{Binding PrimaryColor}" />
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Nazwa konta"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Entry
+                        x:Name="LoginUsername"
+                        FontSize="Small"
+                        MaxLength="50"
+                        PlaceholderColor="{Binding DisabledColor}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Hasło konta"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Entry
+                        x:Name="LoginPassword"
+                        FontSize="Small"
+                        IsPassword="True"
+                        MaxLength="50"
+                        PlaceholderColor="{Binding DisabledColor}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout Margin="0,10" Orientation="Horizontal">
+                    <CheckBox x:Name="LoginRemember" CheckedChanged="LoginRememberCheckedChanged" />
+                    <Label
+                        Margin="0,6,0,0"
+                        FontSize="Small"
+                        Text="Zapamiętaj mnie."
+                        TextColor="{Binding PrimaryColor}" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RememberCheckedTapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <Button
+                    BackgroundColor="{Binding PrimaryColor}"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    Pressed="LoginClicked"
+                    Text="Zaloguj"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </Frame>
+    </ContentPage>
+
+    <ContentPage Title="Rejestracja">
+        <Frame
+            Margin="20"
+            Padding="20"
+            BackgroundColor="{Binding FrameBackground}"
+            CornerRadius="30"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+            <StackLayout>
+                <Label
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="Rejestracja"
+                    TextColor="{Binding PrimaryColor}" />
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Nazwa konta"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Entry
+                        x:Name="RegisterUsername"
+                        FontSize="Small"
+                        MaxLength="50"
+                        PlaceholderColor="{Binding DisabledColor}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Hasło konta"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Entry
+                        x:Name="RegisterPassword1"
+                        FontSize="Small"
+                        IsPassword="True"
+                        MaxLength="50"
+                        PlaceholderColor="{Binding DisabledColor}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Powtórz hasło konta"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Entry
+                        x:Name="RegisterPassword2"
+                        FontSize="Small"
+                        IsPassword="True"
+                        MaxLength="50"
+                        PlaceholderColor="{Binding DisabledColor}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout Margin="0,10" Orientation="Horizontal">
+                    <CheckBox x:Name="RegisterRemember" CheckedChanged="RegisterRememberCheckedChanged" />
+                    <Label
+                        Margin="0,6,0,0"
+                        FontSize="Small"
+                        Text="Zapamiętaj mnie."
+                        TextColor="{Binding PrimaryColor}" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RememberCheckedTapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <Button
+                    BackgroundColor="{Binding PrimaryColor}"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    Pressed="RegisterClicked"
+                    Text="Zarejestruj"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </Frame>
+    </ContentPage>
+</TabbedPage>

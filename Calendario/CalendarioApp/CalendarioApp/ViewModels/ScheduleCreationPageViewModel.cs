@@ -7,7 +7,7 @@ using Java.Util.Jar;
 
 namespace CalendarioApp.ViewModels
 {
-    internal class ScheduleCreationPageViewModel : BasePageViewModel
+    public class ScheduleCreationPageViewModel : BasePageViewModel
     {
         public ScheduleCreationPageViewModel() : base()
         {

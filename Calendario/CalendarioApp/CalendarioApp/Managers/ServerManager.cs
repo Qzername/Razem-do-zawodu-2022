@@ -16,15 +16,15 @@ namespace CalendarioApp.Managers
 {
     public class ServerManager
     {
-        private static readonly Color EventIndicatorSelectedColor = ColorManager.GetPrimaryColor();
         private static readonly string ServerIP = "20.25.191.186"; // "54.37.204.140";
-        public static HttpClient Client = new HttpClient();
+        private static HttpClient Client = new HttpClient();
         public static ObservableCollection<Task> Tasks = new ObservableCollection<Task>();
         public static EventCollection Events = new EventCollection();
         public static ObservableCollection<Priority> Priorities = new ObservableCollection<Priority>();
+        public static string UserName;
         private static Token Token;
 
-        public static async System.Threading.Tasks.Task<Token> Login(AccountCredentials accountCredentials)
+        public static async System.Threading.Tasks.Task Login(AccountCredentials accountCredentials)
         {
             string accountCredentialsDict = JsonSerializer.Serialize(accountCredentials);
 
@@ -37,11 +37,35 @@ namespace CalendarioApp.Managers
             {
                 throw new Exception("Failed login");
             }
+
             string responseString = await response.Content.ReadAsStringAsync();
 
+            UserName = accountCredentials.Login;
             Token = JSONManager.Deserialize<Token>(responseString);
             Client.DefaultRequestHeaders.Add("token", Token.Package);
-            return Token;
+        }
+
+        /*
+             Warunki do stworzenia konta:
+             - nazwa loginu jest większa od 8 i krótsza od 20 symboli
+             - hasło nie zawiera spacji etc.
+             - hasło jest większe od 8 i mniejsze od 50 symboli
+             - hasło zawiera przynajmniej jeden znak specjalny (np. @!&)
+             - hasło zawiera przynajmniej jedną cyfrę
+             - hasło ma przynajmniej jeden znak duży
+             - hasło ma przynajmniej jeden znak mały
+         */
+
+        public static async System.Threading.Tasks.Task Register(AccountCredentials accountCredentials)
+        {
+            string accountCredentialsDict = JsonSerializer.Serialize(accountCredentials);
+
+            StringContent content = new StringContent(accountCredentialsDict, System.Text.Encoding.UTF8);
+            MediaTypeHeaderValue headerValue = new MediaTypeHeaderValue("application/json");
+            content.Headers.ContentType = headerValue;
+
+            await Client.PostAsync($"http://{ServerIP}:6969/api/Account/Register", content);
+            await Login(accountCredentials);
         }
 
         public static async System.Threading.Tasks.Task Sync()
@@ -97,6 +121,8 @@ namespace CalendarioApp.Managers
 
         public static async System.Threading.Tasks.Task GetSchedules(ObservableCollection<Task> tasks)
         {
+            Color EventIndicatorSelectedColor = ColorManager.GetPrimaryColor();
+
             foreach (Task task in tasks)
             {
                 var scheduleResponse = await Client.GetAsync($"http://{ServerIP}:6969/api/Schedule/{task.ID}");

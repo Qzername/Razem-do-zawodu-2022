@@ -34,6 +34,9 @@
     <Compile Update="Views\PriorityCreationPage.xaml.cs">
       <DependentUpon>PriorityCreationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TaskCreationPage.xaml.cs">
       <DependentUpon>TaskCreationPage.xaml</DependentUpon>
     </Compile>
@@ -52,8 +55,8 @@
     <Compile Update="Views\SyncPage.xaml.cs">
       <DependentUpon>SyncPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\TabPage.xaml.cs">
-      <DependentUpon>TabPage.xaml</DependentUpon>
+    <Compile Update="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -76,7 +79,10 @@
     <EmbeddedResource Update="Views\SyncPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\TabPage.xaml">
+    <EmbeddedResource Update="Views\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

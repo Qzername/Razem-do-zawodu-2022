@@ -34,6 +34,8 @@ namespace CalendarioApp.Views
                 EndDate = EndDate.Date + ScheduleEndTimePicker.Time;
             }
 
+            if (ScheduleEndDisabled.IsChecked) EndDate = StartDate;
+
             if (StartDate.Ticks <= EndDate.Ticks)
             {
                 await Navigation.PushAsync(new SyncPage());
@@ -83,6 +85,7 @@ namespace CalendarioApp.Views
             {
                 EndDate = StartDate;
                 ScheduleEndTimePicker.Time = ScheduleStartTimePicker.Time;
+                await App.Current.MainPage.DisplayAlert("Błąd!", "Zakończenie wydarzenia nie może być szybciej niż rozpoczęcie.", "Ok");
             }
         }
 
@@ -91,14 +94,18 @@ namespace CalendarioApp.Views
             if (IsScheduleAllDay.IsChecked)
             {
                 ScheduleStart.IsVisible = false;
+                ScheduleEndDisabledLayout.IsVisible = false;
                 ScheduleEnd.IsVisible = false;
             }
 
             else
             {
                 ScheduleStart.IsVisible = true;
+                ScheduleEndDisabledLayout.IsVisible = true;
                 ScheduleEnd.IsVisible = true;
             }
+
+            ScheduleEndDisabled.IsChecked = false;
         }
 
         private void IsScheduleAllDayCheckedTapped(object sender, EventArgs e)
@@ -107,6 +114,7 @@ namespace CalendarioApp.Views
             {
                 IsScheduleAllDay.IsChecked = false;
                 ScheduleStart.IsVisible = true;
+                ScheduleEndDisabledLayout.IsVisible = true;
                 ScheduleEnd.IsVisible = true;
             }
 
@@ -114,6 +122,37 @@ namespace CalendarioApp.Views
             {
                 IsScheduleAllDay.IsChecked = true;
                 ScheduleStart.IsVisible = false;
+                ScheduleEndDisabledLayout.IsVisible = false;
+                ScheduleEnd.IsVisible = false;
+            }
+
+            ScheduleEndDisabled.IsChecked = false;
+        }
+
+        private void ScheduleEndDisabledCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (ScheduleEndDisabled.IsChecked)
+            {
+                ScheduleEnd.IsVisible = false;
+            }
+
+            else
+            {
+                ScheduleEnd.IsVisible = true;
+            }
+        }
+
+        private void ScheduleEndDisabledCheckedTapped(object sender, EventArgs e)
+        {
+            if (ScheduleEndDisabled.IsChecked)
+            {
+                ScheduleEndDisabled.IsChecked = false;
+                ScheduleEnd.IsVisible = true;
+            }
+
+            else
+            {
+                ScheduleEndDisabled.IsChecked = true;
                 ScheduleEnd.IsVisible = false;
             }
         }

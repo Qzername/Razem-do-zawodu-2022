@@ -53,6 +53,9 @@ namespace CalendarioAPI.Controller
             if (schedule.DateEnd == null)
                 schedule.DateEnd = 0;
 
+            if (schedule.DateRemind == null)
+                schedule.DateRemind = 0;
+
             SQLDatabase.NoReturnQuery($"INSERT INTO Schedules(TaskID, DateBegin, DateEnd, DateRemind) VALUES({schedule.TaskID}, {schedule.DateBegin}, {schedule.DateEnd}, {schedule.DateRemind})");
 
             return Ok();

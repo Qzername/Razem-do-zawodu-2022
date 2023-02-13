@@ -7,21 +7,36 @@
     xmlns:local="clr-namespace:CalendarioApp.ViewModels"
     BackgroundColor="{Binding PageBackground}">
     <ContentPage.BindingContext>
-        <local:BasePageViewModel />
+        <local:AccountManagementPageViewModel />
     </ContentPage.BindingContext>
 
-    <Frame
-        Margin="20"
-        Padding="20"
-        BackgroundColor="{Binding FrameBackground}"
-        CornerRadius="30"
-        HorizontalOptions="Fill"
-        VerticalOptions="Fill">
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-            <Label
-                FontSize="Medium"
-                Text="WIP"
-                TextColor="{Binding PrimaryColor}" />
-        </StackLayout>
-    </Frame>
+    <StackLayout>
+        <Frame
+            Margin="20,20,20,10"
+            Padding="20"
+            BackgroundColor="{Binding FrameBackground}"
+            CornerRadius="30">
+            <StackLayout Orientation="Horizontal">
+                <Label
+                    FontSize="Medium"
+                    HorizontalOptions="Start"
+                    Text="{Binding UserName}"
+                    TextColor="{Binding PrimaryColor}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+
+                <Button
+                    x:Name="Logout"
+                    BackgroundColor="{Binding PrimaryColor}"
+                    Clicked="LogoutClicked"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    HorizontalOptions="EndAndExpand"
+                    Text="Wyloguj"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </Frame>
+    </StackLayout>
 </ContentPage>
