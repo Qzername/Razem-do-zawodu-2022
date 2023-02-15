@@ -23,7 +23,7 @@ namespace CalendarioApp.ViewModels
         public CalendarPageViewModel() : base()
         {
             Culture = CultureInfo.CreateSpecificCulture("pl-PL");
-            SelectedDate = null;
+            SelectedDate = DateTime.Today;
             ShownDate = DateTime.Today;
         }
 

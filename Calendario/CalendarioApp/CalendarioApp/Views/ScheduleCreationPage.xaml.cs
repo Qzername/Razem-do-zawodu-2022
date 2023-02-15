@@ -38,6 +38,12 @@ namespace CalendarioApp.Views
 
             if (StartDate.Ticks <= EndDate.Ticks)
             {
+                if (ReminderPicker.SelectedItem == null)
+                {
+                    await App.Current.MainPage.DisplayAlert("Błąd!", "Priorytet nie został wybrany.", "Ok");
+                    return;
+                }
+
                 await Navigation.PushAsync(new SyncPage());
 
                 var selectedTask = (Task)TaskPicker.SelectedItem;
@@ -50,13 +56,16 @@ namespace CalendarioApp.Views
                         reminder = null;
                         break;
                     case 1: // 1 day before
-                        reminder = StartDate.AddDays(-1).Ticks;
+                        reminder = (StartDate.AddDays(-1).Date + ReminderTimePicker.Time).Ticks;
                         break;
                     case 2: // 1 hour before
                         reminder = StartDate.AddHours(-1).Ticks;
                         break;
                     case 3: // 10 minutes before
                         reminder = StartDate.AddMinutes(-10).Ticks;
+                        break;
+                    case 4: // Custom date
+                        reminder = (ReminderDatePicker.Date + ReminderTimePicker.Time).Ticks;
                         break;
                     default: // Never
                         reminder = null;
@@ -154,6 +163,25 @@ namespace CalendarioApp.Views
             {
                 ScheduleEndDisabled.IsChecked = true;
                 ScheduleEnd.IsVisible = false;
+            }
+        }
+
+        private void ReminderPickerSelectedChanged(object sender, EventArgs e)
+        {
+
+            switch (ReminderPicker.SelectedIndex)
+            {
+                case 1:
+                    ReminderTimePickerLayout.IsVisible = true;
+                    break;
+                case 4:
+                    ReminderDatePickerLayout.IsVisible = true;
+                    ReminderTimePickerLayout.IsVisible = true;
+                    break;
+                default:
+                    ReminderDatePickerLayout.IsVisible = false;
+                    ReminderTimePickerLayout.IsVisible = false;
+                    break;
             }
         }
     }

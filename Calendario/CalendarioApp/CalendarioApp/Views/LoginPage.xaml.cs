@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using CalendarioApp.Managers;
 using CalendarioApp.Model.Server;
 using CalendarioApp.ViewModels;
@@ -11,6 +12,9 @@ namespace CalendarioApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : TabbedPage
     {
+        private static Regex loginRegex = new Regex(".{8,20}");
+        private static Regex passwordRegex = new Regex("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,50}");
+
         public LoginPage ()
         {
             InitializeComponent();
@@ -34,10 +38,10 @@ namespace CalendarioApp.Views
                 ChangeNavigation();
             }
 
-            catch (Exception ex)
+            catch
             {
                 Preferences.Clear();
-                await App.Current.MainPage.DisplayAlert("Błąd!", $"Logowanie nie powiodło się. {ex}", "Ok");
+                await App.Current.MainPage.DisplayAlert("Błąd!", "Logowanie nie powiodło się.", "Ok");
             }
 
             await App.Current.MainPage.Navigation.PopToRootAsync();
@@ -45,13 +49,28 @@ namespace CalendarioApp.Views
 
         private async void RegisterClicked(object sender, EventArgs e)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new SyncPage());
+            if (RegisterUsername.Text == null || RegisterPassword1.Text == null || !loginRegex.IsMatch(RegisterUsername.Text) || !passwordRegex.IsMatch(RegisterPassword1.Text))
+            {
+                await App.Current.MainPage.DisplayAlert("Błąd!", 
+@"Nazwa konta lub hasło nie spełniają warunków:
+- Nazwa konta jest większa od 8 i krótsza od 20 symboli
+- Hasło nie zawiera spacji etc.
+- Hasło jest większe od 8 i mniejsze od 50 symboli
+- Hasło zawiera przynajmniej jeden znak specjalny (np. @!&)
+- Hasło zawiera przynajmniej jedną cyfrę
+- Hasło ma przynajmniej jeden znak duży
+- Hasło ma przynajmniej jeden znak mały", 
+                "Ok");
+                return;
+            }
 
             if (RegisterPassword2.Text != RegisterPassword1.Text)
             {
                 await App.Current.MainPage.DisplayAlert("Błąd!", "Hasła nie zgadzają się.", "Ok");
                 return;
             }
+
+            await App.Current.MainPage.Navigation.PushAsync(new SyncPage());
 
             if (RegisterRemember.IsChecked)
             {
@@ -62,6 +81,9 @@ namespace CalendarioApp.Views
             try
             {
                 await ServerManager.Register(new AccountCredentials { Login = RegisterUsername.Text, Password = RegisterPassword1.Text });
+                await ServerManager.AddPriority(new PriorityCreation() { Name = "Najważniejsze", ColorHex = "#FF0000" });
+                await ServerManager.AddPriority(new PriorityCreation() { Name = "Ważniejsze", ColorHex = "#FFFF00" });
+                await ServerManager.AddPriority(new PriorityCreation() { Name = "Ważne", ColorHex = "#00FF00" });
                 await ServerManager.Sync();
                 ChangeNavigation();
             }
@@ -90,10 +112,28 @@ namespace CalendarioApp.Views
             }
         }
 
+        private void LoginPasswordShowCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (LoginPasswordShow.IsChecked) LoginPassword.IsPassword = false;
+            else LoginPassword.IsPassword = true;
+        }
+
         private void LoginRememberCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (LoginRemember.IsChecked) RegisterRemember.IsChecked = true;
             else RegisterRemember.IsChecked = false;
+        }
+
+        private void RegisterPassword1ShowCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (RegisterPassword1Show.IsChecked) RegisterPassword1.IsPassword = false;
+            else RegisterPassword1.IsPassword = true;
+        }
+
+        private void RegisterPassword2ShowCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (RegisterPassword2Show.IsChecked) RegisterPassword2.IsPassword = false;
+            else RegisterPassword2.IsPassword = true;
         }
 
         private void RegisterRememberCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -109,7 +149,7 @@ namespace CalendarioApp.Views
             App.Current.MainPage.BindingContext = new BasePageViewModel();
         }
 
-        private async void SaveProperties(bool usingLogin)
+        private void SaveProperties(bool usingLogin)
         {
             if (usingLogin)
             {

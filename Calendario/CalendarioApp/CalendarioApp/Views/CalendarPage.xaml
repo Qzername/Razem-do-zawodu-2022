@@ -96,7 +96,6 @@
             </plugin:Calendar>
 
             <Button
-                x:Name="CreateSchedule"
                 Margin="10"
                 BackgroundColor="{Binding PrimaryColor}"
                 Clicked="CreateScheduleClicked"

@@ -17,66 +17,69 @@
         CornerRadius="30"
         HorizontalOptions="Fill"
         VerticalOptions="Center">
-        <StackLayout>
-            <Label
-                FontSize="Medium"
-                HorizontalOptions="Center"
-                Text="Stwórz zadanie"
-                TextColor="{Binding PrimaryColor}" />
-
-            <StackLayout Margin="0,10">
+        <ScrollView>
+            <StackLayout>
                 <Label
-                    FontSize="Small"
-                    Text="Nazwa zadania"
+                    Margin="0,0,0,10"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="Stwórz zadanie"
                     TextColor="{Binding PrimaryColor}" />
-                <Entry
-                    x:Name="TaskName"
-                    FontSize="Small"
-                    MaxLength="50"
-                    Placeholder="(Maks. 50 symboli)"
-                    PlaceholderColor="{Binding DisabledColor}"
-                    TextColor="{Binding PrimaryColor}" />
-            </StackLayout>
 
-            <StackLayout Margin="0,10">
-                <Label
-                    FontSize="Small"
-                    Text="Opis zadania"
-                    TextColor="{Binding PrimaryColor}" />
-                <Entry
-                    x:Name="TaskDescription"
-                    FontSize="Small"
-                    MaxLength="150"
-                    Placeholder="(Maks. 150 symboli)"
-                    PlaceholderColor="{Binding DisabledColor}"
-                    TextColor="{Binding PrimaryColor}" />
-            </StackLayout>
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Nazwa zadania"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Entry
+                        x:Name="TaskName"
+                        FontSize="Small"
+                        MaxLength="50"
+                        Placeholder="(Maks. 50 symboli)"
+                        PlaceholderColor="{Binding DisabledColor}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
 
-            <StackLayout Margin="0,10">
-                <Label
-                    FontSize="Small"
-                    Text="Priorytet"
-                    TextColor="{Binding PrimaryColor}" />
-                <Picker
-                    x:Name="PriorityPicker"
-                    Title="Wybierz priorytet"
-                    FontSize="Small"
-                    ItemDisplayBinding="{Binding Name}"
-                    ItemsSource="{Binding Priorities}"
-                    TextColor="{Binding PrimaryColor}" />
-            </StackLayout>
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Opis zadania"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Entry
+                        x:Name="TaskDescription"
+                        FontSize="Small"
+                        MaxLength="150"
+                        Placeholder="(Maks. 150 symboli)"
+                        PlaceholderColor="{Binding DisabledColor}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
 
-            <Button
-                x:Name="CreateTask"
-                BackgroundColor="{Binding PrimaryColor}"
-                Clicked="CreateTaskClicked"
-                CornerRadius="30"
-                FontSize="Small"
-                HorizontalOptions="Center"
-                Text="Stwórz zadanie"
-                TextColor="{Binding SecondaryColor}"
-                TextTransform="None"
-                VerticalOptions="EndAndExpand" />
-        </StackLayout>
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Priorytet"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Picker
+                        x:Name="PriorityPicker"
+                        Title="Wybierz priorytet"
+                        FontSize="Small"
+                        ItemDisplayBinding="{Binding Name}"
+                        ItemsSource="{Binding Priorities}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <Button
+                    Margin="0,10,0,0"
+                    BackgroundColor="{Binding PrimaryColor}"
+                    Clicked="CreateTaskClicked"
+                    CornerRadius="30"
+                    FontSize="Small"
+                    HorizontalOptions="Center"
+                    Text="Stwórz zadanie"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="EndAndExpand" />
+            </StackLayout>
+        </ScrollView>
     </Frame>
 </ContentPage>

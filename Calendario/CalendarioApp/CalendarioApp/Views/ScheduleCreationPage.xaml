@@ -17,99 +17,129 @@
         CornerRadius="30"
         HorizontalOptions="Fill"
         VerticalOptions="Center">
-        <StackLayout>
-            <Label
-                FontSize="Medium"
-                HorizontalOptions="Center"
-                Text="Zaplanuj wydarzenie"
-                TextColor="{Binding PrimaryColor}" />
-
-            <StackLayout Margin="0,10">
+        <ScrollView>
+            <StackLayout>
                 <Label
-                    FontSize="Small"
-                    Text="Zadanie"
+                    Margin="0,0,0,10"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="Zaplanuj wydarzenie"
                     TextColor="{Binding PrimaryColor}" />
-                <Picker
-                    x:Name="TaskPicker"
-                    Title="Wybierz zadanie"
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Zadanie"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Picker
+                        x:Name="TaskPicker"
+                        Title="Wybierz zadanie"
+                        FontSize="Small"
+                        ItemDisplayBinding="{Binding Name}"
+                        ItemsSource="{Binding Tasks}"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout Margin="0,10" Orientation="Horizontal">
+                    <CheckBox x:Name="IsScheduleAllDay" CheckedChanged="IsScheduleAllDayCheckedChanged" />
+                    <Label
+                        Margin="0,6,0,0"
+                        FontSize="Small"
+                        Text="Wydarzenie trwa cały dzień"
+                        TextColor="{Binding PrimaryColor}" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="IsScheduleAllDayCheckedTapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout x:Name="ScheduleStart" Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Rozpoczęcie wydarzenia"
+                        TextColor="{Binding PrimaryColor}" />
+                    <TimePicker
+                        x:Name="ScheduleStartTimePicker"
+                        FontSize="Small"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="ScheduleEndDisabledLayout"
+                    Margin="0,10"
+                    Orientation="Horizontal">
+                    <CheckBox x:Name="ScheduleEndDisabled" CheckedChanged="ScheduleEndDisabledCheckedChanged" />
+                    <Label
+                        Margin="0,6,0,0"
+                        FontSize="Small"
+                        Text="Wydarzenie nie ma zakończenia"
+                        TextColor="{Binding PrimaryColor}" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ScheduleEndDisabledCheckedTapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout x:Name="ScheduleEnd" Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Zakończenie wydarzenia"
+                        TextColor="{Binding PrimaryColor}" />
+                    <TimePicker
+                        x:Name="ScheduleEndTimePicker"
+                        FontSize="Small"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Przypomnienie"
+                        TextColor="{Binding PrimaryColor}" />
+                    <Picker
+                        x:Name="ReminderPicker"
+                        FontSize="Small"
+                        ItemDisplayBinding="{Binding Name}"
+                        ItemsSource="{Binding Reminders}"
+                        SelectedIndex="0"
+                        SelectedIndexChanged="ReminderPickerSelectedChanged"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout x:Name="ReminderDatePickerLayout" Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Data przypomnienia"
+                        TextColor="{Binding PrimaryColor}" />
+                    <DatePicker
+                        x:Name="ReminderDatePicker"
+                        FontSize="Small"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <StackLayout x:Name="ReminderTimePickerLayout" Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Czas przypomnienia"
+                        TextColor="{Binding PrimaryColor}" />
+                    <TimePicker
+                        x:Name="ReminderTimePicker"
+                        FontSize="Small"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <Button
+                    Margin="0,10,0,0"
+                    BackgroundColor="{Binding PrimaryColor}"
+                    Clicked="CreateScheduleClicked"
+                    CornerRadius="30"
                     FontSize="Small"
-                    ItemDisplayBinding="{Binding Name}"
-                    ItemsSource="{Binding Tasks}"
-                    TextColor="{Binding PrimaryColor}" />
+                    HorizontalOptions="Center"
+                    Text="Zaplanuj wydarzenie"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="EndAndExpand" />
             </StackLayout>
-
-            <StackLayout Margin="0,10" Orientation="Horizontal">
-                <CheckBox x:Name="IsScheduleAllDay" CheckedChanged="IsScheduleAllDayCheckedChanged" />
-                <Label
-                    Margin="0,6,0,0"
-                    FontSize="Small"
-                    Text="Wydarzenie trwa cały dzień?"
-                    TextColor="{Binding PrimaryColor}" />
-
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="IsScheduleAllDayCheckedTapped" />
-                </StackLayout.GestureRecognizers>
-            </StackLayout>
-
-            <StackLayout x:Name="ScheduleStart" Margin="0,10">
-                <Label
-                    FontSize="Small"
-                    Text="Rozpoczęcie wydarzenia"
-                    TextColor="{Binding PrimaryColor}" />
-                <TimePicker
-                    x:Name="ScheduleStartTimePicker"
-                    FontSize="Small"
-                    TextColor="{Binding PrimaryColor}" />
-            </StackLayout>
-
-            <StackLayout x:Name="ScheduleEndDisabledLayout" Margin="0,10" Orientation="Horizontal">
-                <CheckBox x:Name="ScheduleEndDisabled" CheckedChanged="ScheduleEndDisabledCheckedChanged" />
-                <Label
-                    Margin="0,6,0,0"
-                    FontSize="Small"
-                    Text="Wydarzenie nie ma zakończenia?"
-                    TextColor="{Binding PrimaryColor}" />
-
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="ScheduleEndDisabledCheckedTapped" />
-                </StackLayout.GestureRecognizers>
-            </StackLayout>
-
-            <StackLayout x:Name="ScheduleEnd" Margin="0,10">
-                <Label
-                    FontSize="Small"
-                    Text="Zakończenie wydarzenia"
-                    TextColor="{Binding PrimaryColor}" />
-                <TimePicker
-                    x:Name="ScheduleEndTimePicker"
-                    FontSize="Small"
-                    TextColor="{Binding PrimaryColor}" />
-            </StackLayout>
-
-            <StackLayout x:Name="Reminder" Margin="0,10">
-                <Label
-                    FontSize="Small"
-                    Text="Przypomnienie"
-                    TextColor="{Binding PrimaryColor}" />
-                <Picker
-                    x:Name="ReminderPicker"
-                    FontSize="Small"
-                    ItemDisplayBinding="{Binding Name}"
-                    ItemsSource="{Binding Reminders}"
-                    SelectedItem="0"
-                    TextColor="{Binding PrimaryColor}" />
-            </StackLayout>
-
-            <Button
-                BackgroundColor="{Binding PrimaryColor}"
-                Clicked="CreateScheduleClicked"
-                CornerRadius="30"
-                FontSize="Small"
-                HorizontalOptions="Center"
-                Text="Zaplanuj wydarzenie"
-                TextColor="{Binding SecondaryColor}"
-                TextTransform="None"
-                VerticalOptions="EndAndExpand" />
-        </StackLayout>
+        </ScrollView>
     </Frame>
 </ContentPage>

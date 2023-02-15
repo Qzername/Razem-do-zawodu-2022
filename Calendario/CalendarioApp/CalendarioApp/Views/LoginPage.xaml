@@ -13,7 +13,7 @@
         <local:BasePageViewModel />
     </TabbedPage.BindingContext>
 
-    <ContentPage Title="Logowanie">
+    <ContentPage Title="Logowanie" IconImageSource="account.png">
         <Frame
             Margin="20"
             Padding="20"
@@ -23,6 +23,7 @@
             VerticalOptions="Center">
             <StackLayout>
                 <Label
+                    Margin="0,0,0,10"
                     FontSize="Medium"
                     HorizontalOptions="Center"
                     Text="Logowanie"
@@ -46,13 +47,17 @@
                         FontSize="Small"
                         Text="Hasło konta"
                         TextColor="{Binding PrimaryColor}" />
-                    <Entry
-                        x:Name="LoginPassword"
-                        FontSize="Small"
-                        IsPassword="True"
-                        MaxLength="50"
-                        PlaceholderColor="{Binding DisabledColor}"
-                        TextColor="{Binding PrimaryColor}" />
+                    <StackLayout Orientation="Horizontal">
+                        <Entry
+                            x:Name="LoginPassword"
+                            FontSize="Small"
+                            HorizontalOptions="FillAndExpand"
+                            IsPassword="True"
+                            MaxLength="50"
+                            PlaceholderColor="{Binding DisabledColor}"
+                            TextColor="{Binding PrimaryColor}" />
+                        <CheckBox x:Name="LoginPasswordShow" CheckedChanged="LoginPasswordShowCheckedChanged" />
+                    </StackLayout>
                 </StackLayout>
 
                 <StackLayout Margin="0,10" Orientation="Horizontal">
@@ -60,7 +65,7 @@
                     <Label
                         Margin="0,6,0,0"
                         FontSize="Small"
-                        Text="Zapamiętaj mnie."
+                        Text="Zapamiętaj mnie"
                         TextColor="{Binding PrimaryColor}" />
 
                     <StackLayout.GestureRecognizers>
@@ -69,6 +74,7 @@
                 </StackLayout>
 
                 <Button
+                    Margin="0,10,0,0"
                     BackgroundColor="{Binding PrimaryColor}"
                     CornerRadius="30"
                     HeightRequest="50"
@@ -81,7 +87,7 @@
         </Frame>
     </ContentPage>
 
-    <ContentPage Title="Rejestracja">
+    <ContentPage Title="Rejestracja" IconImageSource="account.png">
         <Frame
             Margin="20"
             Padding="20"
@@ -91,6 +97,7 @@
             VerticalOptions="Center">
             <StackLayout>
                 <Label
+                    Margin="0,0,0,10"
                     FontSize="Medium"
                     HorizontalOptions="Center"
                     Text="Rejestracja"
@@ -114,13 +121,17 @@
                         FontSize="Small"
                         Text="Hasło konta"
                         TextColor="{Binding PrimaryColor}" />
-                    <Entry
-                        x:Name="RegisterPassword1"
-                        FontSize="Small"
-                        IsPassword="True"
-                        MaxLength="50"
-                        PlaceholderColor="{Binding DisabledColor}"
-                        TextColor="{Binding PrimaryColor}" />
+                    <StackLayout Orientation="Horizontal">
+                        <Entry
+                            x:Name="RegisterPassword1"
+                            FontSize="Small"
+                            HorizontalOptions="FillAndExpand"
+                            IsPassword="True"
+                            MaxLength="50"
+                            PlaceholderColor="{Binding DisabledColor}"
+                            TextColor="{Binding PrimaryColor}" />
+                        <CheckBox x:Name="RegisterPassword1Show" CheckedChanged="RegisterPassword1ShowCheckedChanged" />
+                    </StackLayout>
                 </StackLayout>
 
                 <StackLayout Margin="0,10">
@@ -128,13 +139,17 @@
                         FontSize="Small"
                         Text="Powtórz hasło konta"
                         TextColor="{Binding PrimaryColor}" />
-                    <Entry
-                        x:Name="RegisterPassword2"
-                        FontSize="Small"
-                        IsPassword="True"
-                        MaxLength="50"
-                        PlaceholderColor="{Binding DisabledColor}"
-                        TextColor="{Binding PrimaryColor}" />
+                    <StackLayout Orientation="Horizontal">
+                        <Entry
+                            x:Name="RegisterPassword2"
+                            FontSize="Small"
+                            HorizontalOptions="FillAndExpand"
+                            IsPassword="True"
+                            MaxLength="50"
+                            PlaceholderColor="{Binding DisabledColor}"
+                            TextColor="{Binding PrimaryColor}" />
+                        <CheckBox x:Name="RegisterPassword2Show" CheckedChanged="RegisterPassword2ShowCheckedChanged" />
+                    </StackLayout>
                 </StackLayout>
 
                 <StackLayout Margin="0,10" Orientation="Horizontal">
@@ -142,7 +157,7 @@
                     <Label
                         Margin="0,6,0,0"
                         FontSize="Small"
-                        Text="Zapamiętaj mnie."
+                        Text="Zapamiętaj mnie"
                         TextColor="{Binding PrimaryColor}" />
 
                     <StackLayout.GestureRecognizers>
@@ -151,6 +166,7 @@
                 </StackLayout>
 
                 <Button
+                    Margin="0,10,0,0"
                     BackgroundColor="{Binding PrimaryColor}"
                     CornerRadius="30"
                     HeightRequest="50"
