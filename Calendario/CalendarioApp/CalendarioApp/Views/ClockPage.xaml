@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="CalendarioApp.Views.ClockPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:CalendarioApp.ViewModels"
+    xmlns:views="clr-namespace:CalendarioApp.Views"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    SelectedTabColor="#0080ff"
+    UnselectedTabColor="{Binding DisabledColor}">
+    <ContentPage Title="Minutnik" IconImageSource="calendar.png">
+        <Frame
+            Margin="20"
+            Padding="20"
+            BackgroundColor="{Binding FrameBackground}"
+            CornerRadius="30"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+            <StackLayout>
+                <Label
+                    Margin="0,0,0,10"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="Minutnik"
+                    TextColor="{Binding PrimaryColor}" />
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Czas"
+                        TextColor="{Binding PrimaryColor}" />
+                    <TimePicker
+                        x:Name="Timer"
+                        FontSize="Medium"
+                        Format="HH:mm:ss"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <Button
+                    x:Name="TimerStart"
+                    Margin="0,10,0,0"
+                    BackgroundColor="{Binding PrimaryColor}"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    Pressed="TimerStartClicked"
+                    Text="Start"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
+
+                <Button
+                    x:Name="TimerStop"
+                    Margin="0,10,0,0"
+                    BackgroundColor="{Binding PrimaryColor}"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    IsVisible="False"
+                    Pressed="TimerStopClicked"
+                    Text="Stop"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </Frame>
+    </ContentPage>
+
+    <ContentPage Title="Stoper" IconImageSource="calendar.png">
+        <Frame
+            Margin="20"
+            Padding="20"
+            BackgroundColor="{Binding FrameBackground}"
+            CornerRadius="30"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+            <StackLayout>
+                <Label
+                    Margin="0,0,0,10"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="Stoper"
+                    TextColor="{Binding PrimaryColor}" />
+
+                <StackLayout Margin="0,10">
+                    <Label
+                        FontSize="Small"
+                        Text="Czas"
+                        TextColor="{Binding PrimaryColor}" />
+                    <TimePicker
+                        x:Name="StopWatch"
+                        FontSize="Medium"
+                        Format="HH:mm:ss:ff"
+                        IsEnabled="False"
+                        TextColor="{Binding PrimaryColor}" />
+                </StackLayout>
+
+                <Button
+                    x:Name="StopWatchStart"
+                    Margin="0,10,0,0"
+                    BackgroundColor="{Binding PrimaryColor}"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    Pressed="StopWatchStartClicked"
+                    Text="Start"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
+
+                <Button
+                    x:Name="StopWatchStop"
+                    Margin="0,10,0,0"
+                    BackgroundColor="{Binding PrimaryColor}"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    IsVisible="False"
+                    Pressed="StopWatchStopClicked"
+                    Text="Stop"
+                    TextColor="{Binding SecondaryColor}"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </Frame>
+    </ContentPage>
+</TabbedPage>

@@ -14,6 +14,7 @@
     </TabbedPage.BindingContext>
 
     <views:CalendarPage Title="Kalendarz" IconImageSource="calendar.png" />
+    <views:ClockPage Title="Zegar" IconImageSource="calendar.png" />
     <views:CalendarManagementPage Title="Zarządzanie" IconImageSource="manage.png" />
     <views:AccountManagementPage Title="Konto" IconImageSource="account.png" />
 </TabbedPage>
