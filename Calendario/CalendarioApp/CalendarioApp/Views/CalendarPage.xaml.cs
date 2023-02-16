@@ -16,10 +16,7 @@ namespace CalendarioApp.Views
         private async void CreateScheduleClicked(object sender, EventArgs args)
         {
             DateTime? selectedDate = Calendar.SelectedDate;
-            if (selectedDate != null)
-            {
-                await Navigation.PushAsync(new ScheduleCreationPage(selectedDate));
-            }
+            if (selectedDate != null) await Navigation.PushAsync(new ScheduleCreationPage(selectedDate));
         }
     }
 }

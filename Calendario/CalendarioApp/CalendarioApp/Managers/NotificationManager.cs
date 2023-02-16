@@ -14,11 +14,11 @@ namespace CalendarioApp.Managers
 
             string notificationDescription;
 
-            if (scheduleBegin.TimeOfDay.ToString() == "00:00:00" && scheduleEnd.TimeOfDay.ToString() == "23:59:59.9999999") { notificationDescription = $"Cały dzień\n{description}"; }
-            else if (scheduleBegin.Ticks == scheduleEnd.Ticks) { notificationDescription = $"{scheduleBegin.ToShortTimeString()}\n{description}"; }
-            else { notificationDescription = $"{scheduleBegin.ToShortTimeString()} - {scheduleEnd.ToShortTimeString()}\n{description}"; }
+            if (scheduleBegin.TimeOfDay.ToString() == "00:00:00" && scheduleEnd.TimeOfDay.ToString() == "23:59:59.9999999") notificationDescription = $"Cały dzień\n{description}";
+            else if (scheduleBegin.Ticks == scheduleEnd.Ticks) notificationDescription = $"{scheduleBegin.ToShortTimeString()}\n{description}";
+            else notificationDescription = $"{scheduleBegin.ToShortTimeString()} - {scheduleEnd.ToShortTimeString()}\n{description}";
 
-            if (scheduleRemind != null) { await LocalNotificationCenter.Current.Show(CreateReminder(title, notificationDescription, scheduleBegin, scheduleRemind)); }
+            if (scheduleRemind != null) await LocalNotificationCenter.Current.Show(CreateReminder(title, notificationDescription, scheduleBegin, scheduleRemind));
             await LocalNotificationCenter.Current.Show(CreateNotification(title, notificationDescription, scheduleBegin));
         }
 

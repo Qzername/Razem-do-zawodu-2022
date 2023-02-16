@@ -13,12 +13,14 @@ namespace CalendarioApp.ViewModels
         {
             Tasks = ServerManager.Tasks;
             Priorities = ServerManager.Priorities;
-            Reminders = new ObservableCollection<Reminder>();
-            Reminders.Add(new Reminder { Name = "Nigdy", ID = 0 });
-            Reminders.Add(new Reminder { Name = "1 dzień przed", ID = 1});
-            Reminders.Add(new Reminder { Name = "1 godzinę przed", ID = 2 });
-            Reminders.Add(new Reminder { Name = "10 minut przed", ID = 3 });
-            Reminders.Add(new Reminder { Name = "Spersonalizuj datę", ID = 4 });
+            Reminders = new ObservableCollection<Reminder>
+            {
+                new Reminder { Name = "Nigdy", ID = 0 },
+                new Reminder { Name = "1 dzień przed", ID = 1 },
+                new Reminder { Name = "1 godzinę przed", ID = 2 },
+                new Reminder { Name = "10 minut przed", ID = 3 },
+                new Reminder { Name = "Spersonalizuj datę", ID = 4 }
+            };
         }
 
         private ObservableCollection<Task> _tasks;

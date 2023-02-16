@@ -61,10 +61,6 @@
                 TodayTextColor="{Binding PrimaryColor}"
                 VerticalOptions="FillAndExpand"
                 YearLabelColor="{Binding PrimaryColor}">
-                <!--
-                    EventIndicatorColor="#0080ff"
-                    EventIndicatorSelectedColor="#0080ff"
-                -->
 
                 <plugin:Calendar.HeaderSectionTemplate>
                     <controls:CalendarHeader />

@@ -10,8 +10,9 @@ namespace CalendarioApp.Managers
 
         public static Color GetPrimaryColor()
         {
-            if (Theme == OSAppTheme.Dark) { return Color.White; }
-            else { return Color.Black; }
+            if (Theme == OSAppTheme.Dark) return Color.White;
+            
+            return Color.Black;
         }
     }
 }

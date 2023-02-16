@@ -72,10 +72,7 @@ namespace CalendarioApp.ViewModels
 
         private async Task ExecuteEventSelectedCommand(object item)
         {
-            if (item is AdvancedEventModel eventModel)
-            {
-                await App.Current.MainPage.Navigation.PushAsync(new SchedulePage(eventModel));
-            }
+            if (item is AdvancedEventModel eventModel) await App.Current.MainPage.Navigation.PushAsync(new SchedulePage(eventModel));
         }
 
         private void ChangeShownUnit(int amountToAdd)

@@ -16,18 +16,12 @@ namespace CalendarioApp.Views
 
         private async void TaskSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (((ListView)sender).SelectedItem == null)
-                return;
+            if (((ListView)sender).SelectedItem == null) return;
 
             Task task = (Task)((ListView)sender).SelectedItem;
             await Navigation.PushAsync(new TaskPage(task));
 
             ((ListView)sender).SelectedItem = null;
-        }
-
-        private void TaskTapped(object sender, ItemTappedEventArgs e)
-        {
-            // Tasks.SelectedItem = null;
         }
 
         private async void CreateTaskClicked(object sender, EventArgs e)
@@ -37,18 +31,12 @@ namespace CalendarioApp.Views
 
         private async void PrioritySelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (((ListView)sender).SelectedItem == null)
-                return;
+            if (((ListView)sender).SelectedItem == null) return;
 
             Priority priority = (Priority)((ListView)sender).SelectedItem;
             await Navigation.PushAsync(new PriorityPage(priority));
 
             ((ListView)sender).SelectedItem = null;
-        }
-
-        private void PriorityTapped(object sender, ItemTappedEventArgs e)
-        {
-            // Priorities.SelectedItem = null;
         }
 
         private async void CreatePriorityClicked(object sender, EventArgs e)

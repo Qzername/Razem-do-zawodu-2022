@@ -9,11 +9,7 @@ namespace CalendarioApp.ViewModels
         public BasePageViewModel()
         {
             SetupTheme(Application.Current.RequestedTheme);
-
-            Application.Current.RequestedThemeChanged += (s, a) =>
-            {
-                SetupTheme(a.RequestedTheme);
-            };
+            Application.Current.RequestedThemeChanged += (s, a) => SetupTheme(a.RequestedTheme);
         }
 
         private void SetupTheme(OSAppTheme theme)
@@ -41,8 +37,7 @@ namespace CalendarioApp.ViewModels
 
         protected void SetProperty<TData>(ref TData storage, TData value, [CallerMemberName] string propertyName = "")
         {
-            if (storage?.Equals(value) == true)
-                return;
+            if (storage?.Equals(value) == true) return;
 
             storage = value;
 

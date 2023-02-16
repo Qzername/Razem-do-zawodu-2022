@@ -140,15 +140,8 @@ namespace CalendarioApp.Views
 
         private void ScheduleEndDisabledCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (ScheduleEndDisabled.IsChecked)
-            {
-                ScheduleEnd.IsVisible = false;
-            }
-
-            else
-            {
-                ScheduleEnd.IsVisible = true;
-            }
+            if (ScheduleEndDisabled.IsChecked) ScheduleEnd.IsVisible = false;
+            else ScheduleEnd.IsVisible = true;
         }
 
         private void ScheduleEndDisabledCheckedTapped(object sender, EventArgs e)

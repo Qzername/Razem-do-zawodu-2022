@@ -32,7 +32,6 @@
                         CachingStrategy="RecycleElement"
                         HasUnevenRows="True"
                         ItemSelected="TaskSelected"
-                        ItemTapped="TaskTapped"
                         ItemsSource="{Binding Tasks}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -64,7 +63,6 @@
                     </ListView>
 
                     <Button
-                        x:Name="CreateTask"
                         Margin="10"
                         BackgroundColor="{Binding PrimaryColor}"
                         Clicked="CreateTaskClicked"
@@ -101,7 +99,6 @@
                         CachingStrategy="RecycleElement"
                         HasUnevenRows="True"
                         ItemSelected="PrioritySelected"
-                        ItemTapped="PriorityTapped"
                         ItemsSource="{Binding Priorities}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -133,7 +130,6 @@
                     </ListView>
 
                     <Button
-                        x:Name="CreatePriority"
                         Margin="10"
                         BackgroundColor="{Binding PrimaryColor}"
                         Clicked="CreatePriorityClicked"

@@ -33,11 +33,7 @@ namespace CalendarioApp.Managers
             content.Headers.ContentType = headerValue;
 
             var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Account/Login", content);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed login");
-            }
-
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("Failed login");
             string responseString = await response.Content.ReadAsStringAsync();
 
             UserName = accountCredentials.Login;
@@ -85,16 +81,10 @@ namespace CalendarioApp.Managers
         public static async System.Threading.Tasks.Task GetTasks()
         {
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Task");
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed tasks");
-            }
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("Failed tasks");
             string responseString = await response.Content.ReadAsStringAsync();
 
-            foreach (Task x in JSONManager.Deserialize<Task[]>(responseString))
-            {
-                Tasks.Add(x);
-            };
+            foreach (Task x in JSONManager.Deserialize<Task[]>(responseString)) Tasks.Add(x);
         }
 
         public static async System.Threading.Tasks.Task AddTask(TaskCreation task)
@@ -106,10 +96,7 @@ namespace CalendarioApp.Managers
             content.Headers.ContentType = headerValue;
 
             var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Task", content);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed add task");
-            }
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("Failed add task");
         }
 
         public static async System.Threading.Tasks.Task RemoveTask(Task task)
@@ -127,11 +114,7 @@ namespace CalendarioApp.Managers
             {
                 var scheduleResponse = await Client.GetAsync($"http://{ServerIP}:6969/api/Schedule/{task.ID}");
                 string scheduleResponseString = await scheduleResponse.Content.ReadAsStringAsync();
-
-                if (scheduleResponseString == null)
-                {
-                    throw new Exception("Failed schedules");
-                }
+                if (scheduleResponseString == null) throw new Exception("Failed schedules");
 
                 Schedule[] schedules = JSONManager.Deserialize<Schedule[]>(scheduleResponseString);
                 foreach (Schedule schedule in schedules)
@@ -141,11 +124,7 @@ namespace CalendarioApp.Managers
                     DateTime? scheduleRemind = new DateTime(schedule.DateRemind);
                     string colorHex = "#ffffff";
 
-                    try
-                    { 
-                        colorHex = Priorities.Single(x => x.ID == schedule.PriorityID).ColorHex;
-                    }
-
+                    try { colorHex = Priorities.Single(x => x.ID == schedule.PriorityID).ColorHex; }
                     catch { }
 
                     try
@@ -175,10 +154,7 @@ namespace CalendarioApp.Managers
             content.Headers.ContentType = headerValue;
 
             var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Schedule", content);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed add schedule");
-            }
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("Failed add schedule");
         }
 
         public static async System.Threading.Tasks.Task RemoveSchedule(AdvancedEventModel schedule)
@@ -191,16 +167,10 @@ namespace CalendarioApp.Managers
         public static async System.Threading.Tasks.Task GetPriorities()
         {
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Priority");
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed priorities");
-            }
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("Failed priorities");
             string responseString = await response.Content.ReadAsStringAsync();
 
-            foreach (Priority x in JSONManager.Deserialize<Priority[]>(responseString))
-            {
-                Priorities.Add(x);
-            };
+            foreach (Priority x in JSONManager.Deserialize<Priority[]>(responseString)) Priorities.Add(x);
         }
 
         public static async System.Threading.Tasks.Task AddPriority(PriorityCreation priority)
@@ -212,10 +182,7 @@ namespace CalendarioApp.Managers
             content.Headers.ContentType = headerValue;
 
             var response = await Client.PostAsync($"http://{ServerIP}:6969/api/Priority", content);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed add priority");
-            }
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("Failed add priority");
         }
 
         public static async System.Threading.Tasks.Task RemovePriority(Priority priority)
@@ -228,11 +195,9 @@ namespace CalendarioApp.Managers
         public static async System.Threading.Tasks.Task<Task[]> GetDay(Date date)
         {
             var response = await Client.GetAsync($"http://{ServerIP}:6969/api/Calendar/Day/{date.Day}");
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed day");
-            }
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("Failed day");
             string responseString = await response.Content.ReadAsStringAsync();
+
             var json = JObject.Parse(responseString);
             Task[] tasks = JSONManager.Deserialize<Task[]>(json["Tasks"].ToString());
 
