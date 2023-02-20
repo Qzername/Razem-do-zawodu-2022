@@ -35,7 +35,7 @@ POST 20.25.191.186:6969/api/Task
 	"PriorityID": np. 10 (int)
 }
 
-Tworzy zadanie (1 z 2 wymaganych rzeczy do stworzenia Wydarzenia).
+Tworzy zadanie (1 z 2 wymaganych rzeczy do stworzenia wydarzenia).
 
 
 DELETE 20.25.191.186:6969/api/Task/WSTAW_TUTAJ_ID
