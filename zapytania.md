@@ -1,4 +1,4 @@
-POST 20.25.191.186:6969/api/Login
+POST 20.25.191.186:6969/api/Account/Login
 
 {
 	"Login": "LOGIN", (string)
@@ -8,7 +8,7 @@ POST 20.25.191.186:6969/api/Login
 Logowanie - Przy pomyslnym logowaniu dostajesz spowrotem Token, ktory sluzy do weryfikacji przy robieniu kazdego zadania (usuwanie wydarzen itd.). Dodaj go do headerow.
 
 
-POST 20.25.191.186:6969/api/Register
+POST 20.25.191.186:6969/api/Account/Register
 
 {
 	"Login": "LOGIN", (string)
