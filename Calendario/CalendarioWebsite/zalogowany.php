@@ -21,7 +21,7 @@
 
     <br>
 
-    <form action="wyloguj.php" method="post">
+    <form action="login_files/wyloguj.php" method="post">
         <input type="submit" value="Wyloguj się">
     </form>
 

@@ -67,15 +67,11 @@
                 <div class="login-form">
                     <div class="sth-wrong">
                             <?php
-                                if (isset($_SESSION['blad-username'])) {
-                                    echo $_SESSION['blad-username'];
-                                    unset($_SESSION['blad-username']);
+                                if (isset($_SESSION['incorrectLoginData'])) {
+                                    echo 'Podana nazwa użytkownika lub hasło jest niepoprawne';
+                                    unset($_SESSION['incorrectLoginData']);
                                 }
-                                
-                                if (isset($_SESSION['blad-password'])) {
-                                    echo $_SESSION['blad-password'];
-                                    unset($_SESSION['blad-password']);
-                                }
+
                             ?>
                         </div>
 
@@ -99,18 +95,6 @@
                             <input type="submit" value="Zaloguj się">
                         </div>
                     </form>
-                </div>
-                <div class="forgot-pass">
-                    <a href="./login-files/change-pass.php">Nie pamiętasz hasła?</a>
-                </div>
-
-                <div class="errors">
-                    <?php
-                        if (isset($_SESSION['db-error'])) {
-                            echo $_SESSION['db-error'];
-                            unset($SESSION['db-error']);
-                        }
-                    ?>
                 </div>
             </div>
             

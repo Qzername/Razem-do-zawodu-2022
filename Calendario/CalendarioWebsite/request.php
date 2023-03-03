@@ -2,18 +2,35 @@
     class HTTPRequester {
 
         function __construct() {
+            // $this->startSession(); 
+
             $this->ip = null;
             $this->port = null;
             $this->token = null;
+            $this->tokenExpiration = null;
+            
             
             $this->setServerData();
         }
+
+        // private function startSession() {
+        //     if (session_status() == 'PHP_SESSION_DISABLED') {
+        //         session_start();
+        //     }
+            
+        // }
 
         private function setServerData() {
             require_once 'server/server.php';
             $this->ip = $ip_adress;
             $this->port = $port_num;
         }
+
+        // sprawdzenie poprawności tokena
+        private function checkToken() {
+
+        }
+
 
         public function login($login, $password) {
             // POST 20.25.191.186:6969/api/Login
@@ -23,9 +40,8 @@
             // }
             $loginUrl = $this->ip."/api/Account/Login";
 
-            $loginData = http_build_query(array("Login" => "$login", "Password" => "$password"));
+            // $loginData = http_build_query(array("Login" => "$login", "Password" => "$password"));
             $jsonSring =  json_encode(["Login" => "$login", "Password" => "$password"]);
-            $encodedUrlJson = urlencode($jsonSring);
 
             $ch = curl_init();
 
@@ -35,10 +51,7 @@
             curl_setopt($ch, CURLOPT_HEADER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
-                'Content-Length:'.strlen($jsonSring),
-				'token: '
-                
-
+                'Content-Length:'.strlen($jsonSring)
             ));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST, true);
@@ -56,15 +69,28 @@
 
             if (empty($response)) {
                 printf("<br> <br>Nothing returned from url");
-
             } else {
+                if (strpos($response, 'Bad Request')) {
+                    $_SESSION['incorrectLoginData'] = true;
+                    header('location: ../login.php');
+                    exit();
+                }
+
+
+                // Wytnij oraz zapisz token, date wygasniecia token'a
+                if ($id = strpos($response, '{')) {
+                    $returnedJson = substr($response, $id);
+                }
+    
+                $returnedArray = json_decode($returnedJson, true);
                 
-                
+                $this->token = $returnedArray['package'];
+                $this->tokenExpiration = $returnedArray['expiration'];
             }
 
-            echo $response . "<br /> <br />";
-            return $jsonSring  ;
-
+            $_SESSION['correct-login'] = true;
+            header("location: ../zalogowany.php");
+            exit();
             
         }
 
@@ -74,9 +100,42 @@
             //     "Login": "LOGIN", (string)
             //     "Password": "HASLO" (string)
             // }  
+            $registerUrl = $this->ip.'/api/Account/Register';
+
+            // $registerdata = http_build_query(array("Login" => "$login", "Password" => "$password"));
+            $jsonSring =  json_encode(["Login" => "$login", "Password" => "$password"]);
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_URL, $registerUrl);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length:'.strlen($jsonSring)
+            ));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonSring);
+
+            $response = curl_exec($ch);
 
 
-        }
+            echo "<pre>";
+            print_r(curl_getinfo($ch));
+            echo "</pre>";
+
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                return printf($response);
+    
+
+            }
+
+        } 
 
         public function getTasks() {
             // GET 20.25.191.186:6969/api/Task

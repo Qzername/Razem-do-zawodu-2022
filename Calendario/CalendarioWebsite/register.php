@@ -75,19 +75,6 @@
                             <!-- <label for="login-username__form">Nazwa użytkownika</label> -->
                             <input type="text" name="register-username-input" placeholder="Login">
                         </div>
-                        
-                        <div class="register-email">
-                            <div class="sth-wrong">
-                                <?php 
-                                    if (isset($_SESSION['register-email-error'])) {
-                                        echo $_SESSION['register-email-error'];
-                                        unset($_SESSION['register-email-error']);
-                                    }
-                                ?>
-                            </div>
-                            <!-- <label for="login-username__form">Nazwa użytkownika</label> -->
-                            <input type="text" name="register-email-input" placeholder="Email">
-                        </div>
 
                         <div class="register-password">
                             <div class="sth-wrong">
@@ -123,6 +110,7 @@
                                     }
                                 ?>
                             </div>
+                            
                         <div class="regulamin">
                             <input type="checkbox" name="regulamin-checkbox" id="regulamin-checkbox">
                             <label for="regulamin-checkbox">Potwierdzam warunki regulaminu</label>
