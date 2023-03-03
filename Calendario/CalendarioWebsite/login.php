@@ -40,7 +40,7 @@
 
         <?php
             if (isset($_SESSION['correct-register'])) {
-                echo "<div class='correct-register'>
+                echo "<div class='register-info'>
                     <span>Rejestracja zakończona pomyślnie</span>
                     <span>Zaloguj się</span>
                 </div>";

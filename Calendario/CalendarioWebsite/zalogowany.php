@@ -1,4 +1,6 @@
 <?php
+    require 'request.php';
+
     session_start();
 
     // Zabezpieczenie przed wpisywaniem strony uzytkownika zalogowanego przez niezalogowane osoby
@@ -32,9 +34,16 @@
         } else {
             echo '<br><b>Użytkownik nie zapamiętany</b>';
         }
+        echo '<br />';
+    
+    
+        $request = new HTTPRequester;
+        $request->getTask(1);
+
+
+        
     ?>
     
-    <br><br>
 
     
 </body>

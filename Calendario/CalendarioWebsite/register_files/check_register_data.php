@@ -18,7 +18,7 @@
     }
 
     // Sprawdzenie czy wpisany nick nie zawiera znaków alfanumerycznych
-    if (!ctype_alnum($login_register) ) {
+    if (!ctype_alnum($login_register) && strlen($login_register > 7)) {
         $_SESSION['register-login-error'] = 'Nieprawidłowo wpisany login.';
         $correct_register = false;
     }
@@ -44,16 +44,14 @@
 
     // Czy wszystkie pola formularza zostały wypełnione poprawnie - jak nie przekieruj do register.php i pokaż błędy
     if (!isset($correct_register)) {
-        // Poprawna rejestracja
-        
         // Utworzenie uzytkownika
 
         $request = new HTTPRequester;
         $request->register($login_register, $passwrod1_register);
         
-        // $_SESSION['correct-register'] = true;
-        // header("location: ../login.php");
-        // exit();
+        $_SESSION['correct-register'] = true;
+        header("location: ../login.php");
+        exit();
 
     } else {
         // Niepoprawna rejestracja
@@ -63,10 +61,3 @@
 
 
 ?>
-
-<!-- 
-    
-/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-^\S*(?=\S{8,20})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$^ 
-
--->

@@ -2,23 +2,25 @@
     class HTTPRequester {
 
         function __construct() {
-            // $this->startSession(); 
+            $this->startSession(); 
 
             $this->ip = null;
             $this->port = null;
             $this->token = null;
             $this->tokenExpiration = null;
             
+            // $_SESSION['token'];
+            
             
             $this->setServerData();
         }
 
-        // private function startSession() {
-        //     if (session_status() == 'PHP_SESSION_DISABLED') {
-        //         session_start();
-        //     }
+        private function startSession() {
+            if (session_status() == 'PHP_SESSION_DISABLED') {
+                session_start();
+            }
             
-        // }
+        }
 
         private function setServerData() {
             require_once 'server/server.php';
@@ -61,9 +63,9 @@
 
             
 
-            echo "<pre>";
-            print_r(curl_getinfo($ch));
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r(curl_getinfo($ch));
+            // echo "</pre>";
 
             curl_close($ch);
 
@@ -86,6 +88,8 @@
                 
                 $this->token = $returnedArray['package'];
                 $this->tokenExpiration = $returnedArray['expiration'];
+
+                $_SESSION['token'] = $returnedArray['package'];
             }
 
             $_SESSION['correct-login'] = true;
@@ -121,11 +125,11 @@
 
             $response = curl_exec($ch);
 
+            // echo "<pre>";
+            // print_r(curl_getinfo($ch));
+            // echo "</pre>";
 
-            echo "<pre>";
-            print_r(curl_getinfo($ch));
-            echo "</pre>";
-
+            curl_close($ch);
 
             if (empty($response)) {
                 printf("<br> <br>Nothing returned from url");
@@ -140,11 +144,71 @@
         public function getTasks() {
             // GET 20.25.191.186:6969/api/Task
 
+            $getTaskURL = $this->ip.'/api/Task?';
 
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $getTaskURL);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'token: '.$_SESSION['token']
+            ));
+            
+            $response = curl_exec($ch);
+
+            // echo "<pre>";
+            // print_r(curl_getinfo($ch));
+            // echo "</pre>";
+
+            curl_close($ch);
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                echo "<pre>";
+                print_r('<br />'.$response);
+                echo "</pre>";
+    
+
+            }
+
+ 
         }
 
         public function getTask($taskId) {
             // GET 20.25.191.186:6969/api/Task/WSTAW_TUTAJ_ID
+
+            $getTaskURL = $this->ip.'/api/Task?'.$taskId;
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $getTaskURL);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'token: '.$_SESSION['token']
+            ));
+            
+            $response = curl_exec($ch);
+
+            // echo "<pre>";
+            // print_r(curl_getinfo($ch));
+            // echo "</pre>";
+
+            curl_close($ch);
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                echo "<pre>";
+                print_r('<br />'.$response);
+                echo "</pre>";
+    
+
+            }
         }
 
         public function createTask($taskName, $taskDescription, $taskPriorityID) {
@@ -155,7 +219,41 @@
             //     "PriorityID": np. 10 (int)
             // }
 
+            $createTaskUrl = $this->ip.'/api/Task';
 
+            // $registerdata = http_build_query(array("Login" => "$login", "Password" => "$password"));
+            $jsonSring =  json_encode(["Name" => "$taskName", "Description" => "$taskDescription", "PriorityID" => "$taskPriorityID"]);
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_URL, $createTaskUrl);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length:'.strlen($jsonSring),
+                'token: '.$_SESSION['token']
+            ));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonSring);
+
+            $response = curl_exec($ch);
+
+            // echo "<pre>";
+            // print_r(curl_getinfo($ch));
+            // echo "</pre>";
+
+            curl_close($ch);
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                return printf($response);
+    
+
+            }
         }
 
         public function deletTask($taskId) {
