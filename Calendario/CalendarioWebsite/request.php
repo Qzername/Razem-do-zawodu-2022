@@ -30,7 +30,10 @@
 
         // sprawdzenie poprawności tokena
         private function checkToken() {
-
+            if (!isset($_SESSION['token']) || $_SESSION['token'] < time()) {
+                echo "Token error";
+                exit();
+            }
         }
 
 
@@ -143,6 +146,7 @@
 
         public function getTasks() {
             // GET 20.25.191.186:6969/api/Task
+            $this->checkToken();
 
             $getTaskURL = $this->ip.'/api/Task?';
 
@@ -167,11 +171,12 @@
             if (empty($response)) {
                 printf("<br> <br>Nothing returned from url");
             } else {
-                echo "<pre>";
-                print_r('<br />'.$response);
-                echo "</pre>";
-    
-
+                if ($id = strpos($response, '{')) {
+                    $returnedJson = substr($response, $id);
+                }
+                $returnedArray = json_decode($returnedJson);
+                return $returnedArray;
+                
             }
 
  
@@ -179,8 +184,9 @@
 
         public function getTask($taskId) {
             // GET 20.25.191.186:6969/api/Task/WSTAW_TUTAJ_ID
+            $this->checkToken();
 
-            $getTaskURL = $this->ip.'/api/Task?'.$taskId;
+            $getTaskURL = $this->ip.'/api/Task/'.$taskId;
 
             $ch = curl_init();
 
@@ -203,11 +209,11 @@
             if (empty($response)) {
                 printf("<br> <br>Nothing returned from url");
             } else {
-                echo "<pre>";
-                print_r('<br />'.$response);
-                echo "</pre>";
-    
-
+                if ($id = strpos($response, '[')) {
+                    $returnedJson = substr($response, $id);
+                }
+                $returnedArray = json_decode($returnedJson);
+                return $returnedArray;
             }
         }
 
@@ -218,6 +224,7 @@
             //     "Description": "OPIS", (string)
             //     "PriorityID": np. 10 (int)
             // }
+            $this->checkToken();
 
             $createTaskUrl = $this->ip.'/api/Task';
 
@@ -233,7 +240,7 @@
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
                 'Content-Length:'.strlen($jsonSring),
-                'token: '.$_SESSION['token']
+                'token'.$_SESSION['token']
             ));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST, true);
@@ -258,18 +265,21 @@
 
         public function deletTask($taskId) {
             // DELETE 20.25.191.186:6969/api/Task/WSTAW_TUTAJ_ID
+            $this->checkToken();
 
             
         }
 
         public function getPriorities() {
             // GET 20.25.191.186:6969/api/Priority
+            $this->checkToken();
 
 
         }
 
         public function getPriority($priorityId) {
             // GET 20.25.191.186:6969/api/Priority/WSTAW_TUTAJ_ID
+            $this->checkToken();
             
 
         }
@@ -280,19 +290,20 @@
             //     "Name": "NAZWA", (string)
             //     "ColorHex": np. "#00ff44" (string)
             // }
+            $this->checkToken();
 
 
         }
 
         public function deletePriority($priorityId) {
             // DELETE 20.25.191.186:6969/api/Priority/WSTAW_TUTAJ_ID
-
+            $this->checkToken();
 
         }
 
         public function getSchedule($scheduleId) {
             // GET 20.25.191.186:6969/api/Schedule/WSTAW_TUTAJ_ID
-
+            $this->checkToken();
 
         }
 
@@ -304,12 +315,15 @@
             //     "DateEnd": np. 2525324321423412312, (long)
             //     "DateRemind": np. 2525324321423412312 (long)
             // }
-
+            $this->checkToken();
 
         }
 
         public function deleteShedule($scheduleId) {
             // DELETE 20.25.191.186:6969/api/Schedule/WSTAW_TUTAJ_ID
+            $this->checkToken();
+
+
         }
     }
 ?>

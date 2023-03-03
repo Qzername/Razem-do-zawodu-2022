@@ -34,14 +34,12 @@
         } else {
             echo '<br><b>Użytkownik nie zapamiętany</b>';
         }
-        echo '<br />';
+        echo '<br>';
     
     
         $request = new HTTPRequester;
-        $request->getTask(1);
+        $request->getTask(31);
 
-
-        
     ?>
     
 
