@@ -44,12 +44,9 @@
             //     "Password": "HASLO" (string)
             // }
             $loginUrl = $this->ip."/api/Account/Login";
-
-            // $loginData = http_build_query(array("Login" => "$login", "Password" => "$password"));
             $jsonSring =  json_encode(["Login" => "$login", "Password" => "$password"]);
 
             $ch = curl_init();
-
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_URL, $loginUrl);
             curl_setopt($ch, CURLOPT_PORT, $this->port);
@@ -63,13 +60,6 @@
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonSring);
 
             $response = curl_exec($ch);
-
-            
-
-            // echo "<pre>";
-            // print_r(curl_getinfo($ch));
-            // echo "</pre>";
-
             curl_close($ch);
 
             if (empty($response)) {
@@ -108,12 +98,9 @@
             //     "Password": "HASLO" (string)
             // }  
             $registerUrl = $this->ip.'/api/Account/Register';
-
-            // $registerdata = http_build_query(array("Login" => "$login", "Password" => "$password"));
             $jsonSring =  json_encode(["Login" => "$login", "Password" => "$password"]);
 
             $ch = curl_init();
-
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_URL, $registerUrl);
             curl_setopt($ch, CURLOPT_PORT, $this->port);
@@ -127,11 +114,6 @@
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonSring);
 
             $response = curl_exec($ch);
-
-            // echo "<pre>";
-            // print_r(curl_getinfo($ch));
-            // echo "</pre>";
-
             curl_close($ch);
 
             if (empty($response)) {
@@ -151,7 +133,6 @@
             $getTaskURL = $this->ip.'/api/Task?';
 
             $ch = curl_init();
-
             curl_setopt($ch, CURLOPT_URL, $getTaskURL);
             curl_setopt($ch, CURLOPT_PORT, $this->port);
             curl_setopt($ch, CURLOPT_HEADER, true);
@@ -161,22 +142,16 @@
             ));
             
             $response = curl_exec($ch);
-
-            // echo "<pre>";
-            // print_r(curl_getinfo($ch));
-            // echo "</pre>";
-
             curl_close($ch);
 
             if (empty($response)) {
                 printf("<br> <br>Nothing returned from url");
             } else {
-                if ($id = strpos($response, '{')) {
+                if ($id = strpos($response, '[')) {
                     $returnedJson = substr($response, $id);
                 }
-                $returnedArray = json_decode($returnedJson);
+                $returnedArray = json_decode($returnedJson, true);
                 return $returnedArray;
-                
             }
 
  
@@ -189,7 +164,6 @@
             $getTaskURL = $this->ip.'/api/Task/'.$taskId;
 
             $ch = curl_init();
-
             curl_setopt($ch, CURLOPT_URL, $getTaskURL);
             curl_setopt($ch, CURLOPT_PORT, $this->port);
             curl_setopt($ch, CURLOPT_HEADER, true);
@@ -199,20 +173,16 @@
             ));
             
             $response = curl_exec($ch);
-
-            // echo "<pre>";
-            // print_r(curl_getinfo($ch));
-            // echo "</pre>";
-
             curl_close($ch);
 
             if (empty($response)) {
                 printf("<br> <br>Nothing returned from url");
             } else {
-                if ($id = strpos($response, '[')) {
+                if ($id = strpos($response, '{')) {
                     $returnedJson = substr($response, $id);
                 }
-                $returnedArray = json_decode($returnedJson);
+
+                $returnedArray = json_decode($returnedJson, true);
                 return $returnedArray;
             }
         }
@@ -227,12 +197,9 @@
             $this->checkToken();
 
             $createTaskUrl = $this->ip.'/api/Task';
-
-            // $registerdata = http_build_query(array("Login" => "$login", "Password" => "$password"));
             $jsonSring =  json_encode(["Name" => "$taskName", "Description" => "$taskDescription", "PriorityID" => "$taskPriorityID"]);
 
             $ch = curl_init();
-
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_URL, $createTaskUrl);
             curl_setopt($ch, CURLOPT_PORT, $this->port);
@@ -240,18 +207,13 @@
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
                 'Content-Length:'.strlen($jsonSring),
-                'token'.$_SESSION['token']
+                'token: '.$_SESSION['token']
             ));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonSring);
 
             $response = curl_exec($ch);
-
-            // echo "<pre>";
-            // print_r(curl_getinfo($ch));
-            // echo "</pre>";
-
             curl_close($ch);
 
             if (empty($response)) {
@@ -267,20 +229,85 @@
             // DELETE 20.25.191.186:6969/api/Task/WSTAW_TUTAJ_ID
             $this->checkToken();
 
+            $deleteTaskUrl = $this->ip."/api/Task/".$taskId;
             
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $deleteTaskUrl);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'token: '.$_SESSION['token']
+            ));
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            return $response;
         }
 
         public function getPriorities() {
             // GET 20.25.191.186:6969/api/Priority
             $this->checkToken();
 
+            $getPrioritiesURL = $this->ip.'/api/Priority/';
 
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $getPrioritiesURL);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'token: '.$_SESSION['token']
+            ));
+            
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                if ($id = strpos($response, '[')) {
+                    $returnedJson = substr($response, $id);
+                }
+
+                $returnedArray = json_decode($returnedJson, true);
+                return $returnedArray;
+            }
         }
 
         public function getPriority($priorityId) {
             // GET 20.25.191.186:6969/api/Priority/WSTAW_TUTAJ_ID
             $this->checkToken();
+
+            $getPriorityURL = $this->ip.'/api/Priority/'.$priorityId;
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $getPriorityURL);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'token: '.$_SESSION['token']
+            ));
             
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            printf(curl_error($ch));
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                if (true) {
+                    $id = strpos($response, '{');
+                    $returnedJson = substr($response, $id);
+                }
+
+                $returnedArray = json_decode($returnedJson, true);
+                return $returnedArray;
+            }
 
         }
 
@@ -292,6 +319,38 @@
             // }
             $this->checkToken();
 
+            $createPriorityUrl = $this->ip.'/api/Priority';
+            $jsonSring =  json_encode(["Name" => "$priorityName", "ColorHex" => "$colorHex"]);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_URL, $createPriorityUrl);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length:'.strlen($jsonSring),
+                'token: '.$_SESSION['token']
+            ));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonSring);
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                if (true) {
+                    $id = strpos($response, '{');
+                    $returnedJson = substr($response, $id);
+                }
+
+                $returnedArray = json_decode($returnedJson, true);
+                return $returnedArray;
+                
+            }
 
         }
 
@@ -299,11 +358,55 @@
             // DELETE 20.25.191.186:6969/api/Priority/WSTAW_TUTAJ_ID
             $this->checkToken();
 
+            $deletePriorityUrl = $this->ip."/api/Priority/".$priorityId;
+            
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $deletePriorityUrl);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'token: '.$_SESSION['token']
+            ));
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            return $response;
         }
 
         public function getSchedule($scheduleId) {
-            // GET 20.25.191.186:6969/api/Schedule/WSTAW_TUTAJ_ID
+            // POST 20.25.191.186:6969/api/Schedule/WSTAW_TUTAJ_ID
             $this->checkToken();
+
+            $getScheduleURL = $this->ip.'/api/Schedule/'.$scheduleId;
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $getScheduleURL);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'token: '.$_SESSION['token']
+            ));
+            
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                if (true) {
+                    $id = strpos($response, '{');
+                    $returnedJson = substr($response, $id);
+                }
+
+                $returnedArray = json_decode($returnedJson, true);
+
+                return $returnedArray;
+                
+            }
 
         }
 
@@ -316,6 +419,39 @@
             //     "DateRemind": np. 2525324321423412312 (long)
             // }
             $this->checkToken();
+
+            $createScheduleUrl = $this->ip.'/api/Schedule';
+            $jsonSring =  json_encode(["TaskID" => "$taskId", "DateBegin" => "$dateBegin", "DateEnd" => "$dateBegin", "DateRemind" => "$dateRemind"]);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_URL, $createScheduleUrl);
+            curl_setopt($ch, CURLOPT_PORT, $this->port);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length:'.strlen($jsonSring),
+                'token: '.$_SESSION['token']
+            ));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonSring);
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            if (empty($response)) {
+                printf("<br> <br>Nothing returned from url");
+            } else {
+                if (true) {
+                    $id = strpos($response, '{');
+                    $returnedJson = substr($response, $id);
+                }
+
+                $returnedArray = json_decode($returnedJson, true);
+                return $returnedArray;
+                
+            }
 
         }
 

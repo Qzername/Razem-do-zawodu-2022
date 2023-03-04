@@ -38,7 +38,8 @@
     
     
         $request = new HTTPRequester;
-        $request->getTask(31);
+        // print_r($request->createPriority('test1', '#12fa34'));
+        print_r($request->getTasks());
 
     ?>
     
